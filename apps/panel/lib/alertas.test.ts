@@ -26,7 +26,20 @@ describe('alertas de comportamiento anómalo', () => {
   it('avisa al superadmin cuando un actor manda muchos documentos a la papelera en poco tiempo, y no repite el aviso', async () => {
     const x = sufijo()
     const actor = `u-sospechoso-${x}`
+    const correoSuper = `super-${x}@pruebas.test`
     await comoSistema('pruebas', async (tx) => {
+      // la prueba no depende de la semilla: crea su propio superadmin que recibirá el aviso
+      await tx
+        .insert(tablaUser)
+        .values({
+          id: `u-super-${x}`,
+          name: 'Super de prueba',
+          email: correoSuper,
+          emailVerified: true,
+          role: 'superadmin',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        })
       const [e] = await tx
         .insert(estados)
         .values({ clave: `A${x}`.slice(0, 5), nombre: 'Estado' })
@@ -108,7 +121,7 @@ describe('alertas de comportamiento anómalo', () => {
     }
     const r1 = await revisarAlertas(ctx)
     expect(r1.alertas).toBe(1)
-    expect(vi.mocked(enviarCorreo)).toHaveBeenCalled()
+    expect(vi.mocked(enviarCorreo).mock.calls.some(([c]) => c.para === correoSuper)).toBe(true)
     const r2 = await revisarAlertas(ctx)
     expect(r2.alertas).toBe(0) // no repite dentro de la ventana
   })
