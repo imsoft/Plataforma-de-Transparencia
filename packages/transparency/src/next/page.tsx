@@ -175,7 +175,7 @@ export async function Page({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Header
-        key={node.key}
+        nodeKey={node.key}
         title={node.title}
         subtitle={`${pathTitle(path)} · ${subject}${r.version ? ` · versión ${r.version}` : ''}`}
         url={`${baseUrl}${nodeRoute(r.prefix, node.key, node.routeSlug)}`}
@@ -234,12 +234,12 @@ function Container({
 }
 
 function Header({
-  key,
+  nodeKey,
   title,
   subtitle,
   url,
 }: {
-  key?: string | null
+  nodeKey?: string | null
   title: string
   subtitle: string
   url: string
@@ -252,8 +252,8 @@ function Header({
       />
       <div className="relative flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
         <div className="min-w-0">
-          {key && (
-            <p className="font-mono text-sm font-semibold tracking-wider opacity-85">{key}</p>
+          {nodeKey && (
+            <p className="font-mono text-sm font-semibold tracking-wider opacity-85">{nodeKey}</p>
           )}
           <h1 className="font-heading mt-1 text-3xl font-bold leading-tight text-balance md:text-4xl">
             {title}
