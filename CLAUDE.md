@@ -24,7 +24,7 @@ Lee `docs/brief-plataforma-transparencia.md` (requisitos) y `docs/plan/` (decisi
 | `packages/db`                     | esquema Drizzle, migraciones, `conUsuario`/`comoPublico`/`comoSistema`, utilidades de prueba |
 | `packages/auth`                   | Better Auth (organization + 2FA + admin), roles, capa de permisos `puede()/exigir()`         |
 | `packages/indice`                 | formato JSON del índice de la ley, claves cortas, validación, carga, semáforo                |
-| `packages/archivos`               | S3 (MinIO/R2), rutas de archivos, URLs firmadas, detección de tipo                           |
+| `packages/archivos`               | S3 (RustFS local / R2), rutas de archivos, URLs firmadas, detección de tipo                  |
 | `packages/transparencia`          | rutas y páginas públicas que montan los sitios (`/85a`, `/dif/85a`, `/d/<id>`)               |
 | `packages/tema`, `ui`, `ui-sitio` | tokens de diseño y componentes                                                               |
 | `apps/panel`                      | administración central (único con login/escritura)                                           |

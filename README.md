@@ -2,7 +2,7 @@
 
 SaaS multi-municipio: un **panel** central donde cada municipio administra sus documentos de transparencia y **un sitio por municipio** (su dominio, su diseño) que los publica con URLs cortas (`/85a`, `/dif/85a`) y enlaces permanentes (`/d/<id>`).
 
-Monorepo Turborepo + pnpm · Next.js · Drizzle + Postgres (Neon) · Better Auth · S3 (Cloudflare R2) · Vercel.
+Monorepo Turborepo + pnpm · Next.js · Drizzle + Postgres (Neon) · Better Auth · S3 (Cloudflare R2; RustFS en local) · Vercel.
 
 ## Desarrollo local (sin cuentas en la nube)
 
@@ -11,19 +11,19 @@ Requisitos: Node 24, pnpm 12 (`corepack enable`), Docker Desktop.
 ```bash
 cp .env.example .env     # valores locales ya listos
 pnpm install
-pnpm iniciar               # Docker (Postgres 18, MinIO, Mailpit) + migraciones + datos semilla
+pnpm iniciar               # Docker (Postgres 18, RustFS como S3, Mailpit) + migraciones + datos semilla
 pnpm dev
 ```
 
 Servicios locales:
 
-| Servicio                 | URL                                        |
-| ------------------------ | ------------------------------------------ |
-| Panel                    | http://localhost:3000                      |
-| Sitio Tuxcacuesco (demo) | http://localhost:3001                      |
-| Mailpit (correos)        | http://localhost:8025                      |
-| MinIO (archivos)         | http://localhost:9001 (minio / minio12345) |
-| Postgres                 | `localhost:5432`, base `transparencia`     |
+| Servicio                  | URL                                        |
+| ------------------------- | ------------------------------------------ |
+| Panel                     | http://localhost:3000                      |
+| Sitio Tuxcacuesco (demo)  | http://localhost:3001                      |
+| Mailpit (correos)         | http://localhost:8025                      |
+| Consola S3 local (RustFS) | http://localhost:9001 (minio / minio12345) |
+| Postgres                  | `localhost:5432`, base `transparencia`     |
 
 Usuarios de prueba: los imprime `pnpm iniciar` (uno por rol).
 

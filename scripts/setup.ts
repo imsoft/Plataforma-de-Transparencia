@@ -15,9 +15,9 @@ function paso(titulo: string) {
   console.info(`\n▶ ${titulo}`)
 }
 
-paso('Docker: Postgres, MinIO y Mailpit')
-execSync('docker compose up -d --wait postgres minio mailpit', { cwd: raiz, stdio: 'inherit' })
-execSync('docker compose run --rm minio-init', { cwd: raiz, stdio: 'inherit' })
+paso('Docker: Postgres, RustFS (S3) y Mailpit')
+execSync('docker compose up -d --wait postgres rustfs mailpit', { cwd: raiz, stdio: 'inherit' })
+execSync('docker compose run --rm bucket-init', { cwd: raiz, stdio: 'inherit' })
 
 paso('Migraciones')
 execSync('pnpm --filter @plataforma/db migrate', { cwd: raiz, stdio: 'inherit' })
@@ -36,6 +36,6 @@ console.info(`
 ✔ Listo. Entra al panel con cualquiera de estos usuarios (solo en local):
 ${resumen.usuarios.map((u) => `   ${u.rol.padEnd(16)} ${u.email}  /  ${u.password}`).join('\n')}
 
-   Municipio demo: ${resumen.municipio}  ·  Mailpit: http://localhost:8025  ·  MinIO: http://localhost:9001
+   Municipio demo: ${resumen.municipio}  ·  Mailpit: http://localhost:8025  ·  Consola S3 (RustFS): http://localhost:9001
 `)
 process.exit(0)

@@ -1,4 +1,4 @@
-/** Cliente S3 (MinIO en local, Cloudflare R2 en producción). Se configura solo por variables de entorno. */
+/** Cliente S3 (RustFS en local, Cloudflare R2 en producción). Se configura solo por variables de entorno. */
 import { S3Client } from '@aws-sdk/client-s3'
 import { z } from 'zod'
 
@@ -55,6 +55,9 @@ export function clienteS3(config: ConfigArchivos = configDesdeEnv()): {
       region: config.region,
       forcePathStyle: config.forcePathStyle,
       credentials: { accessKeyId: config.accessKeyId, secretAccessKey: config.secretAccessKey },
+      // Sin checksums automáticos (CRC32) en las URLs firmadas: ni R2 ni RustFS los aceptan en subidas por partes
+      requestChecksumCalculation: 'WHEN_REQUIRED',
+      responseChecksumValidation: 'WHEN_REQUIRED',
     })
   }
   return { s3: _cliente, config }

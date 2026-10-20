@@ -22,7 +22,7 @@ const ruta = rutaDeArchivo({
 })
 const meta = { contentType: 'application/pdf', contentDisposition: 'inline; filename="prueba.pdf"' }
 
-describe('bucket (MinIO local)', () => {
+describe('bucket (RustFS local)', () => {
   it('sube con URL firmada, lee cabecera e inicio, mueve a _versiones y borra', async () => {
     const cuerpo = '%PDF-1.4 contenido de prueba'
     const url = await firmarSubida(ruta, cuerpo.length, meta)

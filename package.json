@@ -16,7 +16,7 @@
     "test": "turbo run test",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "docker:up": "docker compose up -d --wait postgres minio mailpit && docker compose run --rm minio-init",
+    "docker:up": "docker compose up -d --wait postgres rustfs mailpit && docker compose run --rm bucket-init",
     "docker:down": "docker compose down",
     "docker:reset": "docker compose down -v && pnpm docker:up",
     "db:generate": "pnpm --filter @plataforma/db generate",

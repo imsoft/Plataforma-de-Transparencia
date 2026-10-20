@@ -209,7 +209,7 @@ export async function listarPartes(
   return salida
 }
 
-/** URL firmada de lectura de larga duración (exportaciones enviadas por correo: 7 días). */
+/** URL firmada de lectura de larga duración (exportaciones enviadas por correo: 6 días). */
 export async function firmarLecturaLarga(ruta: string, o?: Opciones): Promise<string> {
   const { s3, config } = ctx(o)
   return getSignedUrl(s3, new GetObjectCommand({ Bucket: config.bucket, Key: ruta }), {
