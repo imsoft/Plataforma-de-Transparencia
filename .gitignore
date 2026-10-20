@@ -1,0 +1,35 @@
+# dependencias
+node_modules/
+.pnpm-store/
+
+# otros gestores: solo pnpm
+package-lock.json
+yarn.lock
+bun.lockb
+bun.lock
+
+# builds
+.next/
+dist/
+out/
+.turbo/
+*.tsbuildinfo
+
+# entorno
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# pruebas
+coverage/
+test-results/
+playwright-report/
+blob-report/
+
+# sistema
+.DS_Store
+*.log
+
+# salidas de scripts
+scripts/migrar-tuxcacuesco/salida/

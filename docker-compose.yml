@@ -1,0 +1,68 @@
+# Servicios locales que sustituyen a Neon, Cloudflare R2 y Resend.
+# Las apps (panel y sitios) corren fuera de Docker con `pnpm dev`.
+name: plataforma-transparencia
+
+services:
+  postgres:
+    image: postgres:18
+    container_name: pt-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: transparencia
+      TZ: UTC
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres-data:/var/lib/postgresql
+      - ./docker/postgres/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres -d transparencia']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  minio:
+    image: minio/minio:latest
+    container_name: pt-minio
+    command: server /data --console-address ':9001'
+    environment:
+      MINIO_ROOT_USER: minio
+      MINIO_ROOT_PASSWORD: minio12345
+    ports:
+      - '9000:9000'
+      - '9001:9001'
+    volumes:
+      - minio-data:/data
+    healthcheck:
+      test: ['CMD', 'mc', 'ready', 'local']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  minio-init:
+    image: minio/mc:latest
+    depends_on:
+      minio:
+        condition: service_healthy
+    entrypoint: ['/bin/sh', '/init/crear-bucket.sh']
+    environment:
+      MINIO_ROOT_USER: minio
+      MINIO_ROOT_PASSWORD: minio12345
+      BUCKET: transparencia
+    volumes:
+      - ./docker/minio:/init:ro
+
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: pt-mailpit
+    ports:
+      - '8025:8025' # interfaz web
+      - '1025:1025' # SMTP
+    environment:
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
+
+volumes:
+  postgres-data:
+  minio-data:

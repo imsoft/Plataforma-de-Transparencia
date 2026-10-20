@@ -1,0 +1,487 @@
+{
+  "estado": "JAL",
+  "version": {
+    "slug": "ley-anterior",
+    "nombre": "Ley de Transparencia de Jalisco (anterior a 2026)",
+    "vigenciaDesde": "2013-08-08"
+  },
+  "tipoSujetoObligado": "dif",
+  "nodos": [
+    {
+      "nivel": "articulo",
+      "numero": "8",
+      "titulo": "Información fundamental – General",
+      "periodicidad": "mensual",
+      "periodicidadPorConfirmar": true,
+      "hijos": [
+        {
+          "nivel": "fraccion",
+          "numero": "I",
+          "titulo": "La necesaria para el ejercicio del derecho a la información pública, que comprende:",
+          "hijos": [
+            {
+              "nivel": "inciso",
+              "numero": "a",
+              "titulo": "La Ley General, la presente Ley de transparencia y acceso a la información pública y su reglamento"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "b",
+              "titulo": "El reglamento interno para el manejo de la información pública del sujeto obligado"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "c",
+              "titulo": "Los lineamientos estatales de clasificación de información pública, emitidos por el Instituto"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "d",
+              "titulo": "Los lineamientos estatales de publicación y actualización de información fundamental, emitidos por el Instituto"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "e",
+              "titulo": "Los lineamientos estatales de protección de información confidencial y reservada, emitidos por el Instituto"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "f",
+              "titulo": "Los lineamientos generales que emita el Sistema Nacional"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "g",
+              "titulo": "Las actas y resoluciones del Comité de Transparencia"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "h",
+              "titulo": "Dirección electrónica donde podrán recibirse las solicitudes de acceso a la información"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "i",
+              "titulo": "La denominación, domicilio, teléfonos, faxes, dirección electrónica y correo electrónico oficiales del sujeto obligado"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "j",
+              "titulo": "El directorio de todos los servidores públicos del sujeto obligado, a partir del nivel de jefe de departamento o su equivalente, o de menor nivel, cuando se brinde atención al público; manejen o apliquen recursos públicos; realicen actos de autoridad o presten servicios profesionales bajo el régimen de confianza u honorarios y personal de base. El directorio deberá incluir, al menos, el nombre, cargo o nombramiento asignado, nivel del puesto en la estructura orgánica, fecha de alta en el cargo, número telefónico, domicilio para recibir correspondencia y dirección de correo electrónico oficiales; el directorio a que se refiere este inciso deberá contener, además, el nombre de todas las cuentas oficiales de redes sociales digitales que administren los sujetos obligados, así como aquellas de los servidores públicos que voluntariamente decidan incorporarse a dicho directorio en los términos establecidos por el Sistema Nacional de Transparencia"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "k",
+              "titulo": "El nombre del encargado y de los integrantes, teléfono, fax, y correo electrónico del Comité de Transparencia"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "l",
+              "titulo": "El nombre del encargado, teléfono, fax, y correo electrónico de la Unidad del sujeto obligado"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "m",
+              "titulo": "El manual y formato de solicitud de información pública"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "n",
+              "titulo": "Índice de los expedientes clasificados como reservados, por área responsable de la información y tema"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "ñ",
+              "titulo": "La estadística de las solicitudes de información pública atendidas, precisando las procedentes, parcialmente procedentes e improcedentes; así como la estadística de visitas a su sistema de consulta electrónica"
+            }
+          ]
+        },
+        {
+          "nivel": "fraccion",
+          "numero": "II",
+          "titulo": "La información sobre el marco jurídico aplicable al y por el sujeto obligado, que comprende:",
+          "hijos": [
+            {
+              "nivel": "inciso",
+              "numero": "a",
+              "titulo": "Las disposiciones de las Constituciones Políticas Federal y Estatal aplicables al y por el sujeto obligado"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "b",
+              "titulo": "Los tratados y convenciones internacionales suscritas por México aplicables al y por el sujeto obligado"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "c",
+              "titulo": "Las leyes federales y estatales"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "d",
+              "titulo": "Los reglamentos federales, estatales y municipales"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "e",
+              "titulo": "Los decretos, acuerdos, criterios, políticas, reglas de operación y demás normas jurídicas generales"
+            }
+          ]
+        },
+        {
+          "nivel": "fraccion",
+          "numero": "III",
+          "titulo": "La información sobre la planeación del desarrollo, aplicable al y por el sujeto obligado, que comprende:",
+          "hijos": [
+            {
+              "nivel": "inciso",
+              "numero": "a",
+              "titulo": "Los apartados del Plan Nacional de Desarrollo que sirve de marco general a la planeación de las áreas relativas a las funciones del sujeto obligado"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "b",
+              "titulo": "Los apartados de los programas federales"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "c",
+              "titulo": "Los apartados del Plan Estatal de Desarrollo"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "d",
+              "titulo": "Los programas estatales aplicables al y por el sujeto obligado"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "e",
+              "titulo": "Los programas regionales"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "f",
+              "titulo": "Las evaluaciones y encuestas que hagan los sujetos obligados a programas financiados con recursos públicos"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "g",
+              "titulo": "Los demás instrumentos de planeación no comprendidos en los incisos anteriores, aplicables al y por el sujeto obligado"
+            }
+          ]
+        },
+        {
+          "nivel": "fraccion",
+          "numero": "IV",
+          "titulo": "La información sobre la planeación estratégica gubernamental aplicable al y por el sujeto obligado, que comprende:",
+          "hijos": [
+            {
+              "nivel": "inciso",
+              "numero": "a",
+              "titulo": "El Plan General Institucional del poder, organismo o municipio"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "b",
+              "titulo": "Los programas operativos anuales aplicables"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "c",
+              "titulo": "Los manuales de organización aplicables"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "d",
+              "titulo": "Los manuales de operación aplicables"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "e",
+              "titulo": "Los manuales de procedimientos"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "f",
+              "titulo": "Los manuales de servicios"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "g",
+              "titulo": "Los protocolos"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "h",
+              "titulo": "Los indicadores que permitan rendir cuenta de sus objetivos y resultados"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "i",
+              "titulo": "Los demás instrumentos normativos internos"
+            }
+          ]
+        },
+        {
+          "nivel": "fraccion",
+          "numero": "V",
+          "titulo": "La información financiera, patrimonial y administrativa, que comprende:",
+          "hijos": [
+            {
+              "nivel": "inciso",
+              "numero": "a",
+              "titulo": "Las partidas del Presupuesto de Egresos de la Federación y del Presupuesto de Egresos del Estado, así como los conceptos del clasificador por objeto del gasto aplicables al y por el sujeto obligado, de cuando menos los últimos tres años"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "b",
+              "titulo": "Los ingresos extraordinarios recibidos por cualquier concepto, señalando el origen de los recursos, el nombre de los responsables de recibirlos, administrarlos y ejercerlos, así como el proyecto o programa donde serán aplicados"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "c",
+              "titulo": "El presupuesto de egresos anual y, en su caso, el clasificador por objeto del gasto del sujeto obligado, de cuando menos los últimos tres años"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "d",
+              "titulo": "Las convocatorias a concursos para ocupar cargos públicos"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "e",
+              "titulo": "La plantilla del personal del sujeto obligado, con las modificaciones de cuando menos los últimos tres años"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "f",
+              "titulo": "Las remuneraciones mensuales por puesto, incluidas todas las prestaciones, estímulos o compensaciones"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "g",
+              "titulo": "Las nóminas completas del sujeto obligado en las que se incluya las gratificaciones, primas, comisiones, dietas y estímulos, de cuando menos los últimos tres años, y en su caso, con sistema de busqueda"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "h",
+              "titulo": "El listado de jubilados y pensionados y el monto que reciben"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "i",
+              "titulo": "Los estados financieros mensuales, de cuando menos los últimos tres años"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "j",
+              "titulo": "Los gastos de comunicación social, de cuando menos los últimos tres años, donde se señale cuando menos la fecha, monto y partida de la erogación, responsable directo de la autorización de la contratación, denominación del medio de comunicación contratado, descripción del servicio contratado, justificación y relación con alguna función o servicio públicos"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "k",
+              "titulo": "El contrato de prestación de servicios o por honorarios, y el gasto realizado por concepto de pago de asesorías al sujeto obligado, donde se señale nombre de la empresa, institución o individuos, el concepto de cada una de las asesorías, así como el trabajo realizado"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "l",
+              "titulo": "Los subsidios, en especie o en numerario, recibidos por el sujeto obligado, así como los otorgados por el sujeto obligado, en los que se señale lo siguiente:"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "m",
+              "titulo": "El listado de personas físicas o jurídicas a quienes, por cualquier motivo, se les asigne o permita usar recursos públicos o, en los términos de las disposiciones aplicables, realicen actos de autoridad, así como los informes que dichas personas les entreguen sobre el uso y destino de dichos recursos"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "n",
+              "titulo": "Las cuentas públicas y demás informes de gestión financiera, las auditorías internas y externas realizadas, así como los informes de gestión financiera del sujeto obligado, de cuando menos los últimos tres años"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "ñ",
+              "titulo": "Los padrones de proveedores o contratistas, de cuando menos los últimos tres años"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "o",
+              "titulo": "La información sobre adjudicaciones directas en materia de adquisiciones, obra pública, proyectos de inversión y prestación de servicios, de cuando menos los últimos tres años, que deberá contener"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "p",
+              "titulo": "La información sobre concursos por invitación y licitaciones públicas en materia de adquisiciones, obra pública, proyectos de invresión prestación de servicios, de cuando menos los últimos tres años, que deberá contener"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "q",
+              "titulo": "El nombre, denominación o razón social y clave del Registro Federal de Contribuyentes de quienes se les hubiera cancelado o condonado algún crédito fiscal, los montos respectivos, así como la información estadística sobre las exenciones previstas en las disposiciones fiscales"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "r",
+              "titulo": "Los inventarios de bienes muebles e inmuebles del sujeto obligado, de cuando menos los últimos tres años, donde se señale cuando menos la descripción, el valor, el régimen jurídico, y el uso o afectación del bien"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "s",
+              "titulo": "Los gastos de representación, viáticos y viajes oficiales, su costo, itinerario, agenda y resultados"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "t",
+              "titulo": "Las concesiones, licencias, permisos o autorizaciones otorgadas de los últimos tres años"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "u",
+              "titulo": "Los decretos y expedientes relativos a las expropiaciones que realicen por utilidad pública"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "v",
+              "titulo": "Las pólizas de los cheques expedidos, con identificación del número de cheque o transferencia, monto y nombre del beneficiario, indicando el motivo de la erogación, en el que de manera detallada y completa se indique para qué se erogó el recurso público, o en su caso la descripción que aparezca en la factura correspondiente; siempre y cuando con ello se aporten los elementos cualitativos de la finalidad del cheque o transferencia"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "w",
+              "titulo": "El estado de la deuda pública del sujeto obligado, donde se señale cuando menos responsable de la autorización, fecha de contratación, monto del crédito, tasa de interés, monto total amortizable, plazo de vencimiento, institución crediticia, objeto de aplicación y avance de aplicación de cada deuda contratada"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "x",
+              "titulo": "Los estados de cuenta bancarios que expiden las instituciones financieras, número de cuentas bancarias,estados financieros, cuentas de fideicomisos e inversiones"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "y",
+              "titulo": "La información en versión pública de las declaraciones patrimoniales de los servidores públicos que así lo determinen, en los sistemas habilitados para ello, de acuerdo a la normatividad aplicable"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "z",
+              "titulo": "El registro de los procedimientos de responsabilidad administrativa, con indicación del número de expediente, fecha de ingreso, nombre del denunciante, nombre y cargo del denunciado, causa del procedimiento, estado procesal y, en su caso, la sanción impuesta"
+            }
+          ]
+        },
+        {
+          "nivel": "fraccion",
+          "numero": "VI",
+          "titulo": "La información sobre la gestión pública",
+          "hijos": [
+            {
+              "nivel": "inciso",
+              "numero": "a",
+              "titulo": "Las funciones públicas que realiza el sujeto obligado, donde se señale cuando menos el fundamento legal, la descripción de la función pública, así como los recursos materiales, humanos y financieros asignados para la realización de la función pública"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "b",
+              "titulo": "Los servicios públicos que presta el sujeto obligado, donde se señale cuando menos la descripción y cobertura del servicio público; los recursos materiales, humanos y financieros asignados para la prestación del servicio público, y el número y tipo de beneficiarios directos e indirectos del servicio público"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "c",
+              "titulo": "Las obras públicas que realiza el sujeto obligado, de cuando menos los últimos tres años, donde se señale cuando menos la descripción y ubicación de la obra; el ejecutor y supervisor de la obra; el costo inicial y final; la superficie construida por metros cuadrados; costo por metro cuadrado; su relación con los instrumentos de planeación del desarrollo, y el número y tipo de beneficiarios directos e indirectos de la obra"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "d",
+              "titulo": "Los programas sociales que aplica el sujeto obligado, de cuando menos los últimos tres años, donde se señale cuando menos los objetivos, metas, presupuesto y reglas de operación del programa; los requisitos, trámites y formatos para ser beneficiario; la entidad pública ejecutora, el responsable directo, número de personal que lo aplica y el costo de operación del programa; el padrón de beneficiarios del programa, y la medición de avances de la ejecución del gasto, y el cumplimiento de metas y objetivos del programa, incluida la metodología empleada"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "e",
+              "titulo": "Las políticas públicas que elabora y aplica el sujeto obligado, de cuando menos los últimos tres años"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "f",
+              "titulo": "Los convenios, contratos y demás instrumentos jurídicos suscritos por el sujeto obligado, de cuando menos los últimos tres años"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "g",
+              "titulo": "Las concesiones, licencias, permisos, autorizaciones y demás actos administrativos otorgados por el sujeto obligado, de cuando menos los últimos tres años, en el que se incluyan los requisitos para acceder a ellos y, en su caso, los formatos correspondientes"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "h",
+              "titulo": "La agenda diaria de actividades del sujeto obligado, de cuando menos el último mes"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "i",
+              "titulo": "El lugar, día y hora de todas las reuniones o sesiones de sus órganos colegiados, junto con el orden del día y una relación detallada de los asuntos a tratar, así como la indicación del lugar y forma en que se puedan consultar los documentos públicos relativos, con cuando menos veinticuatro horas anteriores a la celebración de dicha reunión o sesión"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "j",
+              "titulo": "Las versiones estenográficas, así como las actas o minutas de las reuniones o sesiones de sus órganos colegiados Video sesiones de ayuntamiento"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "k",
+              "titulo": "La integración, la regulación básica y las actas de las reuniones de los consejos ciudadanos reconocidos oficialmente por el sujeto obligado con el propósito de que la ciudadanía participe o vigile la actividad de sus órganos y dependencias"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "l",
+              "titulo": "Los informes trimestrales y anuales de actividades del sujeto obligado, de cuando menos los últimos tres años"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "m",
+              "titulo": "Las recomendaciones emitidas por los órganos públicos del Estado mexicano u organismos internacionales garantes de los derechos humanos, así como las acciones que han llevado a cabo para su atención"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "n",
+              "titulo": "Las estadísticas que generen en cumplimiento de sus facultades, competencias o funciones con la mayor desagregación posible"
+            }
+          ]
+        },
+        {
+          "nivel": "fraccion",
+          "numero": "VII",
+          "titulo": "Las versiones públicas de las resoluciones y laudos que emitan los sujetos obligados, en procesos o procedimientos seguidos en forma de juicio y que hayan causado estado"
+        },
+        {
+          "nivel": "fraccion",
+          "numero": "VIII",
+          "titulo": "Los mecanismos e instrumentos de participación ciudadana que puedan acceder o ejercer ante el sujeto obligado"
+        },
+        {
+          "nivel": "fraccion",
+          "numero": "IX",
+          "titulo": "La información pública ordinaria proactiva o focalizada que considere el sujeto obligado, por sí o a propuesta del Instituto"
+        },
+        {
+          "nivel": "fraccion",
+          "numero": "X",
+          "titulo": "Las condiciones generales de trabajo, contratos o convenios que regulen las relaciones laborales del personal de base o de confianza, así como los recursos públicos económicos, en especie o donativos, que sean entregados a los sindicatos y ejerzan como recursos públicos"
+        },
+        {
+          "nivel": "fraccion",
+          "numero": "XI",
+          "titulo": "Los estudios financiados con recursos públicos"
+        },
+        {
+          "nivel": "fraccion",
+          "numero": "XII",
+          "titulo": "Los ingresos recibidos por cualquier concepto señalando el nombre de los responsables de recibirlos, administrarlos y ejercerlos, así como su destino, indicando el destino de cada uno de ellos"
+        },
+        {
+          "nivel": "fraccion",
+          "numero": "XIII",
+          "titulo": "El catálogo de disposición y guía de archivo documental"
+        },
+        {
+          "nivel": "fraccion",
+          "numero": "XIV",
+          "titulo": "La demás información pública a que obliguen las disposiciones federales y la Ley General de Contabilidad Gubernamental, así como aquella que se genere por la ejecución del gasto público con recursos federales"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+node_modules
+.next
+dist
+.turbo
+pnpm-lock.yaml
+packages/db/migrations/meta
+docs/brief-plataforma-transparencia.md
+
+# generados por Next
+next-env.d.ts

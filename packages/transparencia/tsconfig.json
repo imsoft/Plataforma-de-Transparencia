@@ -1,0 +1,9 @@
+{
+  "extends": "@plataforma/config/tsconfig/react-library.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "exactOptionalPropertyTypes": false,
+    "paths": { "@plataforma/ui/*": ["../ui/src/*"] }
+  },
+  "include": ["src", "vitest.config.ts"]
+}

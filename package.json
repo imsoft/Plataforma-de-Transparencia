@@ -1,0 +1,53 @@
+{
+  "name": "plataforma-transparencia",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@12.14.0",
+  "engines": {
+    "node": ">=24.0.0 <25",
+    "pnpm": ">=12.0.0"
+  },
+  "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "docker:up": "docker compose up -d --wait postgres minio mailpit && docker compose run --rm minio-init",
+    "docker:down": "docker compose down",
+    "docker:reset": "docker compose down -v && pnpm docker:up",
+    "db:generate": "pnpm --filter @plataforma/db generate",
+    "db:migrate": "pnpm --filter @plataforma/db migrate",
+    "typecheck:scripts": "tsc -p scripts/tsconfig.json",
+    "iniciar": "tsx scripts/setup.ts",
+    "e2e": "playwright test",
+    "e2e:ui": "playwright test --ui",
+    "nuevo-municipio": "tsx scripts/nuevo-municipio.ts",
+    "test:scripts": "vitest run --config scripts/vitest.config.ts",
+    "migrar:tuxcacuesco": "tsx scripts/migrar-tuxcacuesco/index.ts"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "catalog:",
+    "@clack/prompts": "catalog:",
+    "@plataforma/archivos": "workspace:*",
+    "@plataforma/auth": "workspace:*",
+    "@plataforma/config": "workspace:*",
+    "@plataforma/db": "workspace:*",
+    "@plataforma/indice": "workspace:*",
+    "@plataforma/transparencia": "workspace:*",
+    "@playwright/test": "catalog:",
+    "@types/node": "catalog:",
+    "better-auth": "catalog:",
+    "dotenv": "catalog:",
+    "node-html-parser": "catalog:",
+    "only-allow": "catalog:",
+    "prettier": "catalog:",
+    "tsx": "catalog:",
+    "turbo": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

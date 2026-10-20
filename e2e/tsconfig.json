@@ -1,0 +1,5 @@
+{
+  "extends": "@plataforma/config/tsconfig/node.json",
+  "compilerOptions": { "rootDir": "..", "lib": ["ES2023", "DOM"] },
+  "include": ["./**/*.ts", "../playwright.config.ts"]
+}

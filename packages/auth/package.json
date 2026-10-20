@@ -1,0 +1,33 @@
+{
+  "name": "@plataforma/auth",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./servidor": "./src/servidor.ts",
+    "./cliente": "./src/cliente.ts",
+    "./permisos": "./src/permisos.ts",
+    "./roles": "./src/roles.ts"
+  },
+  "scripts": {
+    "generate:schema": "auth generate --adapter drizzle --dialect postgresql --config src/auth.cli.ts --output ../db/src/schema/auth.ts -y",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@better-auth/drizzle-adapter": "catalog:",
+    "@plataforma/db": "workspace:*",
+    "better-auth": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@plataforma/config": "workspace:*",
+    "@types/node": "catalog:",
+    "auth": "catalog:",
+    "eslint": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

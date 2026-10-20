@@ -1,0 +1,34 @@
+{
+  "name": "@plataforma/archivos",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./tipos": "./src/tipos.ts",
+    "./rutas": "./src/rutas.ts",
+    "./nombre-sugerido": "./src/nombre-sugerido.ts",
+    "./tipos-cliente": "./src/tipos-cliente.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "catalog:",
+    "@aws-sdk/lib-storage": "catalog:",
+    "@aws-sdk/s3-request-presigner": "catalog:",
+    "file-type": "catalog:",
+    "nanoid": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@plataforma/config": "workspace:*",
+    "@plataforma/db": "workspace:*",
+    "@types/node": "catalog:",
+    "eslint": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

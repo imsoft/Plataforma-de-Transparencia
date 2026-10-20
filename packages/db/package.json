@@ -1,0 +1,39 @@
+{
+  "name": "@plataforma/db",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./schema": "./src/schema/index.ts",
+    "./cliente": "./src/cliente.ts",
+    "./pruebas": "./src/pruebas/index.ts",
+    "./env": "./src/env.ts",
+    "./consultas/*": "./src/consultas/*.ts"
+  },
+  "scripts": {
+    "generate": "drizzle-kit generate",
+    "generate:custom": "drizzle-kit generate --custom",
+    "migrate": "tsx src/migrar.ts",
+    "studio": "drizzle-kit studio",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "catalog:",
+    "drizzle-orm": "catalog:",
+    "postgres": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@plataforma/config": "workspace:*",
+    "@types/node": "catalog:",
+    "dotenv": "catalog:",
+    "drizzle-kit": "catalog:",
+    "eslint": "catalog:",
+    "tsx": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "estado": "JAL",
+  "version": {
+    "slug": "prueba",
+    "nombre": "Índice de prueba (desarrollo)",
+    "vigenciaDesde": "2026-01-01"
+  },
+  "tipoSujetoObligado": "ayuntamiento",
+  "nodos": [
+    {
+      "nivel": "articulo",
+      "numero": "8",
+      "titulo": "Información fundamental — General",
+      "periodicidad": "mensual",
+      "hijos": [
+        {
+          "nivel": "fraccion",
+          "numero": "I",
+          "titulo": "La necesaria para el ejercicio del derecho a la información",
+          "periodicidad": "permanente",
+          "hijos": [
+            {
+              "nivel": "inciso",
+              "numero": "a",
+              "titulo": "El marco normativo aplicable al sujeto obligado"
+            },
+            {
+              "nivel": "inciso",
+              "numero": "b",
+              "titulo": "El directorio de servidores públicos",
+              "periodicidad": "trimestral"
+            }
+          ]
+        },
+        {
+          "nivel": "fraccion",
+          "numero": "V",
+          "titulo": "La información financiera, patrimonial y administrativa",
+          "hijos": [
+            {
+              "nivel": "inciso",
+              "numero": "a",
+              "titulo": "Las partidas del Presupuesto de Egresos",
+              "periodicidad": "anual"
+            },
+            { "nivel": "inciso", "numero": "b", "titulo": "Los estados financieros mensuales" },
+            { "nivel": "inciso", "numero": "g", "titulo": "La nómina completa del sujeto obligado" }
+          ]
+        }
+      ]
+    },
+    {
+      "nivel": "articulo",
+      "numero": "15",
+      "titulo": "Información fundamental — Ayuntamientos",
+      "periodicidad": "mensual",
+      "hijos": [
+        {
+          "nivel": "fraccion",
+          "numero": "XI",
+          "titulo": "Las actas de las sesiones del Ayuntamiento"
+        },
+        {
+          "nivel": "fraccion",
+          "numero": "XX",
+          "titulo": "Las versiones públicas de los contratos",
+          "periodicidad": "trimestral"
+        }
+      ]
+    },
+    {
+      "nivel": "articulo",
+      "rutaSlug": "armonizacion-contable",
+      "titulo": "Armonización contable",
+      "periodicidad": "trimestral",
+      "hijos": [
+        { "nivel": "fraccion", "numero": "1", "titulo": "Estado de situación financiera" },
+        { "nivel": "fraccion", "numero": "2", "titulo": "Estado de actividades" }
+      ]
+    }
+  ]
+}

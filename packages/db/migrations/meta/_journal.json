@@ -1,0 +1,41 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1792383954494,
+      "tag": "0000_inicial",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1792384091328,
+      "tag": "0001_seguridad",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1792386553444,
+      "tag": "0002_municipios_por_membresia",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1792387138478,
+      "tag": "0003_publico_por_slug",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1792394924539,
+      "tag": "0004_tema_neutro",
+      "breakpoints": true
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended", ":pinAllExceptPeerDependencies", "schedule:weekly"],
+  "labels": ["dependencias"],
+  "packageRules": [
+    { "matchUpdateTypes": ["patch", "minor"], "automerge": true },
+    { "matchPackageNames": ["typescript"], "allowedVersions": "<7" }
+  ],
+  "minimumReleaseAge": "3 days"
+}

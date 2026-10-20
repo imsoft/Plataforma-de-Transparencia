@@ -1,0 +1,27 @@
+name: Respaldo diario de la base
+
+on:
+  schedule:
+    - cron: '0 8 * * *' # 02:00 America/Mexico_City
+  workflow_dispatch:
+
+jobs:
+  pg_dump:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - run: sudo apt-get update && sudo apt-get install -y postgresql-client
+      - name: Volcar base
+        run: pg_dump --format=custom --no-owner --file=respaldo.dump "$DATABASE_URL_MIGRACIONES"
+        env:
+          DATABASE_URL_MIGRACIONES: ${{ secrets.DATABASE_URL_MIGRACIONES }}
+      - name: Subir a R2
+        run: |
+          pip install --quiet awscli
+          aws s3 cp respaldo.dump "s3://$S3_BUCKET/_respaldos/$(date -u +%F).dump" --endpoint-url "$S3_ENDPOINT"
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.S3_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.S3_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+          S3_BUCKET: ${{ secrets.S3_BUCKET }}
+          S3_ENDPOINT: ${{ secrets.S3_ENDPOINT }}
