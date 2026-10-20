@@ -9,6 +9,7 @@ import {
   organization,
   sujetosObligados,
   tiposSujetoObligado,
+  user as tablaUser,
 } from '@plataforma/db'
 import { cerrar, clienteDePruebas, sufijo } from '@plataforma/db/pruebas'
 import { afterAll, describe, expect, it, vi } from 'vitest'
@@ -29,17 +30,15 @@ describe('alertas de comportamiento anómalo', () => {
     const correoSuper = `super-${x}@pruebas.test`
     await comoSistema('pruebas', async (tx) => {
       // la prueba no depende de la semilla: crea su propio superadmin que recibirá el aviso
-      await tx
-        .insert(tablaUser)
-        .values({
-          id: `u-super-${x}`,
-          name: 'Super de prueba',
-          email: correoSuper,
-          emailVerified: true,
-          role: 'superadmin',
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        })
+      await tx.insert(tablaUser).values({
+        id: `u-super-${x}`,
+        name: 'Super de prueba',
+        email: correoSuper,
+        emailVerified: true,
+        role: 'superadmin',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      })
       const [e] = await tx
         .insert(estados)
         .values({ clave: `A${x}`.slice(0, 5), nombre: 'Estado' })
