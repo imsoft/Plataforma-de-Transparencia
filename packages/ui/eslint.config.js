@@ -1,1 +1,1 @@
-export { default } from '@plataforma/config/eslint/react'
+export { default } from '@platform/config/eslint/react'

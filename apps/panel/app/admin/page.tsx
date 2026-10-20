@@ -1,15 +1,15 @@
-import { todosLosMunicipios } from '@plataforma/db/consultas/sesion'
-import { Button } from '@plataforma/ui/components/button'
-import { Badge } from '@plataforma/ui/components/badge'
+import { allMunicipalities } from '@platform/db/queries/session'
+import { Button } from '@platform/ui/components/button'
+import { Badge } from '@platform/ui/components/badge'
 import { PlusIcon } from 'lucide-react'
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { BotonSuspender } from '@/components/admin/suspender'
+import { SuspendButton } from '@/components/admin/suspend'
 
 export const metadata: Metadata = { title: 'Municipios' }
 
-export default async function PaginaAdmin() {
-  const lista = await todosLosMunicipios()
+export default async function AdminPage() {
+  const list = await allMunicipalities()
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-wrap items-center justify-between gap-3">
@@ -28,12 +28,12 @@ export default async function PaginaAdmin() {
         </Button>
       </div>
       <ul className="divide-y rounded-xl border bg-card">
-        {lista.map((m) => (
+        {list.map((m) => (
           <li key={m.id} className="flex flex-wrap items-center gap-3 p-3">
             <div className="min-w-0 flex-1">
               <p className="font-medium">
-                {m.nombreOficial}{' '}
-                {m.estatus === 'panel_suspendido' && (
+                {m.officialName}{' '}
+                {m.status === 'panel_suspended' && (
                   <Badge variant="destructive">Panel suspendido</Badge>
                 )}
               </p>
@@ -55,7 +55,7 @@ export default async function PaginaAdmin() {
             >
               Identidad
             </Button>
-            <BotonSuspender municipioId={m.id} suspendido={m.estatus === 'panel_suspendido'} />
+            <SuspendButton municipalityId={m.id} suspended={m.status === 'panel_suspended'} />
           </li>
         ))}
       </ul>

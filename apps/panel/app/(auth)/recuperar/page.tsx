@@ -1,30 +1,30 @@
 'use client'
-import { Button } from '@plataforma/ui/components/button'
-import { campo } from '@/lib/formulario'
+import { Button } from '@platform/ui/components/button'
+import { field } from '@/lib/form'
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@plataforma/ui/components/card'
-import { Input } from '@plataforma/ui/components/input'
-import { Label } from '@plataforma/ui/components/label'
+} from '@platform/ui/components/card'
+import { Input } from '@platform/ui/components/input'
+import { Label } from '@platform/ui/components/label'
 import { Loader2Icon } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
-import { authCliente } from '@/lib/auth-cliente'
+import { authClient } from '@/lib/auth-client'
 
-export default function PaginaRecuperar() {
-  const [cargando, setCargando] = useState(false)
-  const [enviado, setEnviado] = useState(false)
-  async function enviar(e: React.FormEvent<HTMLFormElement>) {
+export default function RecoverPage() {
+  const [loading, setLoading] = useState(false)
+  const [sent, setSent] = useState(false)
+  async function send(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    setCargando(true)
-    const email = campo(new FormData(e.currentTarget), 'email')
-    await authCliente.requestPasswordReset({ email, redirectTo: '/restablecer' })
-    setCargando(false)
-    setEnviado(true) // siempre el mismo mensaje: no revelamos si el correo existe
+    setLoading(true)
+    const email = field(new FormData(e.currentTarget), 'email')
+    await authClient.requestPasswordReset({ email, redirectTo: '/restablecer' })
+    setLoading(false)
+    setSent(true) // siempre el mismo mensaje: no revelamos si el correo existe
   }
   return (
     <Card>
@@ -35,13 +35,13 @@ export default function PaginaRecuperar() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        {enviado ? (
+        {sent ? (
           <p className="text-sm">
             Si el correo está registrado, en unos minutos recibirás el enlace. Revisa también la
             carpeta de correo no deseado.
           </p>
         ) : (
-          <form onSubmit={enviar} className="flex flex-col gap-4">
+          <form onSubmit={send} className="flex flex-col gap-4">
             <div className="flex flex-col gap-1">
               <Label htmlFor="email">Correo electrónico</Label>
               <Input
@@ -53,8 +53,8 @@ export default function PaginaRecuperar() {
                 className="h-11 text-base"
               />
             </div>
-            <Button type="submit" className="h-11" disabled={cargando}>
-              {cargando && <Loader2Icon className="animate-spin" aria-hidden />} Enviar enlace
+            <Button type="submit" className="h-11" disabled={loading}>
+              {loading && <Loader2Icon className="animate-spin" aria-hidden />} Enviar enlace
             </Button>
           </form>
         )}

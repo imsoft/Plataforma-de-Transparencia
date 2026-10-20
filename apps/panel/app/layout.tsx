@@ -1,9 +1,9 @@
-import '@plataforma/ui/globals.css'
-import { cn } from '@plataforma/ui/lib/utils'
+import '@platform/ui/globals.css'
+import { cn } from '@platform/ui/lib/utils'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { headers } from 'next/headers'
-import { Proveedores } from '@/components/proveedores'
+import { Providers } from '@/components/providers'
 import { env } from '@/lib/env'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' })
@@ -26,7 +26,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       className={cn('antialiased font-sans', inter.variable)}
     >
       <body className="min-h-dvh bg-background text-foreground">
-        <Proveedores nonce={nonce}>{children}</Proveedores>
+        <Providers nonce={nonce}>{children}</Providers>
       </body>
     </html>
   )

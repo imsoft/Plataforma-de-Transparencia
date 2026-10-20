@@ -1,18 +1,18 @@
-import { urlPublica } from '@plataforma/archivos'
-import { TEMA_PLATAFORMA, temaSchema } from '@plataforma/tema'
+import { publicUrl } from '@platform/files'
+import { PLATFORM_THEME, themeSchema } from '@platform/theme'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { FormularioIdentidad } from '@/components/identidad/formulario'
-import { contextoMunicipio } from '@/lib/municipio'
+import { IdentityForm } from '@/components/identity/form'
+import { municipalityContext } from '@/lib/municipality'
 
 export const metadata: Metadata = { title: 'Identidad' }
 
-export default async function PaginaIdentidad({ params }: { params: Promise<{ slug: string }> }) {
+export default async function IdentityPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const c = await contextoMunicipio(slug)
-  if (!c.puede('identidad:ver')) notFound()
-  const t = temaSchema.safeParse(c.municipio.tema ?? {})
-  const tema = t.success ? t.data : TEMA_PLATAFORMA
+  const c = await municipalityContext(slug)
+  if (!c.can('identity:view')) notFound()
+  const t = themeSchema.safeParse(c.municipality.theme ?? {})
+  const theme = t.success ? t.data : PLATFORM_THEME
   return (
     <div className="flex max-w-3xl flex-col gap-4">
       <div>
@@ -22,17 +22,21 @@ export default async function PaginaIdentidad({ params }: { params: Promise<{ sl
           al momento, sin tocar los documentos ni sus enlaces.
         </p>
       </div>
-      <FormularioIdentidad
+      <IdentityForm
         slug={slug}
-        tema={tema}
-        escudoUrl={c.municipio.tema?.escudoRuta ? urlPublica(c.municipio.tema.escudoRuta) : null}
-        logoUrl={
-          c.municipio.tema?.logoAdministracionRuta
-            ? urlPublica(c.municipio.tema.logoAdministracionRuta)
+        theme={theme}
+        coatOfArmsUrl={
+          c.municipality.theme?.coatOfArmsPath
+            ? publicUrl(c.municipality.theme.coatOfArmsPath)
             : null
         }
-        contacto={c.municipio.datosContacto}
-        puedeEditar={c.puede('identidad:editar')}
+        logoUrl={
+          c.municipality.theme?.administrationLogoPath
+            ? publicUrl(c.municipality.theme.administrationLogoPath)
+            : null
+        }
+        contact={c.municipality.contactInfo}
+        canEdit={c.can('identity:edit')}
       />
     </div>
   )

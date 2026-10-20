@@ -1,3 +1,3 @@
-export * from './permisos'
+export * from './permissions'
 export * from './roles'
-export { crearAuth, type Auth, type OpcionesAuth } from './servidor'
+export { createAuth, type Auth, type AuthOptions } from './server'

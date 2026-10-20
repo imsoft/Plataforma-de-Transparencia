@@ -1,5 +1,5 @@
 {
-  "extends": "@plataforma/config/tsconfig/node.json",
+  "extends": "@platform/config/tsconfig/node.json",
   "compilerOptions": { "rootDir": "." },
   "include": ["src", "drizzle.config.ts", "vitest.config.ts"]
 }

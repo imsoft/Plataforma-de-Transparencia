@@ -1,5 +1,5 @@
 {
-  "id": "8a7035e7-d55f-4923-8f4f-13d3d0a0585c",
+  "id": "29f79b8a-d998-4bee-a552-32b893235a4d",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -701,14 +701,14 @@
           "notNull": false,
           "default": false
         },
-        "cargo": {
-          "name": "cargo",
+        "job_title": {
+          "name": "job_title",
           "type": "text",
           "primaryKey": false,
           "notNull": false
         },
-        "telefono": {
-          "name": "telefono",
+        "phone": {
+          "name": "phone",
           "type": "text",
           "primaryKey": false,
           "notNull": false
@@ -797,8 +797,8 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.estados": {
-      "name": "estados",
+    "public.law_index_equivalences": {
+      "name": "law_index_equivalences",
       "schema": "",
       "columns": {
         "id": {
@@ -808,85 +808,45 @@
           "notNull": true,
           "default": "uuidv7()"
         },
-        "clave": {
-          "name": "clave",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "nombre": {
-          "name": "nombre",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "estados_clave_unique": {
-          "name": "estados_clave_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "clave"
-          ]
-        }
-      },
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.indice_equivalencias": {
-      "name": "indice_equivalencias",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "uuid",
-          "primaryKey": true,
-          "notNull": true,
-          "default": "uuidv7()"
-        },
-        "nodo_origen_id": {
-          "name": "nodo_origen_id",
+        "source_node_id": {
+          "name": "source_node_id",
           "type": "uuid",
           "primaryKey": false,
           "notNull": true
         },
-        "nodo_destino_id": {
-          "name": "nodo_destino_id",
+        "target_node_id": {
+          "name": "target_node_id",
           "type": "uuid",
           "primaryKey": false,
           "notNull": true
         },
-        "tipo": {
-          "name": "tipo",
-          "type": "tipo_equivalencia",
+        "type": {
+          "name": "type",
+          "type": "equivalence_type",
           "typeSchema": "public",
           "primaryKey": false,
           "notNull": true,
-          "default": "'exacta'"
+          "default": "'exact'"
         },
-        "nota": {
-          "name": "nota",
+        "note": {
+          "name": "note",
           "type": "text",
           "primaryKey": false,
           "notNull": false
         }
       },
       "indexes": {
-        "indice_equivalencias_par": {
-          "name": "indice_equivalencias_par",
+        "law_index_equivalences_pair": {
+          "name": "law_index_equivalences_pair",
           "columns": [
             {
-              "expression": "nodo_origen_id",
+              "expression": "source_node_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
             },
             {
-              "expression": "nodo_destino_id",
+              "expression": "target_node_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -899,12 +859,12 @@
         }
       },
       "foreignKeys": {
-        "indice_equivalencias_nodo_origen_id_indice_nodos_id_fk": {
-          "name": "indice_equivalencias_nodo_origen_id_indice_nodos_id_fk",
-          "tableFrom": "indice_equivalencias",
-          "tableTo": "indice_nodos",
+        "law_index_equivalences_source_node_id_law_index_nodes_id_fk": {
+          "name": "law_index_equivalences_source_node_id_law_index_nodes_id_fk",
+          "tableFrom": "law_index_equivalences",
+          "tableTo": "law_index_nodes",
           "columnsFrom": [
-            "nodo_origen_id"
+            "source_node_id"
           ],
           "columnsTo": [
             "id"
@@ -912,12 +872,12 @@
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
-        "indice_equivalencias_nodo_destino_id_indice_nodos_id_fk": {
-          "name": "indice_equivalencias_nodo_destino_id_indice_nodos_id_fk",
-          "tableFrom": "indice_equivalencias",
-          "tableTo": "indice_nodos",
+        "law_index_equivalences_target_node_id_law_index_nodes_id_fk": {
+          "name": "law_index_equivalences_target_node_id_law_index_nodes_id_fk",
+          "tableFrom": "law_index_equivalences",
+          "tableTo": "law_index_nodes",
           "columnsFrom": [
-            "nodo_destino_id"
+            "target_node_id"
           ],
           "columnsTo": [
             "id"
@@ -932,8 +892,8 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.indice_nodos": {
-      "name": "indice_nodos",
+    "public.law_index_nodes": {
+      "name": "law_index_nodes",
       "schema": "",
       "columns": {
         "id": {
@@ -949,90 +909,90 @@
           "primaryKey": false,
           "notNull": true
         },
-        "tipo_sujeto_id": {
-          "name": "tipo_sujeto_id",
+        "subject_type_id": {
+          "name": "subject_type_id",
           "type": "uuid",
           "primaryKey": false,
           "notNull": true
         },
-        "padre_id": {
-          "name": "padre_id",
+        "parent_id": {
+          "name": "parent_id",
           "type": "uuid",
           "primaryKey": false,
           "notNull": false
         },
-        "nivel": {
-          "name": "nivel",
-          "type": "nivel_nodo",
+        "level": {
+          "name": "level",
+          "type": "node_level",
           "typeSchema": "public",
           "primaryKey": false,
           "notNull": true
         },
-        "numero": {
-          "name": "numero",
+        "number": {
+          "name": "number",
           "type": "text",
           "primaryKey": false,
           "notNull": true
         },
-        "etiqueta": {
-          "name": "etiqueta",
+        "label": {
+          "name": "label",
           "type": "text",
           "primaryKey": false,
           "notNull": true
         },
-        "titulo": {
-          "name": "titulo",
+        "title": {
+          "name": "title",
           "type": "text",
           "primaryKey": false,
           "notNull": true
         },
-        "descripcion": {
-          "name": "descripcion",
+        "description": {
+          "name": "description",
           "type": "text",
           "primaryKey": false,
           "notNull": false
         },
-        "clave": {
-          "name": "clave",
+        "key": {
+          "name": "key",
           "type": "text",
           "primaryKey": false,
           "notNull": false
         },
-        "ruta_slug": {
-          "name": "ruta_slug",
+        "route_slug": {
+          "name": "route_slug",
           "type": "text",
           "primaryKey": false,
           "notNull": false
         },
-        "periodicidad": {
-          "name": "periodicidad",
-          "type": "periodicidad",
+        "frequency": {
+          "name": "frequency",
+          "type": "frequency",
           "typeSchema": "public",
           "primaryKey": false,
           "notNull": true
         },
-        "periodicidad_por_confirmar": {
-          "name": "periodicidad_por_confirmar",
+        "frequency_to_confirm": {
+          "name": "frequency_to_confirm",
           "type": "boolean",
           "primaryKey": false,
           "notNull": true,
           "default": false
         },
-        "carpeta_r2": {
-          "name": "carpeta_r2",
+        "storage_folder": {
+          "name": "storage_folder",
           "type": "text",
           "primaryKey": false,
           "notNull": true
         },
-        "orden": {
-          "name": "orden",
+        "sort_order": {
+          "name": "sort_order",
           "type": "integer",
           "primaryKey": false,
           "notNull": true,
           "default": 0
         },
-        "activo": {
-          "name": "activo",
+        "active": {
+          "name": "active",
           "type": "boolean",
           "primaryKey": false,
           "notNull": true,
@@ -1040,8 +1000,8 @@
         }
       },
       "indexes": {
-        "indice_nodos_clave_unica": {
-          "name": "indice_nodos_clave_unica",
+        "law_index_nodes_key_unique": {
+          "name": "law_index_nodes_key_unique",
           "columns": [
             {
               "expression": "version_id",
@@ -1050,13 +1010,13 @@
               "nulls": "last"
             },
             {
-              "expression": "tipo_sujeto_id",
+              "expression": "subject_type_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
             },
             {
-              "expression": "clave",
+              "expression": "key",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -1067,8 +1027,8 @@
           "method": "btree",
           "with": {}
         },
-        "indice_nodos_ruta_slug_unica": {
-          "name": "indice_nodos_ruta_slug_unica",
+        "law_index_nodes_route_slug_unique": {
+          "name": "law_index_nodes_route_slug_unique",
           "columns": [
             {
               "expression": "version_id",
@@ -1077,13 +1037,13 @@
               "nulls": "last"
             },
             {
-              "expression": "tipo_sujeto_id",
+              "expression": "subject_type_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
             },
             {
-              "expression": "ruta_slug",
+              "expression": "route_slug",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -1094,17 +1054,17 @@
           "method": "btree",
           "with": {}
         },
-        "indice_nodos_padre_orden": {
-          "name": "indice_nodos_padre_orden",
+        "law_index_nodes_parent_order": {
+          "name": "law_index_nodes_parent_order",
           "columns": [
             {
-              "expression": "padre_id",
+              "expression": "parent_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
             },
             {
-              "expression": "orden",
+              "expression": "sort_order",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -1115,8 +1075,8 @@
           "method": "btree",
           "with": {}
         },
-        "indice_nodos_version_tipo": {
-          "name": "indice_nodos_version_tipo",
+        "law_index_nodes_version_type": {
+          "name": "law_index_nodes_version_type",
           "columns": [
             {
               "expression": "version_id",
@@ -1125,7 +1085,7 @@
               "nulls": "last"
             },
             {
-              "expression": "tipo_sujeto_id",
+              "expression": "subject_type_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -1138,10 +1098,10 @@
         }
       },
       "foreignKeys": {
-        "indice_nodos_version_id_indice_versiones_id_fk": {
-          "name": "indice_nodos_version_id_indice_versiones_id_fk",
-          "tableFrom": "indice_nodos",
-          "tableTo": "indice_versiones",
+        "law_index_nodes_version_id_law_index_versions_id_fk": {
+          "name": "law_index_nodes_version_id_law_index_versions_id_fk",
+          "tableFrom": "law_index_nodes",
+          "tableTo": "law_index_versions",
           "columnsFrom": [
             "version_id"
           ],
@@ -1151,12 +1111,12 @@
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
-        "indice_nodos_tipo_sujeto_id_tipos_sujeto_obligado_id_fk": {
-          "name": "indice_nodos_tipo_sujeto_id_tipos_sujeto_obligado_id_fk",
-          "tableFrom": "indice_nodos",
-          "tableTo": "tipos_sujeto_obligado",
+        "law_index_nodes_subject_type_id_obligated_subject_types_id_fk": {
+          "name": "law_index_nodes_subject_type_id_obligated_subject_types_id_fk",
+          "tableFrom": "law_index_nodes",
+          "tableTo": "obligated_subject_types",
           "columnsFrom": [
-            "tipo_sujeto_id"
+            "subject_type_id"
           ],
           "columnsTo": [
             "id"
@@ -1171,8 +1131,8 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.indice_versiones": {
-      "name": "indice_versiones",
+    "public.law_index_versions": {
+      "name": "law_index_versions",
       "schema": "",
       "columns": {
         "id": {
@@ -1182,8 +1142,8 @@
           "notNull": true,
           "default": "uuidv7()"
         },
-        "estado_id": {
-          "name": "estado_id",
+        "state_id": {
+          "name": "state_id",
           "type": "uuid",
           "primaryKey": false,
           "notNull": true
@@ -1194,40 +1154,40 @@
           "primaryKey": false,
           "notNull": true
         },
-        "nombre": {
-          "name": "nombre",
+        "name": {
+          "name": "name",
           "type": "text",
           "primaryKey": false,
           "notNull": true
         },
-        "fecha_vigencia": {
-          "name": "fecha_vigencia",
+        "effective_date": {
+          "name": "effective_date",
           "type": "date",
           "primaryKey": false,
           "notNull": false
         },
-        "estatus": {
-          "name": "estatus",
-          "type": "estatus_version",
+        "status": {
+          "name": "status",
+          "type": "version_status",
           "typeSchema": "public",
           "primaryKey": false,
           "notNull": true,
-          "default": "'borrador'"
+          "default": "'draft'"
         },
-        "carpeta_r2": {
-          "name": "carpeta_r2",
+        "storage_folder": {
+          "name": "storage_folder",
           "type": "text",
           "primaryKey": false,
           "notNull": true
         },
-        "publicada_en": {
-          "name": "publicada_en",
+        "published_at": {
+          "name": "published_at",
           "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": false
         },
-        "creada_en": {
-          "name": "creada_en",
+        "created_at": {
+          "name": "created_at",
           "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": true,
@@ -1235,11 +1195,11 @@
         }
       },
       "indexes": {
-        "indice_versiones_estado_slug": {
-          "name": "indice_versiones_estado_slug",
+        "law_index_versions_state_slug": {
+          "name": "law_index_versions_state_slug",
           "columns": [
             {
-              "expression": "estado_id",
+              "expression": "state_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -1256,30 +1216,30 @@
           "method": "btree",
           "with": {}
         },
-        "indice_versiones_vigente_unica": {
-          "name": "indice_versiones_vigente_unica",
+        "law_index_versions_current_unique": {
+          "name": "law_index_versions_current_unique",
           "columns": [
             {
-              "expression": "estado_id",
+              "expression": "state_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
             }
           ],
           "isUnique": true,
-          "where": "\"indice_versiones\".\"estatus\" = 'vigente'",
+          "where": "\"law_index_versions\".\"status\" = 'current'",
           "concurrently": false,
           "method": "btree",
           "with": {}
         }
       },
       "foreignKeys": {
-        "indice_versiones_estado_id_estados_id_fk": {
-          "name": "indice_versiones_estado_id_estados_id_fk",
-          "tableFrom": "indice_versiones",
-          "tableTo": "estados",
+        "law_index_versions_state_id_states_id_fk": {
+          "name": "law_index_versions_state_id_states_id_fk",
+          "tableFrom": "law_index_versions",
+          "tableTo": "states",
           "columnsFrom": [
-            "estado_id"
+            "state_id"
           ],
           "columnsTo": [
             "id"
@@ -1294,8 +1254,8 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.tipos_sujeto_obligado": {
-      "name": "tipos_sujeto_obligado",
+    "public.obligated_subject_types": {
+      "name": "obligated_subject_types",
       "schema": "",
       "columns": {
         "id": {
@@ -1311,8 +1271,8 @@
           "primaryKey": false,
           "notNull": true
         },
-        "nombre": {
-          "name": "nombre",
+        "name": {
+          "name": "name",
           "type": "text",
           "primaryKey": false,
           "notNull": true
@@ -1322,8 +1282,8 @@
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
-        "tipos_sujeto_obligado_slug_unique": {
-          "name": "tipos_sujeto_obligado_slug_unique",
+        "obligated_subject_types_slug_unique": {
+          "name": "obligated_subject_types_slug_unique",
           "nullsNotDistinct": false,
           "columns": [
             "slug"
@@ -1334,8 +1294,8 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.documento_versiones": {
-      "name": "documento_versiones",
+    "public.states": {
+      "name": "states",
       "schema": "",
       "columns": {
         "id": {
@@ -1345,26 +1305,66 @@
           "notNull": true,
           "default": "uuidv7()"
         },
-        "documento_id": {
-          "name": "documento_id",
+        "key": {
+          "name": "key",
           "type": "text",
           "primaryKey": false,
           "notNull": true
         },
-        "numero": {
-          "name": "numero",
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "states_key_unique": {
+          "name": "states_key_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "key"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.document_versions": {
+      "name": "document_versions",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "uuidv7()"
+        },
+        "document_id": {
+          "name": "document_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "number": {
+          "name": "number",
           "type": "integer",
           "primaryKey": false,
           "notNull": true
         },
-        "ruta_r2": {
-          "name": "ruta_r2",
+        "storage_path": {
+          "name": "storage_path",
           "type": "text",
           "primaryKey": false,
           "notNull": true
         },
-        "nombre_original": {
-          "name": "nombre_original",
+        "original_name": {
+          "name": "original_name",
           "type": "text",
           "primaryKey": false,
           "notNull": true
@@ -1375,15 +1375,15 @@
           "primaryKey": false,
           "notNull": true
         },
-        "tipo_archivo": {
-          "name": "tipo_archivo",
-          "type": "tipo_archivo",
+        "file_type": {
+          "name": "file_type",
+          "type": "file_type",
           "typeSchema": "public",
           "primaryKey": false,
           "notNull": true
         },
-        "tamano": {
-          "name": "tamano",
+        "size": {
+          "name": "size",
           "type": "bigint",
           "primaryKey": false,
           "notNull": true
@@ -1394,33 +1394,33 @@
           "primaryKey": false,
           "notNull": false
         },
-        "duracion_seg": {
-          "name": "duracion_seg",
+        "duration_sec": {
+          "name": "duration_sec",
           "type": "integer",
           "primaryKey": false,
           "notNull": false
         },
-        "miniatura_ruta": {
-          "name": "miniatura_ruta",
+        "thumbnail_path": {
+          "name": "thumbnail_path",
           "type": "text",
           "primaryKey": false,
           "notNull": false
         },
-        "vigente": {
-          "name": "vigente",
+        "is_current": {
+          "name": "is_current",
           "type": "boolean",
           "primaryKey": false,
           "notNull": true,
           "default": true
         },
-        "subido_por": {
-          "name": "subido_por",
+        "uploaded_by": {
+          "name": "uploaded_by",
           "type": "text",
           "primaryKey": false,
           "notNull": false
         },
-        "creado_en": {
-          "name": "creado_en",
+        "created_at": {
+          "name": "created_at",
           "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": true,
@@ -1428,17 +1428,17 @@
         }
       },
       "indexes": {
-        "documento_versiones_numero": {
-          "name": "documento_versiones_numero",
+        "document_versions_number": {
+          "name": "document_versions_number",
           "columns": [
             {
-              "expression": "documento_id",
+              "expression": "document_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
             },
             {
-              "expression": "numero",
+              "expression": "number",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -1451,12 +1451,12 @@
         }
       },
       "foreignKeys": {
-        "documento_versiones_documento_id_documentos_id_fk": {
-          "name": "documento_versiones_documento_id_documentos_id_fk",
-          "tableFrom": "documento_versiones",
-          "tableTo": "documentos",
+        "document_versions_document_id_documents_id_fk": {
+          "name": "document_versions_document_id_documents_id_fk",
+          "tableFrom": "document_versions",
+          "tableTo": "documents",
           "columnsFrom": [
-            "documento_id"
+            "document_id"
           ],
           "columnsTo": [
             "id"
@@ -1464,12 +1464,12 @@
           "onDelete": "no action",
           "onUpdate": "no action"
         },
-        "documento_versiones_subido_por_user_id_fk": {
-          "name": "documento_versiones_subido_por_user_id_fk",
-          "tableFrom": "documento_versiones",
+        "document_versions_uploaded_by_user_id_fk": {
+          "name": "document_versions_uploaded_by_user_id_fk",
+          "tableFrom": "document_versions",
           "tableTo": "user",
           "columnsFrom": [
-            "subido_por"
+            "uploaded_by"
           ],
           "columnsTo": [
             "id"
@@ -1484,8 +1484,8 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.documentos": {
-      "name": "documentos",
+    "public.documents": {
+      "name": "documents",
       "schema": "",
       "columns": {
         "id": {
@@ -1494,153 +1494,153 @@
           "primaryKey": true,
           "notNull": true
         },
-        "municipio_id": {
-          "name": "municipio_id",
+        "municipality_id": {
+          "name": "municipality_id",
           "type": "uuid",
           "primaryKey": false,
           "notNull": true
         },
-        "sujeto_obligado_id": {
-          "name": "sujeto_obligado_id",
+        "obligated_subject_id": {
+          "name": "obligated_subject_id",
           "type": "uuid",
           "primaryKey": false,
           "notNull": true
         },
-        "nodo_id": {
-          "name": "nodo_id",
+        "node_id": {
+          "name": "node_id",
           "type": "uuid",
           "primaryKey": false,
           "notNull": true
         },
-        "nombre": {
-          "name": "nombre",
+        "name": {
+          "name": "name",
           "type": "text",
           "primaryKey": false,
           "notNull": true
         },
-        "periodo_etiqueta": {
-          "name": "periodo_etiqueta",
+        "period_label": {
+          "name": "period_label",
           "type": "text",
           "primaryKey": false,
           "notNull": false
         },
-        "periodo_inicio": {
-          "name": "periodo_inicio",
+        "period_start": {
+          "name": "period_start",
           "type": "date",
           "primaryKey": false,
           "notNull": false
         },
-        "periodo_fin": {
-          "name": "periodo_fin",
+        "period_end": {
+          "name": "period_end",
           "type": "date",
           "primaryKey": false,
           "notNull": false
         },
-        "carpeta_periodo": {
-          "name": "carpeta_periodo",
+        "period_folder": {
+          "name": "period_folder",
           "type": "text",
           "primaryKey": false,
           "notNull": true,
-          "default": "'permanente'"
+          "default": "'permanent'"
         },
-        "orden": {
-          "name": "orden",
+        "sort_order": {
+          "name": "sort_order",
           "type": "integer",
           "primaryKey": false,
           "notNull": true,
           "default": 0
         },
-        "estado": {
-          "name": "estado",
-          "type": "estado_documento",
+        "status": {
+          "name": "status",
+          "type": "document_status",
           "typeSchema": "public",
           "primaryKey": false,
           "notNull": true,
-          "default": "'publicado'"
+          "default": "'published'"
         },
-        "tipo": {
-          "name": "tipo",
-          "type": "tipo_documento",
+        "type": {
+          "name": "type",
+          "type": "document_type",
           "typeSchema": "public",
           "primaryKey": false,
           "notNull": true,
-          "default": "'archivo'"
+          "default": "'file'"
         },
-        "url_externa": {
-          "name": "url_externa",
+        "external_url": {
+          "name": "external_url",
           "type": "text",
           "primaryKey": false,
           "notNull": false
         },
-        "version_actual_id": {
-          "name": "version_actual_id",
+        "current_version_id": {
+          "name": "current_version_id",
           "type": "uuid",
           "primaryKey": false,
           "notNull": false
         },
-        "publicado_en": {
-          "name": "publicado_en",
+        "published_at": {
+          "name": "published_at",
           "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": false
         },
-        "creado_por": {
-          "name": "creado_por",
+        "created_by": {
+          "name": "created_by",
           "type": "text",
           "primaryKey": false,
           "notNull": false
         },
-        "creado_en": {
-          "name": "creado_en",
+        "created_at": {
+          "name": "created_at",
           "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": true,
           "default": "now()"
         },
-        "actualizado_en": {
-          "name": "actualizado_en",
+        "updated_at": {
+          "name": "updated_at",
           "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": true,
           "default": "now()"
         },
-        "eliminado_en": {
-          "name": "eliminado_en",
+        "deleted_at": {
+          "name": "deleted_at",
           "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": false
         }
       },
       "indexes": {
-        "documentos_nodo": {
-          "name": "documentos_nodo",
+        "documents_node": {
+          "name": "documents_node",
           "columns": [
             {
-              "expression": "municipio_id",
+              "expression": "municipality_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
             },
             {
-              "expression": "sujeto_obligado_id",
+              "expression": "obligated_subject_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
             },
             {
-              "expression": "nodo_id",
+              "expression": "node_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
             },
             {
-              "expression": "estado",
+              "expression": "status",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
             },
             {
-              "expression": "orden",
+              "expression": "sort_order",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -1651,17 +1651,17 @@
           "method": "btree",
           "with": {}
         },
-        "documentos_recientes": {
-          "name": "documentos_recientes",
+        "documents_recent": {
+          "name": "documents_recent",
           "columns": [
             {
-              "expression": "municipio_id",
+              "expression": "municipality_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
             },
             {
-              "expression": "actualizado_en",
+              "expression": "updated_at",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -1674,12 +1674,12 @@
         }
       },
       "foreignKeys": {
-        "documentos_municipio_id_municipios_id_fk": {
-          "name": "documentos_municipio_id_municipios_id_fk",
-          "tableFrom": "documentos",
-          "tableTo": "municipios",
+        "documents_municipality_id_municipalities_id_fk": {
+          "name": "documents_municipality_id_municipalities_id_fk",
+          "tableFrom": "documents",
+          "tableTo": "municipalities",
           "columnsFrom": [
-            "municipio_id"
+            "municipality_id"
           ],
           "columnsTo": [
             "id"
@@ -1687,12 +1687,12 @@
           "onDelete": "no action",
           "onUpdate": "no action"
         },
-        "documentos_sujeto_obligado_id_sujetos_obligados_id_fk": {
-          "name": "documentos_sujeto_obligado_id_sujetos_obligados_id_fk",
-          "tableFrom": "documentos",
-          "tableTo": "sujetos_obligados",
+        "documents_obligated_subject_id_obligated_subjects_id_fk": {
+          "name": "documents_obligated_subject_id_obligated_subjects_id_fk",
+          "tableFrom": "documents",
+          "tableTo": "obligated_subjects",
           "columnsFrom": [
-            "sujeto_obligado_id"
+            "obligated_subject_id"
           ],
           "columnsTo": [
             "id"
@@ -1700,12 +1700,12 @@
           "onDelete": "no action",
           "onUpdate": "no action"
         },
-        "documentos_nodo_id_indice_nodos_id_fk": {
-          "name": "documentos_nodo_id_indice_nodos_id_fk",
-          "tableFrom": "documentos",
-          "tableTo": "indice_nodos",
+        "documents_node_id_law_index_nodes_id_fk": {
+          "name": "documents_node_id_law_index_nodes_id_fk",
+          "tableFrom": "documents",
+          "tableTo": "law_index_nodes",
           "columnsFrom": [
-            "nodo_id"
+            "node_id"
           ],
           "columnsTo": [
             "id"
@@ -1713,12 +1713,12 @@
           "onDelete": "no action",
           "onUpdate": "no action"
         },
-        "documentos_creado_por_user_id_fk": {
-          "name": "documentos_creado_por_user_id_fk",
-          "tableFrom": "documentos",
+        "documents_created_by_user_id_fk": {
+          "name": "documents_created_by_user_id_fk",
+          "tableFrom": "documents",
           "tableTo": "user",
           "columnsFrom": [
-            "creado_por"
+            "created_by"
           ],
           "columnsTo": [
             "id"
@@ -1733,8 +1733,8 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.leyendas_sin_informacion": {
-      "name": "leyendas_sin_informacion",
+    "public.no_information_notices": {
+      "name": "no_information_notices",
       "schema": "",
       "columns": {
         "id": {
@@ -1744,105 +1744,105 @@
           "notNull": true,
           "default": "uuidv7()"
         },
-        "municipio_id": {
-          "name": "municipio_id",
+        "municipality_id": {
+          "name": "municipality_id",
           "type": "uuid",
           "primaryKey": false,
           "notNull": true
         },
-        "sujeto_obligado_id": {
-          "name": "sujeto_obligado_id",
+        "obligated_subject_id": {
+          "name": "obligated_subject_id",
           "type": "uuid",
           "primaryKey": false,
           "notNull": true
         },
-        "nodo_id": {
-          "name": "nodo_id",
+        "node_id": {
+          "name": "node_id",
           "type": "uuid",
           "primaryKey": false,
           "notNull": true
         },
-        "periodo_etiqueta": {
-          "name": "periodo_etiqueta",
+        "period_label": {
+          "name": "period_label",
           "type": "text",
           "primaryKey": false,
           "notNull": false
         },
-        "periodo_inicio": {
-          "name": "periodo_inicio",
+        "period_start": {
+          "name": "period_start",
           "type": "date",
           "primaryKey": false,
           "notNull": false
         },
-        "periodo_fin": {
-          "name": "periodo_fin",
+        "period_end": {
+          "name": "period_end",
           "type": "date",
           "primaryKey": false,
           "notNull": false
         },
-        "texto": {
-          "name": "texto",
+        "text": {
+          "name": "text",
           "type": "text",
           "primaryKey": false,
           "notNull": true
         },
-        "creado_por": {
-          "name": "creado_por",
+        "created_by": {
+          "name": "created_by",
           "type": "text",
           "primaryKey": false,
           "notNull": false
         },
-        "creado_en": {
-          "name": "creado_en",
+        "created_at": {
+          "name": "created_at",
           "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": true,
           "default": "now()"
         },
-        "eliminado_en": {
-          "name": "eliminado_en",
+        "deleted_at": {
+          "name": "deleted_at",
           "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": false
         }
       },
       "indexes": {
-        "leyendas_periodo_unica": {
-          "name": "leyendas_periodo_unica",
+        "no_information_notices_period_unique": {
+          "name": "no_information_notices_period_unique",
           "columns": [
             {
-              "expression": "nodo_id",
+              "expression": "node_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
             },
             {
-              "expression": "sujeto_obligado_id",
+              "expression": "obligated_subject_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
             },
             {
-              "expression": "periodo_inicio",
+              "expression": "period_start",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
             }
           ],
           "isUnique": true,
-          "where": "\"leyendas_sin_informacion\".\"eliminado_en\" IS NULL",
+          "where": "\"no_information_notices\".\"deleted_at\" IS NULL",
           "concurrently": false,
           "method": "btree",
           "with": {}
         }
       },
       "foreignKeys": {
-        "leyendas_sin_informacion_municipio_id_municipios_id_fk": {
-          "name": "leyendas_sin_informacion_municipio_id_municipios_id_fk",
-          "tableFrom": "leyendas_sin_informacion",
-          "tableTo": "municipios",
+        "no_information_notices_municipality_id_municipalities_id_fk": {
+          "name": "no_information_notices_municipality_id_municipalities_id_fk",
+          "tableFrom": "no_information_notices",
+          "tableTo": "municipalities",
           "columnsFrom": [
-            "municipio_id"
+            "municipality_id"
           ],
           "columnsTo": [
             "id"
@@ -1850,12 +1850,12 @@
           "onDelete": "no action",
           "onUpdate": "no action"
         },
-        "leyendas_sin_informacion_sujeto_obligado_id_sujetos_obligados_id_fk": {
-          "name": "leyendas_sin_informacion_sujeto_obligado_id_sujetos_obligados_id_fk",
-          "tableFrom": "leyendas_sin_informacion",
-          "tableTo": "sujetos_obligados",
+        "no_information_notices_obligated_subject_id_obligated_subjects_id_fk": {
+          "name": "no_information_notices_obligated_subject_id_obligated_subjects_id_fk",
+          "tableFrom": "no_information_notices",
+          "tableTo": "obligated_subjects",
           "columnsFrom": [
-            "sujeto_obligado_id"
+            "obligated_subject_id"
           ],
           "columnsTo": [
             "id"
@@ -1863,12 +1863,12 @@
           "onDelete": "no action",
           "onUpdate": "no action"
         },
-        "leyendas_sin_informacion_nodo_id_indice_nodos_id_fk": {
-          "name": "leyendas_sin_informacion_nodo_id_indice_nodos_id_fk",
-          "tableFrom": "leyendas_sin_informacion",
-          "tableTo": "indice_nodos",
+        "no_information_notices_node_id_law_index_nodes_id_fk": {
+          "name": "no_information_notices_node_id_law_index_nodes_id_fk",
+          "tableFrom": "no_information_notices",
+          "tableTo": "law_index_nodes",
           "columnsFrom": [
-            "nodo_id"
+            "node_id"
           ],
           "columnsTo": [
             "id"
@@ -1876,12 +1876,12 @@
           "onDelete": "no action",
           "onUpdate": "no action"
         },
-        "leyendas_sin_informacion_creado_por_user_id_fk": {
-          "name": "leyendas_sin_informacion_creado_por_user_id_fk",
-          "tableFrom": "leyendas_sin_informacion",
+        "no_information_notices_created_by_user_id_fk": {
+          "name": "no_information_notices_created_by_user_id_fk",
+          "tableFrom": "no_information_notices",
           "tableTo": "user",
           "columnsFrom": [
-            "creado_por"
+            "created_by"
           ],
           "columnsTo": [
             "id"
@@ -1896,8 +1896,8 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.alcances_miembro": {
-      "name": "alcances_miembro",
+    "public.member_scopes": {
+      "name": "member_scopes",
       "schema": "",
       "columns": {
         "id": {
@@ -1913,28 +1913,28 @@
           "primaryKey": false,
           "notNull": true
         },
-        "municipio_id": {
-          "name": "municipio_id",
+        "municipality_id": {
+          "name": "municipality_id",
           "type": "uuid",
           "primaryKey": false,
           "notNull": true
         },
-        "sujeto_obligado_id": {
-          "name": "sujeto_obligado_id",
+        "obligated_subject_id": {
+          "name": "obligated_subject_id",
           "type": "uuid",
           "primaryKey": false,
           "notNull": false
         },
-        "nodo_id": {
-          "name": "nodo_id",
+        "node_id": {
+          "name": "node_id",
           "type": "uuid",
           "primaryKey": false,
           "notNull": false
         }
       },
       "indexes": {
-        "alcances_miembro_member": {
-          "name": "alcances_miembro_member",
+        "member_scopes_member": {
+          "name": "member_scopes_member",
           "columns": [
             {
               "expression": "member_id",
@@ -1950,9 +1950,9 @@
         }
       },
       "foreignKeys": {
-        "alcances_miembro_member_id_member_id_fk": {
-          "name": "alcances_miembro_member_id_member_id_fk",
-          "tableFrom": "alcances_miembro",
+        "member_scopes_member_id_member_id_fk": {
+          "name": "member_scopes_member_id_member_id_fk",
+          "tableFrom": "member_scopes",
           "tableTo": "member",
           "columnsFrom": [
             "member_id"
@@ -1963,12 +1963,12 @@
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
-        "alcances_miembro_municipio_id_municipios_id_fk": {
-          "name": "alcances_miembro_municipio_id_municipios_id_fk",
-          "tableFrom": "alcances_miembro",
-          "tableTo": "municipios",
+        "member_scopes_municipality_id_municipalities_id_fk": {
+          "name": "member_scopes_municipality_id_municipalities_id_fk",
+          "tableFrom": "member_scopes",
+          "tableTo": "municipalities",
           "columnsFrom": [
-            "municipio_id"
+            "municipality_id"
           ],
           "columnsTo": [
             "id"
@@ -1976,12 +1976,12 @@
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
-        "alcances_miembro_sujeto_obligado_id_sujetos_obligados_id_fk": {
-          "name": "alcances_miembro_sujeto_obligado_id_sujetos_obligados_id_fk",
-          "tableFrom": "alcances_miembro",
-          "tableTo": "sujetos_obligados",
+        "member_scopes_obligated_subject_id_obligated_subjects_id_fk": {
+          "name": "member_scopes_obligated_subject_id_obligated_subjects_id_fk",
+          "tableFrom": "member_scopes",
+          "tableTo": "obligated_subjects",
           "columnsFrom": [
-            "sujeto_obligado_id"
+            "obligated_subject_id"
           ],
           "columnsTo": [
             "id"
@@ -1989,175 +1989,12 @@
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
-        "alcances_miembro_nodo_id_indice_nodos_id_fk": {
-          "name": "alcances_miembro_nodo_id_indice_nodos_id_fk",
-          "tableFrom": "alcances_miembro",
-          "tableTo": "indice_nodos",
+        "member_scopes_node_id_law_index_nodes_id_fk": {
+          "name": "member_scopes_node_id_law_index_nodes_id_fk",
+          "tableFrom": "member_scopes",
+          "tableTo": "law_index_nodes",
           "columnsFrom": [
-            "nodo_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.municipio_dominios": {
-      "name": "municipio_dominios",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "uuid",
-          "primaryKey": true,
-          "notNull": true,
-          "default": "uuidv7()"
-        },
-        "municipio_id": {
-          "name": "municipio_id",
-          "type": "uuid",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "host": {
-          "name": "host",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "principal": {
-          "name": "principal",
-          "type": "boolean",
-          "primaryKey": false,
-          "notNull": true,
-          "default": false
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "municipio_dominios_municipio_id_municipios_id_fk": {
-          "name": "municipio_dominios_municipio_id_municipios_id_fk",
-          "tableFrom": "municipio_dominios",
-          "tableTo": "municipios",
-          "columnsFrom": [
-            "municipio_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "municipio_dominios_host_unique": {
-          "name": "municipio_dominios_host_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "host"
-          ]
-        }
-      },
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.municipio_tema": {
-      "name": "municipio_tema",
-      "schema": "",
-      "columns": {
-        "municipio_id": {
-          "name": "municipio_id",
-          "type": "uuid",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "plantilla": {
-          "name": "plantilla",
-          "type": "plantilla",
-          "typeSchema": "public",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "'institucional-clasica'"
-        },
-        "color_primario": {
-          "name": "color_primario",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "'#125c6a'"
-        },
-        "color_secundario": {
-          "name": "color_secundario",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "'#35505e'"
-        },
-        "color_acento": {
-          "name": "color_acento",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "'#5b7a8c'"
-        },
-        "tipografia": {
-          "name": "tipografia",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "'Inter'"
-        },
-        "escudo_ruta": {
-          "name": "escudo_ruta",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "logo_administracion_ruta": {
-          "name": "logo_administracion_ruta",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "imagenes": {
-          "name": "imagenes",
-          "type": "jsonb",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "'{}'::jsonb"
-        },
-        "version": {
-          "name": "version",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true,
-          "default": 1
-        },
-        "actualizado_en": {
-          "name": "actualizado_en",
-          "type": "timestamp with time zone",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "municipio_tema_municipio_id_municipios_id_fk": {
-          "name": "municipio_tema_municipio_id_municipios_id_fk",
-          "tableFrom": "municipio_tema",
-          "tableTo": "municipios",
-          "columnsFrom": [
-            "municipio_id"
+            "node_id"
           ],
           "columnsTo": [
             "id"
@@ -2172,8 +2009,8 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.municipios": {
-      "name": "municipios",
+    "public.municipalities": {
+      "name": "municipalities",
       "schema": "",
       "columns": {
         "id": {
@@ -2183,8 +2020,8 @@
           "notNull": true,
           "default": "uuidv7()"
         },
-        "estado_id": {
-          "name": "estado_id",
+        "state_id": {
+          "name": "state_id",
           "type": "uuid",
           "primaryKey": false,
           "notNull": true
@@ -2201,54 +2038,54 @@
           "primaryKey": false,
           "notNull": true
         },
-        "nombre": {
-          "name": "nombre",
+        "name": {
+          "name": "name",
           "type": "text",
           "primaryKey": false,
           "notNull": true
         },
-        "nombre_oficial": {
-          "name": "nombre_oficial",
+        "official_name": {
+          "name": "official_name",
           "type": "text",
           "primaryKey": false,
           "notNull": true
         },
-        "estatus": {
-          "name": "estatus",
-          "type": "estatus_municipio",
+        "status": {
+          "name": "status",
+          "type": "municipality_status",
           "typeSchema": "public",
           "primaryKey": false,
           "notNull": true,
-          "default": "'activo'"
+          "default": "'active'"
         },
-        "url_revalidacion": {
-          "name": "url_revalidacion",
+        "revalidation_url": {
+          "name": "revalidation_url",
           "type": "text",
           "primaryKey": false,
           "notNull": false
         },
-        "secreto_revalidacion_hash": {
-          "name": "secreto_revalidacion_hash",
+        "revalidation_secret_hash": {
+          "name": "revalidation_secret_hash",
           "type": "text",
           "primaryKey": false,
           "notNull": false
         },
-        "datos_contacto": {
-          "name": "datos_contacto",
+        "contact_info": {
+          "name": "contact_info",
           "type": "jsonb",
           "primaryKey": false,
           "notNull": true,
           "default": "'{}'::jsonb"
         },
-        "creado_en": {
-          "name": "creado_en",
+        "created_at": {
+          "name": "created_at",
           "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": true,
           "default": "now()"
         },
-        "actualizado_en": {
-          "name": "actualizado_en",
+        "updated_at": {
+          "name": "updated_at",
           "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": true,
@@ -2257,12 +2094,12 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "municipios_estado_id_estados_id_fk": {
-          "name": "municipios_estado_id_estados_id_fk",
-          "tableFrom": "municipios",
-          "tableTo": "estados",
+        "municipalities_state_id_states_id_fk": {
+          "name": "municipalities_state_id_states_id_fk",
+          "tableFrom": "municipalities",
+          "tableTo": "states",
           "columnsFrom": [
-            "estado_id"
+            "state_id"
           ],
           "columnsTo": [
             "id"
@@ -2270,9 +2107,9 @@
           "onDelete": "no action",
           "onUpdate": "no action"
         },
-        "municipios_organization_id_organization_id_fk": {
-          "name": "municipios_organization_id_organization_id_fk",
-          "tableFrom": "municipios",
+        "municipalities_organization_id_organization_id_fk": {
+          "name": "municipalities_organization_id_organization_id_fk",
+          "tableFrom": "municipalities",
           "tableTo": "organization",
           "columnsFrom": [
             "organization_id"
@@ -2286,15 +2123,15 @@
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
-        "municipios_organizationId_unique": {
-          "name": "municipios_organizationId_unique",
+        "municipalities_organizationId_unique": {
+          "name": "municipalities_organizationId_unique",
           "nullsNotDistinct": false,
           "columns": [
             "organization_id"
           ]
         },
-        "municipios_slug_unique": {
-          "name": "municipios_slug_unique",
+        "municipalities_slug_unique": {
+          "name": "municipalities_slug_unique",
           "nullsNotDistinct": false,
           "columns": [
             "slug"
@@ -2305,8 +2142,8 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.redes_sociales": {
-      "name": "redes_sociales",
+    "public.municipality_domains": {
+      "name": "municipality_domains",
       "schema": "",
       "columns": {
         "id": {
@@ -2316,26 +2153,318 @@
           "notNull": true,
           "default": "uuidv7()"
         },
-        "municipio_id": {
-          "name": "municipio_id",
+        "municipality_id": {
+          "name": "municipality_id",
           "type": "uuid",
           "primaryKey": false,
           "notNull": true
         },
-        "sujeto_obligado_id": {
-          "name": "sujeto_obligado_id",
-          "type": "uuid",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "red": {
-          "name": "red",
+        "host": {
+          "name": "host",
           "type": "text",
           "primaryKey": false,
           "notNull": true
         },
-        "nombre_otra": {
-          "name": "nombre_otra",
+        "is_primary": {
+          "name": "is_primary",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "municipality_domains_municipality_id_municipalities_id_fk": {
+          "name": "municipality_domains_municipality_id_municipalities_id_fk",
+          "tableFrom": "municipality_domains",
+          "tableTo": "municipalities",
+          "columnsFrom": [
+            "municipality_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "municipality_domains_host_unique": {
+          "name": "municipality_domains_host_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "host"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.municipality_theme": {
+      "name": "municipality_theme",
+      "schema": "",
+      "columns": {
+        "municipality_id": {
+          "name": "municipality_id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "template": {
+          "name": "template",
+          "type": "template",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'classic-institutional'"
+        },
+        "primary_color": {
+          "name": "primary_color",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'#125c6a'"
+        },
+        "secondary_color": {
+          "name": "secondary_color",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'#35505e'"
+        },
+        "accent_color": {
+          "name": "accent_color",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'#5b7a8c'"
+        },
+        "typeface": {
+          "name": "typeface",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'Inter'"
+        },
+        "coat_of_arms_path": {
+          "name": "coat_of_arms_path",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "administration_logo_path": {
+          "name": "administration_logo_path",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "images": {
+          "name": "images",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'{}'::jsonb"
+        },
+        "version": {
+          "name": "version",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 1
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "municipality_theme_municipality_id_municipalities_id_fk": {
+          "name": "municipality_theme_municipality_id_municipalities_id_fk",
+          "tableFrom": "municipality_theme",
+          "tableTo": "municipalities",
+          "columnsFrom": [
+            "municipality_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.obligated_subjects": {
+      "name": "obligated_subjects",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "uuidv7()"
+        },
+        "municipality_id": {
+          "name": "municipality_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "subject_type_id": {
+          "name": "subject_type_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "prefix": {
+          "name": "prefix",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        },
+        "sort_order": {
+          "name": "sort_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "active": {
+          "name": "active",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
+        }
+      },
+      "indexes": {
+        "obligated_subjects_prefix": {
+          "name": "obligated_subjects_prefix",
+          "columns": [
+            {
+              "expression": "municipality_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "prefix",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "obligated_subjects_type": {
+          "name": "obligated_subjects_type",
+          "columns": [
+            {
+              "expression": "municipality_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "subject_type_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "obligated_subjects_municipality_id_municipalities_id_fk": {
+          "name": "obligated_subjects_municipality_id_municipalities_id_fk",
+          "tableFrom": "obligated_subjects",
+          "tableTo": "municipalities",
+          "columnsFrom": [
+            "municipality_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "obligated_subjects_subject_type_id_obligated_subject_types_id_fk": {
+          "name": "obligated_subjects_subject_type_id_obligated_subject_types_id_fk",
+          "tableFrom": "obligated_subjects",
+          "tableTo": "obligated_subject_types",
+          "columnsFrom": [
+            "subject_type_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.social_networks": {
+      "name": "social_networks",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "uuidv7()"
+        },
+        "municipality_id": {
+          "name": "municipality_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "obligated_subject_id": {
+          "name": "obligated_subject_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "network": {
+          "name": "network",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "other_name": {
+          "name": "other_name",
           "type": "text",
           "primaryKey": false,
           "notNull": false
@@ -2346,14 +2475,14 @@
           "primaryKey": false,
           "notNull": true
         },
-        "texto": {
-          "name": "texto",
+        "text": {
+          "name": "text",
           "type": "text",
           "primaryKey": false,
           "notNull": false
         },
-        "orden": {
-          "name": "orden",
+        "sort_order": {
+          "name": "sort_order",
           "type": "integer",
           "primaryKey": false,
           "notNull": true,
@@ -2366,15 +2495,15 @@
           "notNull": true,
           "default": true
         },
-        "ocultar_en_veda": {
-          "name": "ocultar_en_veda",
+        "hide_during_blackout": {
+          "name": "hide_during_blackout",
           "type": "boolean",
           "primaryKey": false,
           "notNull": true,
           "default": false
         },
-        "actualizado_en": {
-          "name": "actualizado_en",
+        "updated_at": {
+          "name": "updated_at",
           "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": true,
@@ -2382,23 +2511,23 @@
         }
       },
       "indexes": {
-        "redes_sociales_municipio": {
-          "name": "redes_sociales_municipio",
+        "social_networks_municipality": {
+          "name": "social_networks_municipality",
           "columns": [
             {
-              "expression": "municipio_id",
+              "expression": "municipality_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
             },
             {
-              "expression": "sujeto_obligado_id",
+              "expression": "obligated_subject_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
             },
             {
-              "expression": "orden",
+              "expression": "sort_order",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -2411,12 +2540,12 @@
         }
       },
       "foreignKeys": {
-        "redes_sociales_municipio_id_municipios_id_fk": {
-          "name": "redes_sociales_municipio_id_municipios_id_fk",
-          "tableFrom": "redes_sociales",
-          "tableTo": "municipios",
+        "social_networks_municipality_id_municipalities_id_fk": {
+          "name": "social_networks_municipality_id_municipalities_id_fk",
+          "tableFrom": "social_networks",
+          "tableTo": "municipalities",
           "columnsFrom": [
-            "municipio_id"
+            "municipality_id"
           ],
           "columnsTo": [
             "id"
@@ -2424,12 +2553,12 @@
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
-        "redes_sociales_sujeto_obligado_id_sujetos_obligados_id_fk": {
-          "name": "redes_sociales_sujeto_obligado_id_sujetos_obligados_id_fk",
-          "tableFrom": "redes_sociales",
-          "tableTo": "sujetos_obligados",
+        "social_networks_obligated_subject_id_obligated_subjects_id_fk": {
+          "name": "social_networks_obligated_subject_id_obligated_subjects_id_fk",
+          "tableFrom": "social_networks",
+          "tableTo": "obligated_subjects",
           "columnsFrom": [
-            "sujeto_obligado_id"
+            "obligated_subject_id"
           ],
           "columnsTo": [
             "id"
@@ -2444,137 +2573,8 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.sujetos_obligados": {
-      "name": "sujetos_obligados",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "uuid",
-          "primaryKey": true,
-          "notNull": true,
-          "default": "uuidv7()"
-        },
-        "municipio_id": {
-          "name": "municipio_id",
-          "type": "uuid",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "tipo_sujeto_id": {
-          "name": "tipo_sujeto_id",
-          "type": "uuid",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "nombre": {
-          "name": "nombre",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "prefijo": {
-          "name": "prefijo",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "''"
-        },
-        "orden": {
-          "name": "orden",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true,
-          "default": 0
-        },
-        "activo": {
-          "name": "activo",
-          "type": "boolean",
-          "primaryKey": false,
-          "notNull": true,
-          "default": true
-        }
-      },
-      "indexes": {
-        "sujetos_obligados_prefijo": {
-          "name": "sujetos_obligados_prefijo",
-          "columns": [
-            {
-              "expression": "municipio_id",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            },
-            {
-              "expression": "prefijo",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
-          ],
-          "isUnique": true,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        },
-        "sujetos_obligados_tipo": {
-          "name": "sujetos_obligados_tipo",
-          "columns": [
-            {
-              "expression": "municipio_id",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            },
-            {
-              "expression": "tipo_sujeto_id",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
-          ],
-          "isUnique": true,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        }
-      },
-      "foreignKeys": {
-        "sujetos_obligados_municipio_id_municipios_id_fk": {
-          "name": "sujetos_obligados_municipio_id_municipios_id_fk",
-          "tableFrom": "sujetos_obligados",
-          "tableTo": "municipios",
-          "columnsFrom": [
-            "municipio_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        },
-        "sujetos_obligados_tipo_sujeto_id_tipos_sujeto_obligado_id_fk": {
-          "name": "sujetos_obligados_tipo_sujeto_id_tipos_sujeto_obligado_id_fk",
-          "tableFrom": "sujetos_obligados",
-          "tableTo": "tipos_sujeto_obligado",
-          "columnsFrom": [
-            "tipo_sujeto_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.bitacora": {
-      "name": "bitacora",
+    "public.audit_log": {
+      "name": "audit_log",
       "schema": "",
       "columns": {
         "id": {
@@ -2584,7 +2584,7 @@
           "notNull": true,
           "identity": {
             "type": "always",
-            "name": "bitacora_id_seq",
+            "name": "audit_log_id_seq",
             "schema": "public",
             "increment": "1",
             "startWith": "1",
@@ -2594,8 +2594,8 @@
             "cycle": false
           }
         },
-        "ocurrido_en": {
-          "name": "ocurrido_en",
+        "occurred_at": {
+          "name": "occurred_at",
           "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": true,
@@ -2607,44 +2607,44 @@
           "primaryKey": false,
           "notNull": true
         },
-        "actor_rol": {
-          "name": "actor_rol",
+        "actor_role": {
+          "name": "actor_role",
           "type": "text",
           "primaryKey": false,
           "notNull": false
         },
-        "municipio_id": {
-          "name": "municipio_id",
+        "municipality_id": {
+          "name": "municipality_id",
           "type": "uuid",
           "primaryKey": false,
           "notNull": false
         },
-        "entidad": {
-          "name": "entidad",
+        "entity": {
+          "name": "entity",
           "type": "text",
           "primaryKey": false,
           "notNull": true
         },
-        "entidad_id": {
-          "name": "entidad_id",
+        "entity_id": {
+          "name": "entity_id",
           "type": "text",
           "primaryKey": false,
           "notNull": true
         },
-        "accion": {
-          "name": "accion",
+        "action": {
+          "name": "action",
           "type": "text",
           "primaryKey": false,
           "notNull": true
         },
-        "cambios": {
-          "name": "cambios",
+        "changes": {
+          "name": "changes",
           "type": "jsonb",
           "primaryKey": false,
           "notNull": false
         },
-        "origen": {
-          "name": "origen",
+        "origin": {
+          "name": "origin",
           "type": "text",
           "primaryKey": false,
           "notNull": true,
@@ -2652,17 +2652,17 @@
         }
       },
       "indexes": {
-        "bitacora_municipio_fecha": {
-          "name": "bitacora_municipio_fecha",
+        "audit_log_municipality_date": {
+          "name": "audit_log_municipality_date",
           "columns": [
             {
-              "expression": "municipio_id",
+              "expression": "municipality_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
             },
             {
-              "expression": "ocurrido_en",
+              "expression": "occurred_at",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -2673,8 +2673,8 @@
           "method": "btree",
           "with": {}
         },
-        "bitacora_actor_fecha": {
-          "name": "bitacora_actor_fecha",
+        "audit_log_actor_date": {
+          "name": "audit_log_actor_date",
           "columns": [
             {
               "expression": "actor_id",
@@ -2683,7 +2683,7 @@
               "nulls": "last"
             },
             {
-              "expression": "ocurrido_en",
+              "expression": "occurred_at",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -2694,23 +2694,23 @@
           "method": "btree",
           "with": {}
         },
-        "bitacora_entidad": {
-          "name": "bitacora_entidad",
+        "audit_log_entity": {
+          "name": "audit_log_entity",
           "columns": [
             {
-              "expression": "entidad",
+              "expression": "entity",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
             },
             {
-              "expression": "entidad_id",
+              "expression": "entity_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
             },
             {
-              "expression": "ocurrido_en",
+              "expression": "occurred_at",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -2729,40 +2729,8 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.configuracion": {
-      "name": "configuracion",
-      "schema": "",
-      "columns": {
-        "clave": {
-          "name": "clave",
-          "type": "text",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "valor": {
-          "name": "valor",
-          "type": "jsonb",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "actualizada_en": {
-          "name": "actualizada_en",
-          "type": "timestamp with time zone",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.exportaciones": {
-      "name": "exportaciones",
+    "public.export_jobs": {
+      "name": "export_jobs",
       "schema": "",
       "columns": {
         "id": {
@@ -2772,47 +2740,47 @@
           "notNull": true,
           "default": "uuidv7()"
         },
-        "municipio_id": {
-          "name": "municipio_id",
+        "municipality_id": {
+          "name": "municipality_id",
           "type": "uuid",
           "primaryKey": false,
           "notNull": true
         },
-        "solicitante_id": {
-          "name": "solicitante_id",
+        "requester_id": {
+          "name": "requester_id",
           "type": "text",
           "primaryKey": false,
           "notNull": true
         },
-        "estado": {
-          "name": "estado",
-          "type": "estado_exportacion",
+        "status": {
+          "name": "status",
+          "type": "export_status",
           "typeSchema": "public",
           "primaryKey": false,
           "notNull": true,
-          "default": "'pendiente'"
+          "default": "'pending'"
         },
-        "ruta_r2": {
-          "name": "ruta_r2",
+        "storage_path": {
+          "name": "storage_path",
           "type": "text",
           "primaryKey": false,
           "notNull": false
         },
-        "mensaje_error": {
-          "name": "mensaje_error",
+        "error_message": {
+          "name": "error_message",
           "type": "text",
           "primaryKey": false,
           "notNull": false
         },
-        "creada_en": {
-          "name": "creada_en",
+        "created_at": {
+          "name": "created_at",
           "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": true,
           "default": "now()"
         },
-        "terminada_en": {
-          "name": "terminada_en",
+        "finished_at": {
+          "name": "finished_at",
           "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": false
@@ -2820,12 +2788,12 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "exportaciones_municipio_id_municipios_id_fk": {
-          "name": "exportaciones_municipio_id_municipios_id_fk",
-          "tableFrom": "exportaciones",
-          "tableTo": "municipios",
+        "export_jobs_municipality_id_municipalities_id_fk": {
+          "name": "export_jobs_municipality_id_municipalities_id_fk",
+          "tableFrom": "export_jobs",
+          "tableTo": "municipalities",
           "columnsFrom": [
-            "municipio_id"
+            "municipality_id"
           ],
           "columnsTo": [
             "id"
@@ -2840,8 +2808,8 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.revalidaciones_pendientes": {
-      "name": "revalidaciones_pendientes",
+    "public.pending_revalidations": {
+      "name": "pending_revalidations",
       "schema": "",
       "columns": {
         "id": {
@@ -2851,33 +2819,33 @@
           "notNull": true,
           "default": "uuidv7()"
         },
-        "municipio_id": {
-          "name": "municipio_id",
+        "municipality_id": {
+          "name": "municipality_id",
           "type": "uuid",
           "primaryKey": false,
           "notNull": true
         },
-        "etiquetas": {
-          "name": "etiquetas",
+        "tags": {
+          "name": "tags",
           "type": "text[]",
           "primaryKey": false,
           "notNull": true
         },
-        "intentos": {
-          "name": "intentos",
+        "attempts": {
+          "name": "attempts",
           "type": "integer",
           "primaryKey": false,
           "notNull": true,
           "default": 0
         },
-        "ultimo_error": {
-          "name": "ultimo_error",
+        "last_error": {
+          "name": "last_error",
           "type": "text",
           "primaryKey": false,
           "notNull": false
         },
-        "creada_en": {
-          "name": "creada_en",
+        "created_at": {
+          "name": "created_at",
           "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": true,
@@ -2885,17 +2853,17 @@
         }
       },
       "indexes": {
-        "revalidaciones_municipio": {
-          "name": "revalidaciones_municipio",
+        "pending_revalidations_municipality": {
+          "name": "pending_revalidations_municipality",
           "columns": [
             {
-              "expression": "municipio_id",
+              "expression": "municipality_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
             },
             {
-              "expression": "creada_en",
+              "expression": "created_at",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -2908,12 +2876,12 @@
         }
       },
       "foreignKeys": {
-        "revalidaciones_pendientes_municipio_id_municipios_id_fk": {
-          "name": "revalidaciones_pendientes_municipio_id_municipios_id_fk",
-          "tableFrom": "revalidaciones_pendientes",
-          "tableTo": "municipios",
+        "pending_revalidations_municipality_id_municipalities_id_fk": {
+          "name": "pending_revalidations_municipality_id_municipalities_id_fk",
+          "tableFrom": "pending_revalidations",
+          "tableTo": "municipalities",
           "columnsFrom": [
-            "municipio_id"
+            "municipality_id"
           ],
           "columnsTo": [
             "id"
@@ -2927,78 +2895,79 @@
       "policies": {},
       "checkConstraints": {},
       "isRLSEnabled": false
+    },
+    "public.settings": {
+      "name": "settings",
+      "schema": "",
+      "columns": {
+        "key": {
+          "name": "key",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "value": {
+          "name": "value",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
     }
   },
   "enums": {
-    "public.estado_documento": {
-      "name": "estado_documento",
+    "public.document_status": {
+      "name": "document_status",
       "schema": "public",
       "values": [
-        "publicado",
-        "oculto",
-        "historico",
-        "papelera"
+        "published",
+        "hidden",
+        "historical",
+        "trash"
       ]
     },
-    "public.estado_exportacion": {
-      "name": "estado_exportacion",
+    "public.document_type": {
+      "name": "document_type",
       "schema": "public",
       "values": [
-        "pendiente",
-        "generando",
-        "lista",
+        "file",
+        "external_video"
+      ]
+    },
+    "public.equivalence_type": {
+      "name": "equivalence_type",
+      "schema": "public",
+      "values": [
+        "exact",
+        "partial"
+      ]
+    },
+    "public.export_status": {
+      "name": "export_status",
+      "schema": "public",
+      "values": [
+        "pending",
+        "generating",
+        "ready",
         "error"
       ]
     },
-    "public.estatus_municipio": {
-      "name": "estatus_municipio",
-      "schema": "public",
-      "values": [
-        "activo",
-        "panel_suspendido"
-      ]
-    },
-    "public.estatus_version": {
-      "name": "estatus_version",
-      "schema": "public",
-      "values": [
-        "borrador",
-        "vigente",
-        "historica"
-      ]
-    },
-    "public.nivel_nodo": {
-      "name": "nivel_nodo",
-      "schema": "public",
-      "values": [
-        "articulo",
-        "fraccion",
-        "inciso",
-        "subinciso"
-      ]
-    },
-    "public.periodicidad": {
-      "name": "periodicidad",
-      "schema": "public",
-      "values": [
-        "mensual",
-        "trimestral",
-        "semestral",
-        "anual",
-        "permanente"
-      ]
-    },
-    "public.plantilla": {
-      "name": "plantilla",
-      "schema": "public",
-      "values": [
-        "institucional-clasica",
-        "moderna-minimalista",
-        "ciudadana-servicios"
-      ]
-    },
-    "public.tipo_archivo": {
-      "name": "tipo_archivo",
+    "public.file_type": {
+      "name": "file_type",
       "schema": "public",
       "values": [
         "pdf",
@@ -3007,23 +2976,54 @@
         "powerpoint",
         "zip",
         "video",
-        "imagen"
+        "image"
       ]
     },
-    "public.tipo_documento": {
-      "name": "tipo_documento",
+    "public.frequency": {
+      "name": "frequency",
       "schema": "public",
       "values": [
-        "archivo",
-        "video_externo"
+        "monthly",
+        "quarterly",
+        "semiannual",
+        "annual",
+        "permanent"
       ]
     },
-    "public.tipo_equivalencia": {
-      "name": "tipo_equivalencia",
+    "public.municipality_status": {
+      "name": "municipality_status",
       "schema": "public",
       "values": [
-        "exacta",
-        "parcial"
+        "active",
+        "panel_suspended"
+      ]
+    },
+    "public.node_level": {
+      "name": "node_level",
+      "schema": "public",
+      "values": [
+        "article",
+        "fraction",
+        "item",
+        "subitem"
+      ]
+    },
+    "public.template": {
+      "name": "template",
+      "schema": "public",
+      "values": [
+        "classic-institutional",
+        "modern-minimalist",
+        "citizen-services"
+      ]
+    },
+    "public.version_status": {
+      "name": "version_status",
+      "schema": "public",
+      "values": [
+        "draft",
+        "current",
+        "historical"
       ]
     }
   },

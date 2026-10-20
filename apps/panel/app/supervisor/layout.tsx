@@ -1,15 +1,15 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { CambiarTema } from '@/components/shell/cambiar-tema'
-import { MenuUsuario } from '@/components/shell/menu-usuario'
+import { ThemeToggle } from '@/components/shell/theme-toggle'
+import { UserMenu } from '@/components/shell/user-menu'
 import { env } from '@/lib/env'
-import { exigirDosPasos } from '@/lib/municipio'
-import { exigirSesion } from '@/lib/sesion'
+import { requireTwoFactor } from '@/lib/municipality'
+import { requireSession } from '@/lib/session'
 
-export default async function LayoutSupervisor({ children }: { children: React.ReactNode }) {
-  const s = await exigirSesion()
-  if (!s.esSuperadmin && !s.membresias.some((m) => m.rol === 'supervisor')) notFound()
-  exigirDosPasos(s, '/supervisor')
+export default async function SupervisorLayout({ children }: { children: React.ReactNode }) {
+  const s = await requireSession()
+  if (!s.isSuperadmin && !s.memberships.some((m) => m.role === 'supervisor')) notFound()
+  requireTwoFactor(s, '/supervisor')
   return (
     <>
       <header className="sticky top-0 z-30 border-b bg-background/95 backdrop-blur">
@@ -24,13 +24,13 @@ export default async function LayoutSupervisor({ children }: { children: React.R
             <span className="text-sm font-semibold">{env.NEXT_PUBLIC_PLATFORM_NAME} · Tablero</span>
           </Link>
           <div className="ml-auto flex items-center gap-1">
-            <CambiarTema />
-            <MenuUsuario
-              nombre={s.nombre}
+            <ThemeToggle />
+            <UserMenu
+              name={s.name}
               email={s.email}
-              rol={s.esSuperadmin ? 'Superadministrador' : 'Supervisor'}
-              variosMunicipios
-              esSuperadmin={s.esSuperadmin}
+              role={s.isSuperadmin ? 'Superadministrador' : 'Supervisor'}
+              multipleMunicipalities
+              isSuperadmin={s.isSuperadmin}
             />
           </div>
         </div>

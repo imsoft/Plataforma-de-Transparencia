@@ -8,7 +8,7 @@ Ordenados por impacto. Los que necesitan tu respuesta llevan ❓; los demás los
 
 3. **Enlaces viejos de Tuxcacuesco en la PNT.** Hoy los formatos oficiales apuntan a `*.digitaloceanspaces.com/...`. Al migrar, esos enlaces siguen vivos mientras exista el bucket de Spaces; si lo borras, se rompen y no podemos redirigirlos (no es nuestro dominio). Supuesto: Spaces se queda ≥ 1 año y el script de migración produce un CSV "URL vieja → `/d/<id>`" para que el municipio actualice la PNT cuando le toque. También redirijo las rutas del sitio Angular (`/transparencia/articulo-8` → `/articulo-8`, etc.) desde la app nueva.
 
-4. **Better Auth escribe fuera del helper de transacción.** Resuelto en el entregable 2 (trigger permisivo en `member`/`invitation` con actor derivado; cambios de rol y bajas se hacen por Drizzle dentro de `conUsuario`). Riesgo residual: una versión futura de Better Auth podría cambiar columnas; Renovate + pruebas lo detectan.
+4. **Better Auth escribe fuera del helper de transacción.** Resuelto en el entregable 2 (trigger permisivo en `member`/`invitation` con actor derivado; cambios de rol y bajas se hacen por Drizzle dentro de `withUser`). Riesgo residual: una versión futura de Better Auth podría cambiar columnas; Renovate + pruebas lo detectan.
 
 5. **TypeScript 7 vs tooling.** `typescript-eslint` aún no soporta TS 7. Supuesto: TS 6.0.3 ahora; cambio cuando el peer lo permita (es un cambio de una línea).
 
@@ -28,4 +28,4 @@ Ordenados por impacto. Los que necesitan tu respuesta llevan ❓; los demás los
 
 13. **Videos de varios GB en R2 por el navegador:** multipart funciona, pero en conexiones municipales lentas una sesión de 2 GB puede tardar horas; la subida reanudable guarda el `uploadId` en `localStorage` para continuar tras cerrar la pestaña. Queda en Fase 1.5 por el recorte; los videos externos (YouTube/Facebook) cubren el caso común desde el MVP.
 
-14. **Nombre de la plataforma.** Placeholder `NEXT_PUBLIC_PLATFORM_NAME="Plataforma de Transparencia"`; el paquete npm interno se llama `@plataforma/*` y se renombra con un find-replace cuando lo definas (mejor antes del primer municipio nuevo, no después).
+14. **Nombre de la plataforma.** Placeholder `NEXT_PUBLIC_PLATFORM_NAME="Plataforma de Transparencia"`; el paquete npm interno se llama `@platform/*` y se renombra con un find-replace cuando lo definas (mejor antes del primer municipio nuevo, no después).

@@ -1,34 +1,30 @@
-import { Badge } from '@plataforma/ui/components/badge'
-import { Button } from '@plataforma/ui/components/button'
+import { Badge } from '@platform/ui/components/badge'
+import { Button } from '@platform/ui/components/button'
 import { DownloadIcon } from 'lucide-react'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { listarExportaciones } from '@/acciones/exportaciones'
-import { BotonExportar } from '@/components/exportaciones/boton'
-import { fechaHora } from '@/lib/fechas'
-import { contextoMunicipio } from '@/lib/municipio'
+import { listExports } from '@/actions/exports'
+import { ExportButton } from '@/components/exports/button'
+import { dateTime } from '@/lib/dates'
+import { municipalityContext } from '@/lib/municipality'
 
 export const metadata: Metadata = { title: 'Exportación completa' }
 
-const ESTADO: Record<
+const STATUS_LABEL: Record<
   string,
-  { texto: string; variante: 'default' | 'secondary' | 'destructive' | 'outline' }
+  { text: string; variant: 'default' | 'secondary' | 'destructive' | 'outline' }
 > = {
-  pendiente: { texto: 'En espera', variante: 'secondary' },
-  generando: { texto: 'Generando…', variante: 'secondary' },
-  lista: { texto: 'Lista', variante: 'default' },
-  error: { texto: 'Falló', variante: 'destructive' },
+  pending: { text: 'En espera', variant: 'secondary' },
+  generating: { text: 'Generando…', variant: 'secondary' },
+  list: { text: 'Lista', variant: 'default' },
+  error: { text: 'Falló', variant: 'destructive' },
 }
 
-export default async function PaginaExportaciones({
-  params,
-}: {
-  params: Promise<{ slug: string }>
-}) {
+export default async function ExportsPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const c = await contextoMunicipio(slug)
-  if (!c.puede('exportacion:ver')) notFound()
-  const lista = await listarExportaciones(slug)
+  const c = await municipalityContext(slug)
+  if (!c.can('exportJob:view')) notFound()
+  const list = await listExports(slug)
   return (
     <div className="flex max-w-3xl flex-col gap-6">
       <div className="flex flex-wrap items-start justify-between gap-3">
@@ -40,30 +36,32 @@ export default async function PaginaExportaciones({
             de administración.
           </p>
         </div>
-        {c.puede('exportacion:solicitar') && <BotonExportar slug={slug} />}
+        {c.can('exportJob:request') && <ExportButton slug={slug} />}
       </div>
-      {lista.length === 0 ? (
+      {list.length === 0 ? (
         <p className="rounded-xl border border-dashed p-8 text-center text-muted-foreground">
           Todavía no se ha generado ninguna exportación.
         </p>
       ) : (
         <ul className="divide-y rounded-xl border bg-card">
-          {lista.map((e) => (
+          {list.map((e) => (
             <li key={e.id} className="flex flex-wrap items-center gap-3 p-3">
               <div className="min-w-0 flex-1">
                 <p className="font-medium">
-                  Solicitada el {fechaHora(e.creadaEn)}{' '}
-                  <Badge variant={ESTADO[e.estado]?.variante}>{ESTADO[e.estado]?.texto}</Badge>
+                  Solicitada el {dateTime(e.createdAt)}{' '}
+                  <Badge variant={STATUS_LABEL[e.status]?.variant}>
+                    {STATUS_LABEL[e.status]?.text}
+                  </Badge>
                 </p>
                 <p className="text-xs text-muted-foreground">
-                  {e.terminadaEn
-                    ? `Terminó el ${fechaHora(e.terminadaEn)}`
+                  {e.finishedAt
+                    ? `Terminó el ${dateTime(e.finishedAt)}`
                     : 'Te avisamos por correo cuando esté lista.'}
-                  {e.mensajeError ? ` · ${e.mensajeError}` : ''}
+                  {e.errorMessage ? ` · ${e.errorMessage}` : ''}
                 </p>
               </div>
-              {e.enlace && (
-                <Button variant="outline" nativeButton={false} render={<a href={e.enlace} />}>
+              {e.link && (
+                <Button variant="outline" nativeButton={false} render={<a href={e.link} />}>
                   <DownloadIcon aria-hidden /> Descargar ZIP
                 </Button>
               )}

@@ -1,6 +1,6 @@
 # Entregable 10 — Tarjetas al compartir y el caso de `/d/<id>`
 
-## Diseño de la imagen (1200 × 630, `next/og`, una plantilla en `packages/transparencia/og/`)
+## Diseño de la imagen (1200 × 630, `next/og`, una plantilla en `packages/transparency/og/`)
 
 ```
 ┌────────────────────────────────────────────────────────────────┐
@@ -31,7 +31,7 @@
 
 ## `/d/<id>` para robots de vista previa
 
-`packages/transparencia/bots.ts` exporta la lista: `WhatsApp`, `facebookexternalhit`, `Facebot`, `Twitterbot`, `TelegramBot`, `LinkedInBot`, `Slackbot`, `Discordbot`, `Pinterestbot`, `iMessage`/`Applebot`? → **no** (Applebot es buscador; iMessage usa `facebookexternalhit`), `Googlebot` → **no** (sería cloaking). Prueba unitaria sobre la lista.
+`packages/transparency/bots.ts` exporta la lista: `WhatsApp`, `facebookexternalhit`, `Facebot`, `Twitterbot`, `TelegramBot`, `LinkedInBot`, `Slackbot`, `Discordbot`, `Pinterestbot`, `iMessage`/`Applebot`? → **no** (Applebot es buscador; iMessage usa `facebookexternalhit`), `Googlebot` → **no** (sería cloaking). Prueba unitaria sobre la lista.
 
 Respuesta al bot: HTML de ~2 KB con `<head>` completo (og:*, twitter:card, canonical = `/d/<id>`) y un `<body>` con el nombre y un enlace al archivo. Sin JS. `Cache-Control: public, s-maxage=3600`. La variación por user-agent se declara con `Vary: User-Agent`.
 

@@ -1,12 +1,12 @@
-import { todosLosMunicipios } from '@plataforma/db/consultas/sesion'
+import { allMunicipalities } from '@platform/db/queries/session'
 import type { Metadata } from 'next'
-import { listarSupervisores } from '@/acciones/admin'
-import { AsignarSupervisor } from '@/components/admin/supervisores'
+import { listSupervisors } from '@/actions/admin'
+import { AssignSupervisor } from '@/components/admin/supervisors'
 
 export const metadata: Metadata = { title: 'Supervisores' }
 
-export default async function PaginaSupervisores() {
-  const [supervisores, municipios] = await Promise.all([listarSupervisores(), todosLosMunicipios()])
+export default async function SupervisorsPage() {
+  const [supervisors, municipalities] = await Promise.all([listSupervisors(), allMunicipalities()])
   return (
     <div className="flex flex-col gap-6">
       <div>
@@ -16,9 +16,9 @@ export default async function PaginaSupervisores() {
           (acepta una invitación o crea su cuenta primero).
         </p>
       </div>
-      <AsignarSupervisor
-        municipios={municipios.map((m) => ({ id: m.id, nombre: m.nombre }))}
-        supervisores={supervisores}
+      <AssignSupervisor
+        municipalities={municipalities.map((m) => ({ id: m.id, name: m.name }))}
+        supervisors={supervisors}
       />
     </div>
   )

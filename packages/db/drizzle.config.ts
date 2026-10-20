@@ -8,8 +8,8 @@ export default defineConfig({
   casing: 'snake_case',
   dbCredentials: {
     url:
-      process.env.DATABASE_URL_MIGRACIONES ??
-      'postgres://migraciones:migraciones@localhost:5432/transparencia',
+      process.env.DATABASE_URL_MIGRATIONS ??
+      'postgres://migrator:migrator@localhost:5432/transparency',
   },
   strict: true,
   verbose: true,

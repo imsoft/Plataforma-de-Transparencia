@@ -1,15 +1,15 @@
-import { invitacionPorId } from '@plataforma/db/consultas/invitaciones'
-import { Card, CardDescription, CardHeader, CardTitle } from '@plataforma/ui/components/card'
+import { invitationById } from '@platform/db/queries/invitations'
+import { Card, CardDescription, CardHeader, CardTitle } from '@platform/ui/components/card'
 import type { Metadata } from 'next'
-import { obtenerSesion } from '@/lib/sesion'
-import { FormularioInvitacion } from './formulario'
+import { getSession } from '@/lib/session'
+import { InvitationForm } from './form'
 
 export const metadata: Metadata = { title: 'Invitación' }
 
-export default async function PaginaInvitacion({ params }: { params: Promise<{ id: string }> }) {
+export default async function InvitationPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
-  const inv = await invitacionPorId(id)
-  if (!inv || inv.status !== 'pending' || inv.expiresAt < new Date()) {
+  const invite = await invitationById(id)
+  if (!invite || invite.status !== 'pending' || invite.expiresAt < new Date()) {
     return (
       <Card>
         <CardHeader>
@@ -22,13 +22,13 @@ export default async function PaginaInvitacion({ params }: { params: Promise<{ i
       </Card>
     )
   }
-  const sesion = await obtenerSesion()
+  const session = await getSession()
   return (
-    <FormularioInvitacion
-      invitacionId={inv.id}
-      email={inv.email}
-      municipio={inv.municipio}
-      sesion={sesion ? { email: sesion.email, nombre: sesion.nombre } : null}
+    <InvitationForm
+      invitationId={invite.id}
+      email={invite.email}
+      municipality={invite.municipality}
+      session={session ? { email: session.email, name: session.name } : null}
     />
   )
 }

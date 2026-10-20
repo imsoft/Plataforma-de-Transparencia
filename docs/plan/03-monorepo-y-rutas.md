@@ -16,18 +16,18 @@ plataforma-transparencia/
 │   └── migrar-tuxcacuesco/ parser HTML, copia Spaces→R2, reporte
 ├── apps/
 │   ├── panel/              Next.js. Única app con login y escritura
-│   └── sitio-tuxcacuesco/  Next.js. Solo lectura. MUNICIPIO_SLUG=tuxcacuesco
+│   └── sitio-tuxcacuesco/  Next.js. Solo lectura. MUNICIPALITY_SLUG=tuxcacuesco
 ├── packages/
 │   ├── config/             tsconfig base, eslint flat config, tailwind preset, prettier
 │   ├── db/                 schema/ (auth.ts generado, *.ts propios) · migrations/ (drizzle + sql de roles, RLS, triggers, vistas)
-│   │                       cliente (postgres|neon) · conUsuario / comoPublico · consultas/ (lecturas tipadas reutilizables)
+│   │                       cliente (postgres|neon) · withUser / asPublic · consultas/ (lecturas tipadas reutilizables)
 │   ├── auth/               instancia Better Auth (server) · cliente · roles y `createAccessControl`
 │   │                       permisos.ts: puede(ctx, accion, recurso) + alcances · correos (plantillas React Email → Resend/SMTP)
 │   ├── archivos/           cliente S3 · rutaDeArchivo() (7.5) · firmar PUT / multipart · mover() · detectarTipo() (file-type)
 │   │                       catálogo de tipos permitidos, límites, íconos (fuente única para 5.8)
 │   ├── indice/             formato JSON + zod · claves.ts (generar/normalizar/validar) · semaforo.ts · cargar.ts (seed)
 │   │                       datos/jalisco/ley-anterior/{ayuntamiento,dif}.json
-│   ├── transparencia/      next/ (páginas, generateMetadata, sitemap, robots, /d, /og, /api/revalidar)
+│   ├── transparencia/      next/ (páginas, generateMetadata, sitemap, robots, /d, /og, /api/revalidate)
 │   │                       resolver.ts (segmentos → sujeto obligado + nodo) · componentes/ · etiquetas-cache.ts · bots.ts
 │   ├── ui/                 shadcn compartido (button, dialog, toast, dropzone, etc.) · íconos de archivo
 │   ├── ui-sitio/           bloques: encabezado, pie, hero, directorio, noticias, contacto, redes sociales
@@ -39,7 +39,7 @@ plataforma-transparencia/
 
 Qué **no** va en una app de municipio: nada de lógica de transparencia, nada de acceso a escritura, nada de auth. Solo `app/(sitio)/...` con sus páginas institucionales, `contenido/` (textos, directorio), `public/` y `tema.config.ts` (fallback si la BD no responde).
 
-Reglas de ESLint entre paquetes: las apps no importan `packages/db` directamente, solo `@plataforma/transparencia` (sitios) o las capas de servicio del panel; `db` crudo solo dentro de `packages/db`.
+Reglas de ESLint entre paquetes: las apps no importan `packages/db` directamente, solo `@platform/transparency` (sitios) o las capas de servicio del panel; `db` crudo solo dentro de `packages/db`.
 
 Vercel: un proyecto por app, mismo repo, `Root Directory` = `apps/<app>`, comando `turbo-ignore` como "Ignored Build Step" para no reconstruir sitios cuando solo cambió el panel.
 
@@ -59,26 +59,26 @@ Vercel: un proyecto por app, mismo repo, `Root Directory` = `apps/<app>`, comand
 | `/d/<id>`                                                     | documento: redirección, página de video o HTML para bots                                                                              | `documento:<id>` |
 | `/og/nodo/<so>/<clave>-<v>.png`, `/og/d/<id>-<v>.png`         | imágenes de tarjeta                                                                                                                   | immutable        |
 | `/sitemap.xml`, `/robots.txt`, `/.well-known/security.txt`    | generados                                                                                                                             | ISR 1 h          |
-| `/api/revalidar`                                              | POST protegido, lo llama el panel                                                                                                     | —                |
+| `/api/revalidate`                                             | POST protegido, lo llama el panel                                                                                                     | —                |
 
-**Palabras reservadas** (documentadas en `packages/transparencia/RESERVADAS.md` y verificadas por una prueba que recorre `app/` de cada sitio): todo lo que empieza con dígito, `d`, `v`, `og`, `api`, `transparencia`, `articulo-*`, `sitemap.xml`, `robots.txt`, `.well-known` y **cada prefijo de sujeto obligado** del municipio. El generador rechaza un prefijo que choque con una página de la plantilla.
+**Palabras reservadas** (documentadas en `packages/transparency/RESERVADAS.md` y verificadas por una prueba que recorre `app/` de cada sitio): todo lo que empieza con dígito, `d`, `v`, `og`, `api`, `transparencia`, `articulo-*`, `sitemap.xml`, `robots.txt`, `.well-known` y **cada prefijo de sujeto obligado** del municipio. El generador rechaza un prefijo que choque con una página de la plantilla.
 
 ### 4.2 Cómo se monta el paquete en una app
 
 ```
-apps/sitio-x/app/
-├── layout.tsx                     ← envuelve con <ProveedorTema> de @plataforma/tema
+apps/site-x/app/
+├── layout.tsx                     ← envuelve con <ProveedorTema> de @platform/theme
 ├── page.tsx                       ← portada propia
 ├── directorio/page.tsx …          ← páginas propias (rutas estáticas; Next les da prioridad)
-├── [...segmentos]/page.tsx        ← export { Pagina as default, generateMetadata } from '@plataforma/transparencia/next/pagina'
-├── d/[id]/route.ts                ← export { GET } from '@plataforma/transparencia/next/documento'
-├── og/[...ruta]/route.tsx         ← export { GET } from '@plataforma/transparencia/next/og'
-├── api/revalidar/route.ts         ← export { POST } from '@plataforma/transparencia/next/revalidar'
+├── [...segmentos]/page.tsx        ← export { Pagina as default, generateMetadata } from '@platform/transparency/next/page'
+├── d/[id]/route.ts                ← export { GET } from '@platform/transparency/next/document'
+├── og/[...ruta]/route.tsx         ← export { GET } from '@platform/transparency/next/og'
+├── api/revalidate/route.ts         ← export { POST } from '@platform/transparency/next/revalidate'
 ├── sitemap.ts · robots.ts         ← re-export
 └── not-found.tsx                  ← re-export (404 útil con sugerencia de clave)
 ```
 
-El paquete lee `process.env.MUNICIPIO_SLUG` una sola vez (`configSitio()`), con validación zod al arrancar. La plantilla ya trae estos archivos, así que montar = no hacer nada.
+El paquete lee `process.env.MUNICIPALITY_SLUG` una sola vez (`configSitio()`), con validación zod al arrancar. La plantilla ya trae estos archivos, así que montar = no hacer nada.
 
 ### 4.3 Resolución de `[...segmentos]` (`resolver.ts`, función pura con pruebas)
 
@@ -134,6 +134,6 @@ La clave **no se parsea** en artículo/fracción/inciso: se busca tal cual en `i
 | `/api/archivos/firmar`, `/api/archivos/multipart/{iniciar,parte,completar,abortar}`     | autenticado + permiso          | URLs firmadas                                                  |
 | `/api/cron/revalidaciones`, `/api/cron/exportaciones`                                   | Vercel Cron con secreto        | reintentos y trabajos en segundo plano                         |
 
-Todas las escrituras son **Server Actions** (zod + `puede()` + `conUsuario`). El panel entero lleva `noindex` y `robots.txt` con `Disallow: /`.
+Todas las escrituras son **Server Actions** (zod + `can()` + `withUser`). El panel entero lleva `noindex` y `robots.txt` con `Disallow: /`.
 
 En el panel las URLs usan el prefijo "humano" del sujeto obligado (`ayuntamiento` para la raíz) para no tener rutas vacías; en el sitio público la raíz sigue siendo el Ayuntamiento.

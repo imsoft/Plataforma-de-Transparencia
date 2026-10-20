@@ -1,32 +1,32 @@
-import { Badge } from '@plataforma/ui/components/badge'
-import { Button } from '@plataforma/ui/components/button'
+import { Badge } from '@platform/ui/components/badge'
+import { Button } from '@platform/ui/components/button'
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@plataforma/ui/components/card'
-import { ROLES_CON_2FA_OBLIGATORIA } from '@plataforma/auth'
+} from '@platform/ui/components/card'
+import { ROLES_REQUIRING_2FA } from '@platform/auth'
 import { ShieldCheckIcon } from 'lucide-react'
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { CambiarContrasena } from '@/components/cuenta/cambiar-contrasena'
-import { exigirSesion } from '@/lib/sesion'
+import { ChangePassword } from '@/components/account/change-password'
+import { requireSession } from '@/lib/session'
 
 export const metadata: Metadata = { title: 'Mi cuenta' }
 
-export default async function PaginaCuenta() {
-  const s = await exigirSesion()
-  const obligatoria =
-    s.esSuperadmin ||
-    s.membresias.some((m) => (ROLES_CON_2FA_OBLIGATORIA as readonly string[]).includes(m.rol))
+export default async function AccountPage() {
+  const s = await requireSession()
+  const mandatory =
+    s.isSuperadmin ||
+    s.memberships.some((m) => (ROLES_REQUIRING_2FA as readonly string[]).includes(m.role))
   return (
     <div className="flex flex-col gap-6">
       <div>
         <h1 className="text-2xl font-semibold">Mi cuenta y seguridad</h1>
         <p className="text-sm text-muted-foreground">
-          {s.nombre} · {s.email}
+          {s.name} · {s.email}
         </p>
       </div>
       <Card>
@@ -42,7 +42,7 @@ export default async function PaginaCuenta() {
           <CardDescription>
             Además de tu contraseña, pedimos un código de tu teléfono al entrar. Protege la
             información del municipio aunque alguien consiga tu contraseña.
-            {obligatoria && !s.twoFactorEnabled && ' Para tu rol es obligatoria.'}
+            {mandatory && !s.twoFactorEnabled && ' Para tu rol es obligatoria.'}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -56,7 +56,7 @@ export default async function PaginaCuenta() {
           </Button>
         </CardContent>
       </Card>
-      <CambiarContrasena />
+      <ChangePassword />
     </div>
   )
 }

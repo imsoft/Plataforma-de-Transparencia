@@ -1,0 +1,36 @@
+{
+  "name": "site-__SLUG__",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev --port __PORT__",
+    "build": "next build",
+    "start": "next start --port __PORT__",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@platform/files": "workspace:*",
+    "@platform/db": "workspace:*",
+    "@platform/law-index": "workspace:*",
+    "@platform/theme": "workspace:*",
+    "@platform/transparency": "workspace:*",
+    "@platform/ui": "workspace:*",
+    "@platform/ui-site": "workspace:*",
+    "lucide-react": "catalog:",
+    "next": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:"
+  },
+  "devDependencies": {
+    "@platform/config": "workspace:*",
+    "@tailwindcss/postcss": "catalog:",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "eslint": "catalog:",
+    "tailwindcss": "catalog:",
+    "typescript": "catalog:"
+  }
+}

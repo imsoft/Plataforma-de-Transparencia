@@ -3,7 +3,7 @@ import { config } from 'dotenv'
 import { fileURLToPath } from 'node:url'
 import { resolve } from 'node:path'
 
-const raiz = resolve(fileURLToPath(import.meta.url), '../../../..')
-config({ path: [resolve(raiz, '.env.local'), resolve(raiz, '.env')], quiet: true })
+const root = resolve(fileURLToPath(import.meta.url), '../../../..')
+config({ path: [resolve(root, '.env.local'), resolve(root, '.env')], quiet: true })
 
-export const RAIZ_MONOREPO = raiz
+export const MONOREPO_ROOT = root

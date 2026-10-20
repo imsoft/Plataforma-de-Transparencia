@@ -4,10 +4,10 @@
 
 ## Base de datos
 
-1. **Neon PITR**: restaura a un punto en el tiempo creando una rama desde el historial (Neon → Branches → _Restore_). Apunta `DATABASE_URL`/`DATABASE_URL_PUBLICO` a la rama restaurada o promuévela. Ventana: 7 días (plan Launch).
-2. **Respaldo lógico diario** (GitHub Actions, `.github/workflows/respaldo.yml`): `pg_dump --format=custom` con el rol `migraciones` → se sube a R2 en `_respaldos/<fecha>.dump` (retención 90 días por regla de ciclo de vida del bucket).
-   - Restaurar: `pg_restore --clean --if-exists --no-owner -d "$DATABASE_URL_MIGRACIONES" <fecha>.dump`
-   - Después: `pnpm --filter @plataforma/db migrate` (por si el dump es anterior a una migración) y revisar que `select count(*) from bitacora` coincida con lo esperado.
+1. **Neon PITR**: restaura a un punto en el tiempo creando una rama desde el historial (Neon → Branches → _Restore_). Apunta `DATABASE_URL`/`DATABASE_URL_PUBLIC` a la rama restaurada o promuévela. Ventana: 7 días (plan Launch).
+2. **Respaldo lógico diario** (GitHub Actions, `.github/workflows/respaldo.yml`): `pg_dump --format=custom` con el rol `migrator` → se sube a R2 en `_respaldos/<fecha>.dump` (retención 90 días por regla de ciclo de vida del bucket).
+   - Restaurar: `pg_restore --clean --if-exists --no-owner -d "$DATABASE_URL_MIGRATIONS" <fecha>.dump`
+   - Después: `pnpm --filter @platform/db migrate` (por si el dump es anterior a una migración) y revisar que `select count(*) from audit_log` coincida con lo esperado.
 
 ## Archivos
 

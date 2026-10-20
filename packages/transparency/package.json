@@ -1,0 +1,50 @@
+{
+  "name": "@platform/transparency",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./tags": "./src/tags.ts",
+    "./routes": "./src/routes.ts",
+    "./bots": "./src/bots.ts",
+    "./next/config": "./src/next/config.ts",
+    "./next/data": "./src/next/data.ts",
+    "./next/metadata": "./src/next/metadata.ts",
+    "./next/page": "./src/next/page.tsx",
+    "./next/document": "./src/next/document.ts",
+    "./next/view-document": "./src/next/view-document.tsx",
+    "./next/revalidate": "./src/next/revalidate.ts",
+    "./next/sitemap": "./src/next/sitemap.ts",
+    "./next/og": "./src/next/og.tsx",
+    "./next/not-found": "./src/next/not-found.tsx",
+    "./components/*": "./src/components/*.tsx"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@platform/files": "workspace:*",
+    "@platform/db": "workspace:*",
+    "@platform/law-index": "workspace:*",
+    "@platform/theme": "workspace:*",
+    "@platform/ui": "workspace:*",
+    "lucide-react": "catalog:",
+    "next": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "zod": "catalog:",
+    "server-only": "catalog:"
+  },
+  "devDependencies": {
+    "@platform/config": "workspace:*",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "eslint": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

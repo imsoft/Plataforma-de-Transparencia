@@ -11,7 +11,7 @@ Requisitos: Node 24, pnpm 12 (`corepack enable`), Docker Desktop.
 ```bash
 cp .env.example .env     # valores locales ya listos
 pnpm install
-pnpm iniciar               # Docker (Postgres 18, RustFS como S3, Mailpit) + migraciones + datos semilla
+pnpm bootstrap               # Docker (Postgres 18, RustFS como S3, Mailpit) + migraciones + datos semilla
 pnpm dev
 ```
 
@@ -23,11 +23,11 @@ Servicios locales:
 | Sitio Tuxcacuesco (demo)  | http://localhost:3001                      |
 | Mailpit (correos)         | http://localhost:8025                      |
 | Consola S3 local (RustFS) | http://localhost:9001 (minio / minio12345) |
-| Postgres                  | `localhost:5432`, base `transparencia`     |
+| Postgres                  | `localhost:5432`, base `transparency`      |
 
-Usuarios de prueba: los imprime `pnpm iniciar` (uno por rol).
+Usuarios de prueba: los imprime `pnpm bootstrap` (uno por rol).
 
-Pruebas: `pnpm test` (unitarias e integración, necesita Docker arriba), `pnpm e2e` (Playwright en escritorio, tablet y celular). Reiniciar todo: `pnpm docker:reset && pnpm iniciar`.
+Pruebas: `pnpm test` (unitarias e integración, necesita Docker arriba), `pnpm e2e` (Playwright en escritorio, tablet y celular). Reiniciar todo: `pnpm docker:reset && pnpm bootstrap`.
 
 Más documentación:
 
@@ -39,9 +39,9 @@ Más documentación:
 
 ## Producción (resumen; detalle en `docs/produccion.md`)
 
-1. **Neon**: proyecto Postgres 18. Crear roles `app_panel` y `lector_publico` (login, contraseña) y uno `migraciones` dueño de la base. Correr `pnpm db:migrate` con `DATABASE_URL_MIGRACIONES` apuntando a Neon.
+1. **Neon**: proyecto Postgres 18. Crear roles `app_panel` y `public_reader` (login, contraseña) y uno `migrator` dueño de la base. Correr `pnpm db:migrate` con `DATABASE_URL_MIGRATIONS` apuntando a Neon.
 2. **Cloudflare R2**: bucket privado + dominio público `archivos.<plataforma>.mx` + token de API limitado al bucket. Variables `S3_*`.
-3. **Resend**: dominio verificado, `RESEND_API_KEY`, `CORREO_PROVEEDOR=resend`.
+3. **Resend**: dominio verificado, `RESEND_API_KEY`, `EMAIL_PROVIDER=resend`.
 4. **Vercel Pro**: un proyecto por app con _Root Directory_ `apps/<app>`; variables de entorno por proyecto; `DATABASE_DRIVER=neon`.
 5. **Sentry**: un proyecto por app.
 

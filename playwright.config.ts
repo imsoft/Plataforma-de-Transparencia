@@ -1,6 +1,6 @@
 import { defineConfig, devices } from '@playwright/test'
 
-/** Pruebas punta a punta contra las apps en local (Docker arriba y `pnpm iniciar` ejecutado). */
+/** Pruebas punta a punta contra las apps en local (Docker arriba y `pnpm bootstrap` ejecutado). */
 export default defineConfig({
   testDir: './e2e',
   timeout: 60_000,
@@ -17,16 +17,16 @@ export default defineConfig({
     screenshot: 'only-on-failure',
   },
   projects: [
-    { name: 'escritorio', use: { ...devices['Desktop Chrome'] } },
+    { name: 'desktop', use: { ...devices['Desktop Chrome'] } },
     {
       name: 'tablet',
       use: { ...devices['iPad Mini'], defaultBrowserType: 'chromium' },
-      testIgnore: /usuarios|admin|videos|exportacion|supervisor/,
+      testIgnore: /users|admin|videos|export|supervisor/,
     },
     {
-      name: 'celular',
+      name: 'mobile',
       use: { ...devices['Pixel 7'], defaultBrowserType: 'chromium' },
-      testIgnore: /usuarios|admin|videos|exportacion|supervisor/,
+      testIgnore: /users|admin|videos|export|supervisor/,
     },
   ],
   webServer: [
@@ -37,7 +37,7 @@ export default defineConfig({
       timeout: 120_000,
     },
     {
-      command: 'pnpm --filter sitio-tuxcacuesco dev',
+      command: 'pnpm --filter site-tuxcacuesco dev',
       // ruta dinámica: así Turbopack ya la compiló antes de la primera prueba
       url: 'http://localhost:3001/85b',
       reuseExistingServer: !process.env.CI,

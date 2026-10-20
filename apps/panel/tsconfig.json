@@ -1,10 +1,10 @@
 {
-  "extends": "@plataforma/config/tsconfig/nextjs.json",
+  "extends": "@platform/config/tsconfig/nextjs.json",
   "compilerOptions": {
     "exactOptionalPropertyTypes": false,
     "paths": {
       "@/*": ["./*"],
-      "@plataforma/ui/*": ["../../packages/ui/src/*"]
+      "@platform/ui/*": ["../../packages/ui/src/*"]
     }
   },
   "include": [

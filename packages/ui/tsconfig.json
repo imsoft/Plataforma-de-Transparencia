@@ -1,9 +1,9 @@
 {
-  "extends": "@plataforma/config/tsconfig/react-library.json",
+  "extends": "@platform/config/tsconfig/react-library.json",
   "compilerOptions": {
     "rootDir": ".",
     "paths": {
-      "@plataforma/ui/*": ["./src/*"]
+      "@platform/ui/*": ["./src/*"]
     },
     "exactOptionalPropertyTypes": false
   },

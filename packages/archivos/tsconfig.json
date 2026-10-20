@@ -1,5 +1,0 @@
-{
-  "extends": "@plataforma/config/tsconfig/node.json",
-  "compilerOptions": { "rootDir": "." },
-  "include": ["src", "vitest.config.ts"]
-}

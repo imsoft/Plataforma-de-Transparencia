@@ -1,13 +1,13 @@
 {
-  "name": "@plataforma/auth",
+  "name": "@platform/auth",
   "version": "0.0.0",
   "private": true,
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
-    "./servidor": "./src/servidor.ts",
-    "./cliente": "./src/cliente.ts",
-    "./permisos": "./src/permisos.ts",
+    "./server": "./src/server.ts",
+    "./client": "./src/client.ts",
+    "./permissions": "./src/permissions.ts",
     "./roles": "./src/roles.ts"
   },
   "scripts": {
@@ -18,12 +18,12 @@
   },
   "dependencies": {
     "@better-auth/drizzle-adapter": "catalog:",
-    "@plataforma/db": "workspace:*",
+    "@platform/db": "workspace:*",
     "better-auth": "catalog:",
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@plataforma/config": "workspace:*",
+    "@platform/config": "workspace:*",
     "@types/node": "catalog:",
     "auth": "catalog:",
     "eslint": "catalog:",

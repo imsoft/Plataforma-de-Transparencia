@@ -18,8 +18,8 @@ export const next = tseslint.config(
         {
           paths: [
             {
-              name: '@plataforma/db/cliente',
-              message: 'Usa conUsuario() o comoPublico(), nunca el cliente crudo.',
+              name: '@platform/db/client',
+              message: 'Usa withUser() o asPublic(), nunca el cliente crudo.',
             },
           ],
         },

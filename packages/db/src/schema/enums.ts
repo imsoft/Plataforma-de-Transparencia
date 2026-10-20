@@ -1,40 +1,35 @@
 import { pgEnum } from 'drizzle-orm/pg-core'
 
-export const estatusVersionEnum = pgEnum('estatus_version', ['borrador', 'vigente', 'historica'])
-export const nivelNodoEnum = pgEnum('nivel_nodo', ['articulo', 'fraccion', 'inciso', 'subinciso'])
-export const periodicidadEnum = pgEnum('periodicidad', [
-  'mensual',
-  'trimestral',
-  'semestral',
-  'anual',
-  'permanente',
+export const versionStatusEnum = pgEnum('version_status', ['draft', 'current', 'historical'])
+export const nodeLevelEnum = pgEnum('node_level', ['article', 'fraction', 'item', 'subitem'])
+export const frequencyEnum = pgEnum('frequency', [
+  'monthly',
+  'quarterly',
+  'semiannual',
+  'annual',
+  'permanent',
 ])
-export const tipoEquivalenciaEnum = pgEnum('tipo_equivalencia', ['exacta', 'parcial'])
-export const estatusMunicipioEnum = pgEnum('estatus_municipio', ['activo', 'panel_suspendido'])
-export const plantillaEnum = pgEnum('plantilla', [
-  'institucional-clasica',
-  'moderna-minimalista',
-  'ciudadana-servicios',
+export const equivalenceTypeEnum = pgEnum('equivalence_type', ['exact', 'partial'])
+export const municipalityStatusEnum = pgEnum('municipality_status', ['active', 'panel_suspended'])
+export const templateEnum = pgEnum('template', [
+  'classic-institutional',
+  'modern-minimalist',
+  'citizen-services',
 ])
-export const estadoDocumentoEnum = pgEnum('estado_documento', [
-  'publicado',
-  'oculto',
-  'historico',
-  'papelera',
+export const documentStatusEnum = pgEnum('document_status', [
+  'published',
+  'hidden',
+  'historical',
+  'trash',
 ])
-export const tipoDocumentoEnum = pgEnum('tipo_documento', ['archivo', 'video_externo'])
-export const tipoArchivoEnum = pgEnum('tipo_archivo', [
+export const documentTypeEnum = pgEnum('document_type', ['file', 'external_video'])
+export const fileTypeEnum = pgEnum('file_type', [
   'pdf',
   'word',
   'excel',
   'powerpoint',
   'zip',
   'video',
-  'imagen',
+  'image',
 ])
-export const estadoExportacionEnum = pgEnum('estado_exportacion', [
-  'pendiente',
-  'generando',
-  'lista',
-  'error',
-])
+export const exportStatusEnum = pgEnum('export_status', ['pending', 'generating', 'ready', 'error'])

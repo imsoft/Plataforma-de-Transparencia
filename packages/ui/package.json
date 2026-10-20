@@ -1,5 +1,5 @@
 {
-  "name": "@plataforma/ui",
+  "name": "@platform/ui",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -28,7 +28,7 @@
     "tw-animate-css": "catalog:"
   },
   "devDependencies": {
-    "@plataforma/config": "workspace:*",
+    "@platform/config": "workspace:*",
     "@tailwindcss/postcss": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",

@@ -1,7 +1,7 @@
 -- Roles de Postgres de mínimo privilegio. En Neon se crean a mano una sola vez (ver README).
--- `postgres` (superusuario local) hace el papel del rol `migraciones` en desarrollo.
-CREATE ROLE migraciones LOGIN PASSWORD 'migraciones' CREATEROLE;
+-- `postgres` (superusuario local) hace el papel del rol `migrator` en desarrollo.
+CREATE ROLE migrator LOGIN PASSWORD 'migrator' CREATEROLE;
 CREATE ROLE app_panel LOGIN PASSWORD 'app_panel';
-CREATE ROLE lector_publico LOGIN PASSWORD 'lector_publico';
-GRANT ALL PRIVILEGES ON DATABASE transparencia TO migraciones;
-ALTER DATABASE transparencia OWNER TO migraciones;
+CREATE ROLE public_reader LOGIN PASSWORD 'public_reader';
+GRANT ALL PRIVILEGES ON DATABASE transparency TO migrator;
+ALTER DATABASE transparency OWNER TO migrator;

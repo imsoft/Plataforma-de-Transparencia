@@ -1,9 +1,9 @@
 import Link from 'next/link'
 import { ArrowLeftIcon } from 'lucide-react'
-import { exigirSesion } from '@/lib/sesion'
+import { requireSession } from '@/lib/session'
 
-export default async function LayoutCuenta({ children }: { children: React.ReactNode }) {
-  await exigirSesion()
+export default async function AccountLayout({ children }: { children: React.ReactNode }) {
+  await requireSession()
   return (
     <main className="mx-auto flex min-h-dvh max-w-2xl flex-col gap-6 px-4 py-8">
       <Link

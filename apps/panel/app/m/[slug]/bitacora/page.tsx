@@ -1,93 +1,93 @@
-import { and, bitacora as tabla, conUsuario, desc, eq, gte, lte, sql } from '@plataforma/db'
-import { Button } from '@plataforma/ui/components/button'
-import { Input } from '@plataforma/ui/components/input'
-import { Label } from '@plataforma/ui/components/label'
+import { and, auditLog as table, withUser, desc, eq, gte, lte, sql } from '@platform/db'
+import { Button } from '@platform/ui/components/button'
+import { Input } from '@platform/ui/components/input'
+import { Label } from '@platform/ui/components/label'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { fechaHora } from '@/lib/fechas'
-import { contextoMunicipio } from '@/lib/municipio'
+import { dateTime } from '@/lib/dates'
+import { municipalityContext } from '@/lib/municipality'
 
 export const metadata: Metadata = { title: 'Bitácora' }
 
-const ACCION: Record<string, string> = {
-  crear: 'Creó',
-  renombrar: 'Renombró',
-  reemplazar: 'Reemplazó archivo',
-  reordenar: 'Reordenó',
-  cambiar_periodo: 'Cambió periodo',
-  ocultar: 'Ocultó',
-  historico: 'Mandó a histórico',
-  papelera: 'Mandó a papelera',
-  restaurar: 'Restauró',
-  publicar: 'Publicó',
-  actualizar: 'Actualizó',
-  eliminar: 'Eliminó',
-  marcar_leyenda: 'Marcó "sin información"',
-  desmarcar_leyenda: 'Quitó "sin información"',
-  cambiar_rol: 'Cambió rol',
+const ACTION_LABEL: Record<string, string> = {
+  create: 'Creó',
+  rename: 'Renombró',
+  replace: 'Reemplazó archivo',
+  reorder: 'Reordenó',
+  change_period: 'Cambió periodo',
+  hide: 'Ocultó',
+  archive: 'Mandó a histórico',
+  trash: 'Mandó a papelera',
+  restore: 'Restauró',
+  publish: 'Publicó',
+  update: 'Actualizó',
+  delete: 'Eliminó',
+  mark_notice: 'Marcó "sin información"',
+  unmark_notice: 'Quitó "sin información"',
+  change_role: 'Cambió rol',
 }
-const ENTIDAD: Record<string, string> = {
-  documento: 'documento',
-  documento_version: 'versión de archivo',
-  leyenda: 'leyenda',
-  red_social: 'red social',
-  sujeto_obligado: 'sujeto obligado',
-  tema: 'identidad',
-  municipio: 'municipio',
-  dominio: 'dominio',
-  alcance: 'alcance',
-  miembro: 'usuario',
-  invitacion: 'invitación',
-  exportacion: 'exportación',
-}
-
-type Filtros = {
-  usuario?: string
-  accion?: string
-  desde?: string
-  hasta?: string
-  pagina?: string
+const ENTITY_LABEL: Record<string, string> = {
+  document: 'documento',
+  document_version: 'versión de archivo',
+  notice: 'leyenda',
+  social_network: 'red social',
+  obligated_subject: 'sujeto obligado',
+  theme: 'identidad',
+  municipality: 'municipio',
+  domain: 'dominio',
+  scope: 'alcance',
+  member: 'usuario',
+  invitation: 'invitación',
+  export: 'exportación',
 }
 
-export default async function PaginaBitacora({
+type Filters = {
+  user?: string
+  action?: string
+  from?: string
+  until?: string
+  page?: string
+}
+
+export default async function AuditLogPage({
   params,
   searchParams,
 }: {
   params: Promise<{ slug: string }>
-  searchParams: Promise<Filtros>
+  searchParams: Promise<Filters>
 }) {
   const { slug } = await params
   const f = await searchParams
-  const c = await contextoMunicipio(slug)
-  if (!c.puede('bitacora:ver')) notFound()
-  const pagina = Math.max(1, Number(f.pagina ?? 1) || 1)
-  const porPagina = 50
-  const condiciones = [eq(tabla.municipioId, c.municipio.id)]
-  if (f.usuario) condiciones.push(sql`${tabla.actorId} ILIKE ${'%' + f.usuario + '%'}`)
-  if (f.accion) condiciones.push(eq(tabla.accion, f.accion))
-  if (f.desde && /^\d{4}-\d{2}-\d{2}$/.test(f.desde))
-    condiciones.push(gte(tabla.ocurridoEn, new Date(`${f.desde}T00:00:00-06:00`)))
-  if (f.hasta && /^\d{4}-\d{2}-\d{2}$/.test(f.hasta))
-    condiciones.push(lte(tabla.ocurridoEn, new Date(`${f.hasta}T23:59:59-06:00`)))
-  const filas = await conUsuario(c.ctx, (tx) =>
+  const c = await municipalityContext(slug)
+  if (!c.can('auditLog:view')) notFound()
+  const page = Math.max(1, Number(f.page ?? 1) || 1)
+  const perPage = 50
+  const conditions = [eq(table.municipalityId, c.municipality.id)]
+  if (f.user) conditions.push(sql`${table.actorId} ILIKE ${'%' + f.user + '%'}`)
+  if (f.action) conditions.push(eq(table.action, f.action))
+  if (f.from && /^\d{4}-\d{2}-\d{2}$/.test(f.from))
+    conditions.push(gte(table.occurredAt, new Date(`${f.from}T00:00:00-06:00`)))
+  if (f.until && /^\d{4}-\d{2}-\d{2}$/.test(f.until))
+    conditions.push(lte(table.occurredAt, new Date(`${f.until}T23:59:59-06:00`)))
+  const rows = await withUser(c.ctx, (tx) =>
     tx
       .select()
-      .from(tabla)
-      .where(and(...condiciones))
-      .orderBy(desc(tabla.ocurridoEn))
-      .limit(porPagina + 1)
-      .offset((pagina - 1) * porPagina),
+      .from(table)
+      .where(and(...conditions))
+      .orderBy(desc(table.occurredAt))
+      .limit(perPage + 1)
+      .offset((page - 1) * perPage),
   )
-  const haySiguiente = filas.length > porPagina
-  const lista = filas.slice(0, porPagina)
+  const hasNext = rows.length > perPage
+  const list = rows.slice(0, perPage)
   const qs = (p: number) => {
     const u = new URLSearchParams({
-      ...(f.usuario ? { usuario: f.usuario } : {}),
-      ...(f.accion ? { accion: f.accion } : {}),
-      ...(f.desde ? { desde: f.desde } : {}),
-      ...(f.hasta ? { hasta: f.hasta } : {}),
-      pagina: String(p),
+      ...(f.user ? { user: f.user } : {}),
+      ...(f.action ? { action: f.action } : {}),
+      ...(f.from ? { from: f.from } : {}),
+      ...(f.until ? { until: f.until } : {}),
+      page: String(p),
     })
     return `?${u.toString()}`
   }
@@ -103,25 +103,25 @@ export default async function PaginaBitacora({
       </div>
       <form className="grid gap-3 rounded-xl border bg-card p-4 sm:grid-cols-5">
         <div className="flex flex-col gap-1">
-          <Label htmlFor="usuario">Usuario</Label>
+          <Label htmlFor="user">Usuario</Label>
           <Input
-            id="usuario"
-            name="usuario"
-            defaultValue={f.usuario ?? ''}
+            id="user"
+            name="user"
+            defaultValue={f.user ?? ''}
             placeholder="id o nombre"
             className="h-10"
           />
         </div>
         <div className="flex flex-col gap-1">
-          <Label htmlFor="accion">Acción</Label>
+          <Label htmlFor="action">Acción</Label>
           <select
-            id="accion"
-            name="accion"
-            defaultValue={f.accion ?? ''}
+            id="action"
+            name="action"
+            defaultValue={f.action ?? ''}
             className="h-10 rounded-md border bg-background px-3 text-sm"
           >
             <option value="">Todas</option>
-            {Object.entries(ACCION).map(([k, v]) => (
+            {Object.entries(ACTION_LABEL).map(([k, v]) => (
               <option key={k} value={k}>
                 {v}
               </option>
@@ -129,22 +129,16 @@ export default async function PaginaBitacora({
           </select>
         </div>
         <div className="flex flex-col gap-1">
-          <Label htmlFor="desde">Desde</Label>
-          <Input
-            id="desde"
-            name="desde"
-            type="date"
-            defaultValue={f.desde ?? ''}
-            className="h-10"
-          />
+          <Label htmlFor="from">Desde</Label>
+          <Input id="from" name="from" type="date" defaultValue={f.from ?? ''} className="h-10" />
         </div>
         <div className="flex flex-col gap-1">
-          <Label htmlFor="hasta">Hasta</Label>
+          <Label htmlFor="until">Hasta</Label>
           <Input
-            id="hasta"
-            name="hasta"
+            id="until"
+            name="until"
             type="date"
-            defaultValue={f.hasta ?? ''}
+            defaultValue={f.until ?? ''}
             className="h-10"
           />
         </div>
@@ -163,52 +157,52 @@ export default async function PaginaBitacora({
           </Button>
         </div>
       </form>
-      {lista.length === 0 ? (
+      {list.length === 0 ? (
         <p className="rounded-xl border border-dashed p-8 text-center text-muted-foreground">
           No hay movimientos con esos filtros.
         </p>
       ) : (
-        <ul data-testid="bitacora" className="divide-y rounded-xl border bg-card">
-          {lista.map((b) => (
+        <ul data-testid="audit-log" className="divide-y rounded-xl border bg-card">
+          {list.map((b) => (
             <li
               key={b.id}
               className="flex flex-col gap-1 p-3 text-sm sm:flex-row sm:items-start sm:gap-4"
             >
               <span className="shrink-0 text-xs text-muted-foreground tabular-nums sm:w-36">
-                {fechaHora(b.ocurridoEn)}
+                {dateTime(b.occurredAt)}
               </span>
               <span className="min-w-0 flex-1">
                 <span className="font-medium">{b.actorId}</span>
-                {b.actorRol && (
-                  <span className="text-muted-foreground"> ({b.actorRol})</span>
-                )} · {ACCION[b.accion] ?? b.accion} {ENTIDAD[b.entidad] ?? b.entidad}{' '}
-                {b.entidad === 'documento' ? (
+                {b.actorRole && (
+                  <span className="text-muted-foreground"> ({b.actorRole})</span>
+                )} · {ACTION_LABEL[b.action] ?? b.action} {ENTITY_LABEL[b.entity] ?? b.entity}{' '}
+                {b.entity === 'document' ? (
                   <Link
-                    href={`/m/${slug}/documentos/${b.entidadId}`}
+                    href={`/m/${slug}/documentos/${b.entityId}`}
                     className="font-mono text-xs text-primary hover:underline"
                   >
-                    {b.entidadId}
+                    {b.entityId}
                   </Link>
                 ) : (
                   <span className="font-mono text-xs text-muted-foreground">
-                    {b.entidadId.slice(0, 12)}
+                    {b.entityId.slice(0, 12)}
                   </span>
                 )}
-                {b.cambios && b.accion !== 'crear' && (
+                {b.changes && b.action !== 'create' && (
                   <span className="block text-xs text-muted-foreground">
-                    {Object.entries(b.cambios)
+                    {Object.entries(b.changes)
                       .filter(([k]) =>
                         [
-                          'nombre',
-                          'estado',
-                          'periodo_etiqueta',
-                          'orden',
+                          'name',
+                          'status',
+                          'period_label',
+                          'sort_order',
                           'role',
                           'url',
-                          'texto',
+                          'text',
                         ].includes(k),
                       )
-                      .map(([k, v]) => `${k}: ${mostrar(v.antes)} → ${mostrar(v.despues)}`)
+                      .map(([k, v]) => `${k}: ${display(v.before)} → ${display(v.after)}`)
                       .join(' · ')}
                   </span>
                 )}
@@ -218,15 +212,15 @@ export default async function PaginaBitacora({
         </ul>
       )}
       <div className="flex justify-between">
-        {pagina > 1 ? (
-          <Button variant="outline" nativeButton={false} render={<Link href={qs(pagina - 1)} />}>
+        {page > 1 ? (
+          <Button variant="outline" nativeButton={false} render={<Link href={qs(page - 1)} />}>
             Anteriores
           </Button>
         ) : (
           <span />
         )}
-        {haySiguiente && (
-          <Button variant="outline" nativeButton={false} render={<Link href={qs(pagina + 1)} />}>
+        {hasNext && (
+          <Button variant="outline" nativeButton={false} render={<Link href={qs(page + 1)} />}>
             Siguientes
           </Button>
         )}
@@ -235,7 +229,7 @@ export default async function PaginaBitacora({
   )
 }
 
-const mostrar = (v: unknown): string => {
+const display = (v: unknown): string => {
   if (v == null) return '—'
   if (typeof v === 'string') return v
   if (typeof v === 'number' || typeof v === 'boolean') return String(v)

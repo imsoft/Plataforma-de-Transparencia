@@ -2,22 +2,17 @@
  * Content-Security-Policy con nonce por petición (sección 9.2). La usan los proxy.ts del panel y de los sitios.
  * Next.js lee el nonce de la cabecera CSP de la petición y lo aplica a sus propios scripts.
  */
-export type OpcionesCsp = {
+export type CspOptions = {
   nonce: string
   /** Hosts extra permitidos para imágenes/medios (bucket público). */
-  archivos: string[]
+  files: string[]
   /** Permitir iframes de video externos (solo sitios). */
-  videosExternos?: boolean
+  externalVideos?: boolean
   dev: boolean
 }
 
-export function construirCsp({
-  nonce,
-  archivos,
-  videosExternos = false,
-  dev,
-}: OpcionesCsp): string {
-  const extra = archivos.join(' ')
+export function buildCsp({ nonce, files, externalVideos = false, dev }: CspOptions): string {
+  const extra = files.join(' ')
   return [
     "default-src 'self'",
     `script-src 'self' 'nonce-${nonce}' 'strict-dynamic'${dev ? " 'unsafe-eval'" : ''}`,
@@ -26,7 +21,7 @@ export function construirCsp({
     "font-src 'self' data: https://fonts.gstatic.com",
     `connect-src 'self' https: ${extra}${dev ? ' ws: wss:' : ''}`.trim(),
     `media-src 'self' blob: https: ${extra}`.trim(),
-    videosExternos
+    externalVideos
       ? 'frame-src https://www.youtube-nocookie.com https://www.youtube.com https://www.facebook.com'
       : "frame-src 'none'",
     "frame-ancestors 'none'",
@@ -37,7 +32,7 @@ export function construirCsp({
   ].join('; ')
 }
 
-export function nuevoNonce(): string {
+export function newNonce(): string {
   const bytes = new Uint8Array(16)
   crypto.getRandomValues(bytes)
   return btoa(String.fromCharCode(...bytes))

@@ -1,19 +1,19 @@
-import { asc, conUsuario, eq, redesSociales } from '@plataforma/db'
+import { asc, withUser, eq, socialNetworks } from '@platform/db'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { GestorRedes } from '@/components/redes/gestor'
-import { contextoMunicipio } from '@/lib/municipio'
+import { NetworksManager } from '@/components/networks/manager'
+import { municipalityContext } from '@/lib/municipality'
 
 export const metadata: Metadata = { title: 'Redes sociales' }
 
-export default async function PaginaRedes({ params }: { params: Promise<{ slug: string }> }) {
+export default async function NetworksPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const c = await contextoMunicipio(slug)
-  if (!c.puede('redes_sociales:ver')) notFound()
-  const redes = await conUsuario(c.ctx, (tx) =>
-    tx.query.redesSociales.findMany({
-      where: eq(redesSociales.municipioId, c.municipio.id),
-      orderBy: [asc(redesSociales.orden)],
+  const c = await municipalityContext(slug)
+  if (!c.can('socialNetworks:view')) notFound()
+  const networks = await withUser(c.ctx, (tx) =>
+    tx.query.socialNetworks.findMany({
+      where: eq(socialNetworks.municipalityId, c.municipality.id),
+      orderBy: [asc(socialNetworks.order)],
     }),
   )
   return (
@@ -25,27 +25,27 @@ export default async function PaginaRedes({ params }: { params: Promise<{ slug: 
           puede tener las suyas.
         </p>
       </div>
-      <GestorRedes
+      <NetworksManager
         slug={slug}
-        redes={redes.map((r) => ({
+        networks={networks.map((r) => ({
           id: r.id,
-          sujetoObligadoId: r.sujetoObligadoId,
-          red: r.red,
-          nombreOtra: r.nombreOtra,
+          obligatedSubjectId: r.obligatedSubjectId,
+          network: r.network,
+          otherName: r.otherName,
           url: r.url,
-          texto: r.texto,
+          text: r.text,
           visible: r.visible,
-          ocultarEnVeda: r.ocultarEnVeda,
+          hideDuringBlackout: r.hideDuringBlackout,
         }))}
-        sujetos={c.municipio.sujetosObligados
-          .filter((s) => s.activo)
+        subjects={c.municipality.obligatedSubjects
+          .filter((s) => s.active)
           .map((s) => ({
             id: s.id,
-            nombre: s.prefijo ? s.nombre : 'Ayuntamiento',
-            raiz: s.prefijo === '',
+            name: s.prefix ? s.name : 'Ayuntamiento',
+            root: s.prefix === '',
           }))}
-        puedeEditar={c.puede('redes_sociales:editar')}
-        nombreOficial={c.municipio.nombreOficial}
+        canEdit={c.can('socialNetworks:edit')}
+        officialName={c.municipality.officialName}
       />
     </div>
   )

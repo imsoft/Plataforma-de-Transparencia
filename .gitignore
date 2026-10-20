@@ -32,4 +32,4 @@ blob-report/
 *.log
 
 # salidas de scripts
-scripts/migrar-tuxcacuesco/salida/
+scripts/migrate-tuxcacuesco/output/

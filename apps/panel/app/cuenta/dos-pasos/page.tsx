@@ -1,21 +1,21 @@
 import type { Metadata } from 'next'
-import { exigirSesion } from '@/lib/sesion'
-import { ConfigurarDosPasos } from './configurar'
+import { requireSession } from '@/lib/session'
+import { TwoFactorSetup } from './setup'
 
 export const metadata: Metadata = { title: 'Verificación en dos pasos' }
 
-export default async function PaginaDosPasos({
+export default async function TwoFactorPage({
   searchParams,
 }: {
-  searchParams: Promise<{ volver?: string }>
+  searchParams: Promise<{ returnTo?: string }>
 }) {
-  const s = await exigirSesion()
-  const { volver } = await searchParams
+  const s = await requireSession()
+  const { returnTo } = await searchParams
   return (
-    <ConfigurarDosPasos
-      activa={s.twoFactorEnabled}
+    <TwoFactorSetup
+      active={s.twoFactorEnabled}
       email={s.email}
-      volver={volver && volver.startsWith('/') ? volver : '/municipios'}
+      returnTo={returnTo && returnTo.startsWith('/') ? returnTo : '/municipios'}
     />
   )
 }

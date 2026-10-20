@@ -1,18 +1,16 @@
 import type { Metadata } from 'next'
 import { redirect } from 'next/navigation'
-import { obtenerSesion } from '@/lib/sesion'
-import { FormularioInicioSesion } from './formulario'
+import { getSession } from '@/lib/session'
+import { SignInForm } from './form'
 
 export const metadata: Metadata = { title: 'Iniciar sesión' }
 
-export default async function PaginaInicioSesion({
+export default async function SignInPage({
   searchParams,
 }: {
-  searchParams: Promise<{ volver?: string }>
+  searchParams: Promise<{ returnTo?: string }>
 }) {
-  if (await obtenerSesion()) redirect('/municipios')
-  const { volver } = await searchParams
-  return (
-    <FormularioInicioSesion volver={volver && volver.startsWith('/') ? volver : '/municipios'} />
-  )
+  if (await getSession()) redirect('/municipios')
+  const { returnTo } = await searchParams
+  return <SignInForm returnTo={returnTo && returnTo.startsWith('/') ? returnTo : '/municipios'} />
 }

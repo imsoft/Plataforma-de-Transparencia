@@ -1,0 +1,98 @@
+{
+  "state": "JAL",
+  "version": {
+    "slug": "prueba",
+    "name": "Índice de prueba (desarrollo)",
+    "validFrom": "2026-01-01"
+  },
+  "obligatedSubjectType": "ayuntamiento",
+  "nodes": [
+    {
+      "level": "article",
+      "number": "8",
+      "title": "Información fundamental — General",
+      "frequency": "monthly",
+      "children": [
+        {
+          "level": "fraction",
+          "number": "I",
+          "title": "La necesaria para el ejercicio del derecho a la información",
+          "frequency": "permanent",
+          "children": [
+            {
+              "level": "item",
+              "number": "a",
+              "title": "El marco normativo aplicable al sujeto obligado"
+            },
+            {
+              "level": "item",
+              "number": "b",
+              "title": "El directorio de servidores públicos",
+              "frequency": "quarterly"
+            }
+          ]
+        },
+        {
+          "level": "fraction",
+          "number": "V",
+          "title": "La información financiera, patrimonial y administrativa",
+          "children": [
+            {
+              "level": "item",
+              "number": "a",
+              "title": "Las partidas del Presupuesto de Egresos",
+              "frequency": "annual"
+            },
+            {
+              "level": "item",
+              "number": "b",
+              "title": "Los estados financieros mensuales"
+            },
+            {
+              "level": "item",
+              "number": "g",
+              "title": "La nómina completa del sujeto obligado"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "level": "article",
+      "number": "15",
+      "title": "Información fundamental — Ayuntamientos",
+      "frequency": "monthly",
+      "children": [
+        {
+          "level": "fraction",
+          "number": "XI",
+          "title": "Las actas de las sesiones del Ayuntamiento"
+        },
+        {
+          "level": "fraction",
+          "number": "XX",
+          "title": "Las versiones públicas de los contratos",
+          "frequency": "quarterly"
+        }
+      ]
+    },
+    {
+      "level": "article",
+      "routeSlug": "armonizacion-contable",
+      "title": "Armonización contable",
+      "frequency": "quarterly",
+      "children": [
+        {
+          "level": "fraction",
+          "number": "1",
+          "title": "Estado de situación financiera"
+        },
+        {
+          "level": "fraction",
+          "number": "2",
+          "title": "Estado de actividades"
+        }
+      ]
+    }
+  ]
+}

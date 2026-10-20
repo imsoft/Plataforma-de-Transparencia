@@ -1,58 +1,58 @@
-import { Button } from '@plataforma/ui/components/button'
+import { Button } from '@platform/ui/components/button'
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@plataforma/ui/components/card'
-import { todosLosMunicipios } from '@plataforma/db/consultas/sesion'
+} from '@platform/ui/components/card'
+import { allMunicipalities } from '@platform/db/queries/session'
 import { BuildingIcon, ChevronRightIcon, ShieldIcon } from 'lucide-react'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
-import { CerrarSesion } from '@/components/cerrar-sesion'
-import { exigirSesion } from '@/lib/sesion'
+import { SignOut } from '@/components/sign-out'
+import { requireSession } from '@/lib/session'
 
 export const metadata: Metadata = { title: 'Elige un municipio' }
 
-const NOMBRE_ROL: Record<string, string> = {
-  admin_municipal: 'Administrador',
-  capturista: 'Capturista',
+const ROLE_NAME: Record<string, string> = {
+  municipal_admin: 'Administrador',
+  uploader: 'Capturista',
   supervisor: 'Supervisor',
 }
 
-export default async function PaginaMunicipios() {
-  const sesion = await exigirSesion()
-  const lista = sesion.esSuperadmin
-    ? (await todosLosMunicipios()).map((m) => ({ ...m, rol: 'superadmin' }))
-    : sesion.municipios.map((m) => ({ ...m.municipio, rol: m.rol }))
+export default async function MunicipalitiesPage() {
+  const session = await requireSession()
+  const list = session.isSuperadmin
+    ? (await allMunicipalities()).map((m) => ({ ...m, role: 'superadmin' }))
+    : session.municipalities.map((m) => ({ ...m.municipality, role: m.role }))
 
-  if (!sesion.esSuperadmin && lista.length === 1) redirect(`/m/${lista[0]!.slug}`)
+  if (!session.isSuperadmin && list.length === 1) redirect(`/m/${list[0]!.slug}`)
 
   return (
     <main className="mx-auto flex min-h-dvh max-w-2xl flex-col gap-6 px-4 py-10">
       <header className="flex items-start justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-semibold">Hola, {sesion.nombre.split(' ')[0]}</h1>
+          <h1 className="text-2xl font-semibold">Hola, {session.name.split(' ')[0]}</h1>
           <p className="text-muted-foreground">¿En qué municipio vas a trabajar hoy?</p>
         </div>
-        <CerrarSesion />
+        <SignOut />
       </header>
 
-      {lista.length === 0 && (
+      {list.length === 0 && (
         <Card>
           <CardHeader>
             <CardTitle>Todavía no tienes municipios</CardTitle>
             <CardDescription>
-              Pide al administrador de tu municipio que te invite con este correo: {sesion.email}
+              Pide al administrador de tu municipio que te invite con este correo: {session.email}
             </CardDescription>
           </CardHeader>
         </Card>
       )}
 
       <ul className="flex flex-col gap-3">
-        {lista.map((m) => (
+        {list.map((m) => (
           <li key={m.id}>
             <Link
               href={`/m/${m.slug}`}
@@ -65,10 +65,10 @@ export default async function PaginaMunicipios() {
                 <BuildingIcon className="size-5" />
               </span>
               <span className="min-w-0 flex-1">
-                <span className="block truncate font-medium">{m.nombreOficial}</span>
+                <span className="block truncate font-medium">{m.officialName}</span>
                 <span className="block text-sm text-muted-foreground">
-                  {NOMBRE_ROL[m.rol] ?? m.rol}
-                  {m.estatus === 'panel_suspendido' && ' · panel suspendido'}
+                  {ROLE_NAME[m.role] ?? m.role}
+                  {m.status === 'panel_suspended' && ' · panel suspendido'}
                 </span>
               </span>
               <ChevronRightIcon className="size-5 text-muted-foreground" aria-hidden />
@@ -77,7 +77,7 @@ export default async function PaginaMunicipios() {
         ))}
       </ul>
 
-      {!sesion.esSuperadmin && sesion.membresias.some((m) => m.rol === 'supervisor') && (
+      {!session.isSuperadmin && session.memberships.some((m) => m.role === 'supervisor') && (
         <Card>
           <CardContent className="flex items-center justify-between gap-4 py-4">
             <div>
@@ -92,7 +92,7 @@ export default async function PaginaMunicipios() {
           </CardContent>
         </Card>
       )}
-      {sesion.esSuperadmin && (
+      {session.isSuperadmin && (
         <Card>
           <CardContent className="flex items-center justify-between gap-4 py-4">
             <div className="flex items-center gap-3">

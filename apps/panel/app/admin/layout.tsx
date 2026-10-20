@@ -1,16 +1,16 @@
-import { exigirSuperadmin } from '@plataforma/auth'
+import { requireSuperadmin } from '@platform/auth'
 import Link from 'next/link'
-import { NavMunicipio } from '@/components/shell/nav-municipio'
-import { CambiarTema } from '@/components/shell/cambiar-tema'
-import { MenuUsuario } from '@/components/shell/menu-usuario'
+import { MunicipalityNav } from '@/components/shell/municipality-nav'
+import { ThemeToggle } from '@/components/shell/theme-toggle'
+import { UserMenu } from '@/components/shell/user-menu'
 import { env } from '@/lib/env'
-import { exigirDosPasos } from '@/lib/municipio'
-import { exigirSesion } from '@/lib/sesion'
+import { requireTwoFactor } from '@/lib/municipality'
+import { requireSession } from '@/lib/session'
 
-export default async function LayoutAdmin({ children }: { children: React.ReactNode }) {
-  const s = await exigirSesion()
-  exigirSuperadmin(s)
-  exigirDosPasos(s, '/admin')
+export default async function AdminLayout({ children }: { children: React.ReactNode }) {
+  const s = await requireSession()
+  requireSuperadmin(s)
+  requireTwoFactor(s, '/admin')
   return (
     <>
       <header className="sticky top-0 z-30 border-b bg-background/95 backdrop-blur">
@@ -27,23 +27,23 @@ export default async function LayoutAdmin({ children }: { children: React.ReactN
             </span>
           </Link>
           <div className="ml-auto flex items-center gap-1">
-            <CambiarTema />
-            <MenuUsuario
-              nombre={s.nombre}
+            <ThemeToggle />
+            <UserMenu
+              name={s.name}
               email={s.email}
-              rol="Superadministrador"
-              variosMunicipios
-              esSuperadmin
+              role="Superadministrador"
+              multipleMunicipalities
+              isSuperadmin
             />
           </div>
         </div>
       </header>
       <div className="mx-auto w-full max-w-6xl px-4">
-        <NavMunicipio
-          enlaces={[
-            { href: '/admin', etiqueta: 'Municipios', exacto: true },
-            { href: '/admin/indice', etiqueta: 'Índice de la ley' },
-            { href: '/admin/supervisores', etiqueta: 'Supervisores' },
+        <MunicipalityNav
+          links={[
+            { href: '/admin', label: 'Municipios', exact: true },
+            { href: '/admin/indice', label: 'Índice de la ley' },
+            { href: '/admin/supervisores', label: 'Supervisores' },
           ]}
         />
       </div>

@@ -7,67 +7,58 @@ import { adminAc, defaultStatements, memberAc } from 'better-auth/plugins/organi
  */
 export const statement = {
   ...defaultStatements,
-  documento: [
-    'ver',
-    'subir',
-    'renombrar',
-    'reordenar',
-    'reemplazar',
-    'ocultar',
-    'eliminar',
-    'restaurar',
-  ],
-  leyenda: ['ver', 'marcar', 'desmarcar'],
-  usuario: ['ver', 'invitar', 'cambiar_rol', 'dar_de_baja', 'asignar_alcance'],
-  redes_sociales: ['ver', 'editar'],
-  identidad: ['ver', 'editar'],
-  bitacora: ['ver'],
-  exportacion: ['ver', 'solicitar'],
-  tablero: ['ver'],
+  document: ['view', 'upload', 'rename', 'reorder', 'replace', 'hide', 'delete', 'restore'],
+  notice: ['view', 'mark', 'unmark'],
+  user: ['view', 'invite', 'change_role', 'remove', 'assign_scope'],
+  socialNetworks: ['view', 'edit'],
+  identity: ['view', 'edit'],
+  auditLog: ['view'],
+  exportJob: ['view', 'request'],
+  dashboard: ['view'],
 } as const
 
 export const ac = createAccessControl(statement)
 
-const todoDocumentos = {
-  documento: [...statement.documento],
-  leyenda: [...statement.leyenda],
+const allDocumentActions = {
+  document: [...statement.document],
+  notice: [...statement.notice],
 } as const
 
-export const capturista = ac.newRole({
-  ...todoDocumentos,
-  bitacora: ['ver'],
+export const uploader = ac.newRole({
+  ...allDocumentActions,
+  auditLog: ['view'],
   ...memberAc.statements,
 })
 
 export const supervisor = ac.newRole({
-  ...todoDocumentos,
-  bitacora: ['ver'],
-  exportacion: ['ver'],
-  tablero: ['ver'],
-  usuario: ['ver'],
-  redes_sociales: ['ver'],
-  identidad: ['ver'],
+  ...allDocumentActions,
+  auditLog: ['view'],
+  exportJob: ['view'],
+  dashboard: ['view'],
+  user: ['view'],
+  socialNetworks: ['view'],
+  identity: ['view'],
   ...memberAc.statements,
 })
 
-export const admin_municipal = ac.newRole({
-  ...todoDocumentos,
-  usuario: [...statement.usuario],
-  redes_sociales: ['ver', 'editar'],
-  identidad: ['ver'],
-  bitacora: ['ver'],
-  exportacion: ['ver', 'solicitar'],
+export const municipal_admin = ac.newRole({
+  ...allDocumentActions,
+  user: [...statement.user],
+  socialNetworks: ['view', 'edit'],
+  identity: ['view'],
+  auditLog: ['view'],
+  exportJob: ['view', 'request'],
   ...adminAc.statements,
 })
 
-export const roles = { capturista, supervisor, admin_municipal } as const
-export type RolMunicipio = keyof typeof roles
-export const ROLES_MUNICIPIO = Object.keys(roles) as RolMunicipio[]
+export const roles = { uploader, supervisor, municipal_admin } as const
+export type MunicipalityRole = keyof typeof roles
+export const MUNICIPALITY_ROLES = Object.keys(roles) as MunicipalityRole[]
 /** Roles que deben tener verificación en dos pasos activa. */
-export const ROLES_CON_2FA_OBLIGATORIA: ReadonlyArray<RolMunicipio | 'superadmin'> = [
+export const ROLES_REQUIRING_2FA: ReadonlyArray<MunicipalityRole | 'superadmin'> = [
   'superadmin',
   'supervisor',
-  'admin_municipal',
+  'municipal_admin',
 ]
 
 // ─── Roles globales (plugin admin) ─────────────────────────────────────────────
@@ -79,15 +70,15 @@ import {
 
 export const statementGlobal = {
   ...statementsGlobal,
-  plataforma: ['administrar'], // alta de municipios, versiones del índice, supervisores
+  platform: ['manage'], // alta de municipios, versiones del índice, supervisores
 } as const
 
 export const acGlobal = crearAcGlobal(statementGlobal)
 
-export const usuario = acGlobal.newRole({})
+export const user = acGlobal.newRole({})
 export const superadmin = acGlobal.newRole({
-  plataforma: ['administrar'],
+  platform: ['manage'],
   ...adminGlobalAc.statements,
 })
 
-export const rolesGlobales = { usuario, superadmin } as const
+export const globalRoles = { user, superadmin } as const

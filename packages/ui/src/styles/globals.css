@@ -4,8 +4,8 @@
 
 @custom-variant dark (&:is(.dark *));
 @source "../../../../apps/**/*.{ts,tsx}";
-@source "../../../../packages/transparencia/src/**/*.{ts,tsx}";
-@source "../../../../packages/ui-sitio/src/**/*.{ts,tsx}";
+@source "../../../../packages/transparency/src/**/*.{ts,tsx}";
+@source "../../../../packages/ui-site/src/**/*.{ts,tsx}";
 @source "../**/*.{ts,tsx}";
 
 @theme inline {

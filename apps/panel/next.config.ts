@@ -1,15 +1,15 @@
 // Carga .env/.env.local de la raíz del monorepo (Next solo lee los de la app)
-import '@plataforma/db/env'
+import '@platform/db/env'
 import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
   transpilePackages: [
-    '@plataforma/ui',
-    '@plataforma/tema',
-    '@plataforma/auth',
-    '@plataforma/db',
-    '@plataforma/indice',
-    '@plataforma/archivos',
+    '@platform/ui',
+    '@platform/theme',
+    '@platform/auth',
+    '@platform/db',
+    '@platform/law-index',
+    '@platform/files',
   ],
   cacheComponents: false, // el panel es 100 % dinámico y autenticado
   poweredByHeader: false,

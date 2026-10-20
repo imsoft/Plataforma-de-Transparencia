@@ -1,6 +1,6 @@
 # Servicios locales que sustituyen a Neon (Postgres), Cloudflare R2 (RustFS, compatible con S3) y Resend (Mailpit).
 # Las apps (panel y sitios) corren fuera de Docker con `pnpm dev`.
-name: plataforma-transparencia
+name: transparency-platform
 
 services:
   postgres:
@@ -9,7 +9,7 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: transparencia
+      POSTGRES_DB: transparency
       TZ: UTC
     ports:
       - '5432:5432'
@@ -17,7 +17,7 @@ services:
       - postgres-data:/var/lib/postgresql
       - ./docker/postgres/init:/docker-entrypoint-initdb.d:ro
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U postgres -d transparencia']
+      test: ['CMD-SHELL', 'pg_isready -U postgres -d transparency']
       interval: 5s
       timeout: 5s
       retries: 10
@@ -53,7 +53,7 @@ services:
     depends_on:
       rustfs:
         condition: service_healthy
-    entrypoint: ['/bin/sh', '/init/crear-bucket.sh']
+    entrypoint: ['/bin/sh', '/init/create-bucket.sh']
     environment:
       AWS_ACCESS_KEY_ID: minio
       AWS_SECRET_ACCESS_KEY: minio12345

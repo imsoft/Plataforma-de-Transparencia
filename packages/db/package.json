@@ -1,20 +1,20 @@
 {
-  "name": "@plataforma/db",
+  "name": "@platform/db",
   "version": "0.0.0",
   "private": true,
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
     "./schema": "./src/schema/index.ts",
-    "./cliente": "./src/cliente.ts",
-    "./pruebas": "./src/pruebas/index.ts",
+    "./client": "./src/client.ts",
+    "./testing": "./src/testing/index.ts",
     "./env": "./src/env.ts",
-    "./consultas/*": "./src/consultas/*.ts"
+    "./queries/*": "./src/queries/*.ts"
   },
   "scripts": {
     "generate": "drizzle-kit generate",
     "generate:custom": "drizzle-kit generate --custom",
-    "migrate": "tsx src/migrar.ts",
+    "migrate": "tsx src/migrate.ts",
     "studio": "drizzle-kit studio",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
@@ -27,7 +27,7 @@
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@plataforma/config": "workspace:*",
+    "@platform/config": "workspace:*",
     "@types/node": "catalog:",
     "dotenv": "catalog:",
     "drizzle-kit": "catalog:",

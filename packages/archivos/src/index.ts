@@ -1,6 +1,0 @@
-export * from './cliente'
-export * from './detectar'
-export * from './nombre-sugerido'
-export * from './operaciones'
-export * from './rutas'
-export * from './tipos'

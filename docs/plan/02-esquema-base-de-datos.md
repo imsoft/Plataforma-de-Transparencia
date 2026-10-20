@@ -4,13 +4,13 @@ Postgres 18 · Drizzle ORM · nombres en español, `snake_case`. Todas las fecha
 
 ## 1. Roles de Postgres
 
-| Rol              | Usa                                                           | Permisos                                                                                                                                                                                                     |
-| ---------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `migraciones`    | drizzle-kit, `pnpm setup`, script de migración de Tuxcacuesco | Dueño de todas las tablas. Único que puede crear/alterar                                                                                                                                                     |
-| `app_panel`      | `apps/panel`                                                  | `SELECT/INSERT/UPDATE` en tablas de negocio; `INSERT` en `bitacora`; **nunca** `DELETE` salvo en `revalidaciones_pendientes` y tablas de Better Auth (`session`, `verification`, `invitation`); sujeto a RLS |
-| `lector_publico` | todas las `apps/sitio-*`                                      | Solo `SELECT` sobre un conjunto de **vistas** `publico.*`; sujeto a RLS                                                                                                                                      |
+| Rol             | Usa                                                           | Permisos                                                                                                                                                                                                     |
+| --------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `migraciones`   | drizzle-kit, `pnpm setup`, script de migración de Tuxcacuesco | Dueño de todas las tablas. Único que puede crear/alterar                                                                                                                                                     |
+| `app_panel`     | `apps/panel`                                                  | `SELECT/INSERT/UPDATE` en tablas de negocio; `INSERT` en `bitacora`; **nunca** `DELETE` salvo en `revalidaciones_pendientes` y tablas de Better Auth (`session`, `verification`, `invitation`); sujeto a RLS |
+| `public_reader` | todas las `apps/site-*`                                       | Solo `SELECT` sobre un conjunto de **vistas** `publico.*`; sujeto a RLS                                                                                                                                      |
 
-`bitacora`: `REVOKE UPDATE, DELETE, TRUNCATE ... FROM PUBLIC, app_panel, lector_publico` + trigger que rechaza. Ni el superadmin de la plataforma (que es un usuario de la app, no un rol de Postgres) puede tocarla.
+`bitacora`: `REVOKE UPDATE, DELETE, TRUNCATE ... FROM PUBLIC, app_panel, public_reader` + trigger que rechaza. Ni el superadmin de la plataforma (que es un usuario de la app, no un rol de Postgres) puede tocarla.
 
 ## 2. Tablas de Better Auth (las crea su CLI, no se modifican a mano)
 
@@ -114,7 +114,7 @@ configuracion           clave text PK, valor jsonb   -- umbrales del semáforo, 
 
 ## 4. Vistas para el sitio público (`schema publico`)
 
-`publico.nodos` (índice vigente + histórico por tipo de sujeto), `publico.documentos` (solo `estado='publicado'`, con su versión vigente, sin `creado_por`), `publico.leyendas`, `publico.redes_sociales` (solo `visible`), `publico.tema`, `publico.sujetos_obligados`, `publico.municipio`. `lector_publico` solo tiene `SELECT` sobre este esquema. Las vistas se definen `WITH (security_invoker = true)` para que la RLS de las tablas base aplique.
+`publico.nodos` (índice vigente + histórico por tipo de sujeto), `publico.documentos` (solo `estado='publicado'`, con su versión vigente, sin `creado_por`), `publico.leyendas`, `publico.redes_sociales` (solo `visible`), `publico.tema`, `publico.sujetos_obligados`, `publico.municipio`. `public_reader` solo tiene `SELECT` sobre este esquema. Las vistas se definen `WITH (security_invoker = true)` para que la RLS de las tablas base aplique.
 
 ## 5. Row Level Security
 
@@ -127,7 +127,7 @@ Variables de sesión (se fijan por transacción con `set_config(..., true)`):
 | `app.usuario_id`            | panel         | id del usuario                                                             |
 | `app.rol`                   | panel         | `superadmin` o el rol de la membresía activa                               |
 | `app.municipios_permitidos` | panel         | ids de los municipios donde el usuario tiene membresía, separados por coma |
-| `app.municipio_id`          | sitio público | el municipio de esa app (desde `MUNICIPIO_SLUG`)                           |
+| `app.municipio_id`          | sitio público | el municipio de esa app (desde `MUNICIPALITY_SLUG`)                        |
 
 Función auxiliar en SQL:
 
@@ -147,7 +147,7 @@ CREATE POLICY panel_insert ON documentos FOR INSERT TO app_panel WITH CHECK (app
 CREATE POLICY panel_update ON documentos FOR UPDATE TO app_panel
   USING (app.municipio_permitido(municipio_id)) WITH CHECK (app.municipio_permitido(municipio_id));
 -- sitio público: solo publicados de SU municipio
-CREATE POLICY publico_select ON documentos FOR SELECT TO lector_publico
+CREATE POLICY publico_select ON documentos FOR SELECT TO public_reader
   USING (municipio_id = current_setting('app.municipio_id', true)::uuid AND estado = 'publicado');
 ```
 
@@ -155,7 +155,7 @@ Si la variable no existe, `current_setting(..., true)` devuelve `NULL`, la compa
 
 El alcance fino (capturista limitado a ciertos sujetos obligados o fracciones) **no** va en RLS: lo valida la capa de permisos de la app (`alcances_miembro`). RLS es la red de seguridad por municipio; la capa de app es la autorización de verdad.
 
-Pruebas (Vitest contra Postgres real en Docker; en CI, rama de Neon): usuario de A no lee ni escribe en B; supervisor solo ve asignados; `lector_publico` no ve `oculto/historico/papelera` ni otro municipio; escritura sin `app.usuario_id` falla.
+Pruebas (Vitest contra Postgres real en Docker; en CI, rama de Neon): usuario de A no lee ni escribe en B; supervisor solo ve asignados; `public_reader` no ve `oculto/historico/papelera` ni otro municipio; escritura sin `app.usuario_id` falla.
 
 ## 6. Triggers de bitácora
 
@@ -166,7 +166,7 @@ Una función genérica `app.registrar_bitacora()` en `AFTER INSERT OR UPDATE OR 
 3. Deriva la `accion` semántica: cambió `nombre` → `renombrar`; `estado` → `ocultar`/`papelera`/`restaurar`/`historico`; `orden` → `reordenar`; `version_actual_id` → `reemplazar`; `periodo_*` → `cambiar_periodo`.
 4. Inserta en `bitacora` con `municipio_id` de la fila, `actor_rol` de `app.rol`, `origen` de `app.origen` (default `panel`).
 
-**Tablas de Better Auth** (`member`, `invitation`): Better Auth escribe con su propio cliente y no pasa por el helper, así que su trigger **no rechaza** si falta la variable: usa `COALESCE(current_setting('app.usuario_id', true), NEW.inviter_id | NEW.user_id)` como actor y `origen='auth'`. Para las acciones críticas (cambiar rol, dar de baja) el panel **no** usa la API de Better Auth: escribe en `member` dentro de `conUsuario` y revoca sesiones con `auth.api.revokeUserSessions`. Así el actor real siempre queda registrado.
+**Tablas de Better Auth** (`member`, `invitation`): Better Auth escribe con su propio cliente y no pasa por el helper, así que su trigger **no rechaza** si falta la variable: usa `COALESCE(current_setting('app.usuario_id', true), NEW.inviter_id | NEW.user_id)` como actor y `origen='auth'`. Para las acciones críticas (cambiar rol, dar de baja) el panel **no** usa la API de Better Auth: escribe en `member` dentro de `withUser` y revoca sesiones con `auth.api.revokeUserSessions`. Así el actor real siempre queda registrado.
 
 Append-only:
 
@@ -175,7 +175,7 @@ CREATE FUNCTION app.bitacora_inmutable() RETURNS trigger LANGUAGE plpgsql AS $$
 BEGIN RAISE EXCEPTION 'La bitácora es de solo escritura'; END $$;
 CREATE TRIGGER bitacora_sin_update_delete BEFORE UPDATE OR DELETE OR TRUNCATE ON bitacora
   FOR EACH STATEMENT EXECUTE FUNCTION app.bitacora_inmutable();
-REVOKE UPDATE, DELETE, TRUNCATE ON bitacora FROM PUBLIC, app_panel, lector_publico;
+REVOKE UPDATE, DELETE, TRUNCATE ON bitacora FROM PUBLIC, app_panel, public_reader;
 ```
 
 Límite honesto: el rol dueño (`migraciones`) y el administrador de Neon podrían deshabilitar el trigger. Mitigación: credencial de `migraciones` solo en CI y en tu máquina; el respaldo `pg_dump` en R2 conserva copia externa.
@@ -190,7 +190,7 @@ type Contexto = {
   origen?: 'panel' | 'migracion'
 }
 
-export function conUsuario<T>(ctx: Contexto, fn: (tx: Tx) => Promise<T>): Promise<T> {
+export function withUser<T>(ctx: Contexto, fn: (tx: Tx) => Promise<T>): Promise<T> {
   return db.transaction(async (tx) => {
     await tx.execute(sql`
       SELECT set_config('app.usuario_id', ${ctx.usuarioId}, true),
@@ -201,15 +201,15 @@ export function conUsuario<T>(ctx: Contexto, fn: (tx: Tx) => Promise<T>): Promis
   })
 }
 
-export function comoPublico<T>(municipioId: string, fn: (tx: Tx) => Promise<T>): Promise<T> // sitios
+export function asPublic<T>(municipioId: string, fn: (tx: Tx) => Promise<T>): Promise<T> // sitios
 ```
 
 - Es la **única** exportación de escritura de `packages/db`; el `db` crudo no se exporta a las apps (regla de ESLint `no-restricted-imports`).
 - `set_config(..., true)` = `SET LOCAL`: muere con la transacción, no contamina la conexión del pool.
-- En producción el panel usa `@neondatabase/serverless` con **Pool (WebSocket)**, no el driver HTTP: el HTTP no mantiene transacciones y las variables se perderían. Los sitios públicos sí pueden usar HTTP para lecturas sueltas, pero `comoPublico` también abre transacción para fijar `app.municipio_id`; el costo es mínimo porque casi todo se sirve desde caché.
+- En producción el panel usa `@neondatabase/serverless` con **Pool (WebSocket)**, no el driver HTTP: el HTTP no mantiene transacciones y las variables se perderían. Los sitios públicos sí pueden usar HTTP para lecturas sueltas, pero `asPublic` también abre transacción para fijar `app.municipio_id`; el costo es mínimo porque casi todo se sirve desde caché.
 - El cliente se elige por variable de entorno: `DATABASE_DRIVER=postgres|neon`.
 
-## 8. Reglas del semáforo (para `packages/indice`, sección 5.2)
+## 8. Reglas del semáforo (para `packages/law-index`, sección 5.2)
 
 Función pura `estadoNodo(nodo, documentos, leyendas, hoy, config)`:
 

@@ -12,9 +12,9 @@ jobs:
     steps:
       - run: sudo apt-get update && sudo apt-get install -y postgresql-client
       - name: Volcar base
-        run: pg_dump --format=custom --no-owner --file=respaldo.dump "$DATABASE_URL_MIGRACIONES"
+        run: pg_dump --format=custom --no-owner --file=respaldo.dump "$DATABASE_URL_MIGRATIONS"
         env:
-          DATABASE_URL_MIGRACIONES: ${{ secrets.DATABASE_URL_MIGRACIONES }}
+          DATABASE_URL_MIGRATIONS: ${{ secrets.DATABASE_URL_MIGRATIONS }}
       - name: Subir a R2
         run: |
           pip install --quiet awscli

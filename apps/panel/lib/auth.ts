@@ -1,13 +1,13 @@
 import 'server-only'
-import { crearAuth } from '@plataforma/auth'
+import { createAuth } from '@platform/auth'
 import { nextCookies } from 'better-auth/next-js'
-import { enviarCorreo } from './correo'
+import { sendEmail } from './email'
 import { env } from './env'
 
-export const auth = crearAuth({
+export const auth = createAuth({
   baseURL: env.BETTER_AUTH_URL,
   secret: env.BETTER_AUTH_SECRET,
-  nombrePlataforma: env.NEXT_PUBLIC_PLATFORM_NAME,
-  enviarCorreo,
+  platformName: env.NEXT_PUBLIC_PLATFORM_NAME,
+  sendEmail,
   plugins: [nextCookies()], // debe ir al final: fija cookies desde Server Actions
 })

@@ -1,13 +1,13 @@
-import { Badge } from '@plataforma/ui/components/badge'
+import { Badge } from '@platform/ui/components/badge'
 import type { Metadata } from 'next'
-import { listarArchivosIndice, listarVersiones } from '@/acciones/admin'
-import { CargarIndice, PublicarVersion } from '@/components/admin/indice'
-import { fechaCorta } from '@/lib/fechas'
+import { listLawIndexFiles, listVersions } from '@/actions/admin'
+import { LoadLawIndex, PublishVersion } from '@/components/admin/law-index'
+import { shortDate } from '@/lib/dates'
 
 export const metadata: Metadata = { title: 'Índice de la ley' }
 
-export default async function PaginaIndice() {
-  const [versiones, archivos] = await Promise.all([listarVersiones(), listarArchivosIndice()])
+export default async function LawIndexPage() {
+  const [versions, files] = await Promise.all([listVersions(), listLawIndexFiles()])
   return (
     <div className="flex flex-col gap-6">
       <div>
@@ -17,24 +17,22 @@ export default async function PaginaIndice() {
           estructura de una versión publicada no cambia: para la ley nueva se crea otra versión.
         </p>
       </div>
-      <CargarIndice archivos={archivos.ok ? archivos.datos : []} />
+      <LoadLawIndex files={files.ok ? files.data : []} />
       <ul className="divide-y rounded-xl border bg-card">
-        {versiones.map((v) => (
+        {versions.map((v) => (
           <li key={v.id} className="flex flex-wrap items-center gap-3 p-3">
             <div className="min-w-0 flex-1">
               <p className="font-medium">
-                {v.nombre}{' '}
-                <Badge variant={v.estatus === 'vigente' ? 'default' : 'secondary'}>
-                  {v.estatus}
-                </Badge>
+                {v.name}{' '}
+                <Badge variant={v.status === 'current' ? 'default' : 'secondary'}>{v.status}</Badge>
               </p>
               <p className="text-xs text-muted-foreground">
-                {v.estado.nombre} · {v.slug} · {v.nodos.length} nodos en{' '}
-                {new Set(v.nodos.map((n) => n.tipoSujetoId)).size} tipos de sujeto · creada el{' '}
-                {fechaCorta(v.creadaEn)}
+                {v.state.name} · {v.slug} · {v.nodes.length} nodos en{' '}
+                {new Set(v.nodes.map((n) => n.subjectTypeId)).size} tipos de sujeto · creada el{' '}
+                {shortDate(v.createdAt)}
               </p>
             </div>
-            {v.estatus === 'borrador' && <PublicarVersion versionId={v.id} nombre={v.nombre} />}
+            {v.status === 'draft' && <PublishVersion versionId={v.id} name={v.name} />}
           </li>
         ))}
       </ul>

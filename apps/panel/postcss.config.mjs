@@ -1,1 +1,1 @@
-export { default } from '@plataforma/ui/postcss.config'
+export { default } from '@platform/ui/postcss.config'

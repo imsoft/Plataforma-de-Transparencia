@@ -14,8 +14,8 @@
     "components": "@/components",
     "hooks": "@/hooks",
     "lib": "@/lib",
-    "utils": "@plataforma/ui/lib/utils",
-    "ui": "@plataforma/ui/components"
+    "utils": "@platform/ui/lib/utils",
+    "ui": "@platform/ui/components"
   },
   "rtl": false,
   "menuColor": "default",

@@ -1,0 +1,44 @@
+{
+  "state": "JAL",
+  "version": {
+    "slug": "prueba",
+    "name": "Índice de prueba (desarrollo)",
+    "validFrom": "2026-01-01"
+  },
+  "obligatedSubjectType": "dif",
+  "nodes": [
+    {
+      "level": "article",
+      "number": "8",
+      "title": "Información fundamental — General (DIF)",
+      "frequency": "monthly",
+      "children": [
+        {
+          "level": "fraction",
+          "number": "I",
+          "title": "Marco normativo",
+          "frequency": "permanent",
+          "children": [
+            {
+              "level": "item",
+              "number": "a",
+              "title": "Reglamento interno del DIF"
+            }
+          ]
+        },
+        {
+          "level": "fraction",
+          "number": "V",
+          "title": "Información financiera",
+          "children": [
+            {
+              "level": "item",
+              "number": "b",
+              "title": "Estados financieros mensuales"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

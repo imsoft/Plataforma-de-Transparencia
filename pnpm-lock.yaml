@@ -349,24 +349,24 @@ importers:
       '@clack/prompts':
         specifier: 'catalog:'
         version: 1.8.1
-      '@plataforma/archivos':
-        specifier: workspace:*
-        version: link:packages/archivos
-      '@plataforma/auth':
+      '@platform/auth':
         specifier: workspace:*
         version: link:packages/auth
-      '@plataforma/config':
+      '@platform/config':
         specifier: workspace:*
         version: link:packages/config
-      '@plataforma/db':
+      '@platform/db':
         specifier: workspace:*
         version: link:packages/db
-      '@plataforma/indice':
+      '@platform/files':
         specifier: workspace:*
-        version: link:packages/indice
-      '@plataforma/transparencia':
+        version: link:packages/files
+      '@platform/law-index':
         specifier: workspace:*
-        version: link:packages/transparencia
+        version: link:packages/law-index
+      '@platform/transparency':
+        specifier: workspace:*
+        version: link:packages/transparency
       '@playwright/test':
         specifier: 'catalog:'
         version: 1.64.1
@@ -403,33 +403,33 @@ importers:
 
   apps/panel:
     dependencies:
-      '@plataforma/archivos':
-        specifier: workspace:*
-        version: link:../../packages/archivos
-      '@plataforma/auth':
+      '@platform/auth':
         specifier: workspace:*
         version: link:../../packages/auth
-      '@plataforma/db':
+      '@platform/db':
         specifier: workspace:*
         version: link:../../packages/db
-      '@plataforma/indice':
+      '@platform/files':
         specifier: workspace:*
-        version: link:../../packages/indice
-      '@plataforma/redes':
+        version: link:../../packages/files
+      '@platform/law-index':
         specifier: workspace:*
-        version: link:../../packages/redes
-      '@plataforma/tema':
+        version: link:../../packages/law-index
+      '@platform/social-networks':
         specifier: workspace:*
-        version: link:../../packages/tema
-      '@plataforma/transparencia':
+        version: link:../../packages/social-networks
+      '@platform/theme':
         specifier: workspace:*
-        version: link:../../packages/transparencia
-      '@plataforma/ui':
+        version: link:../../packages/theme
+      '@platform/transparency':
+        specifier: workspace:*
+        version: link:../../packages/transparency
+      '@platform/ui':
         specifier: workspace:*
         version: link:../../packages/ui
-      '@plataforma/ui-sitio':
+      '@platform/ui-site':
         specifier: workspace:*
-        version: link:../../packages/ui-sitio
+        version: link:../../packages/ui-site
       '@t3-oss/env-nextjs':
         specifier: 'catalog:'
         version: 0.13.11(typescript@6.0.3)(zod@4.6.7)
@@ -476,7 +476,7 @@ importers:
         specifier: 'catalog:'
         version: 4.6.7
     devDependencies:
-      '@plataforma/config':
+      '@platform/config':
         specifier: workspace:*
         version: link:../../packages/config
       '@tailwindcss/postcss':
@@ -513,29 +513,29 @@ importers:
         specifier: 'catalog:'
         version: 5.0.5(@types/node@24.19.2)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15))
 
-  apps/sitio-tuxcacuesco:
+  apps/site-tuxcacuesco:
     dependencies:
-      '@plataforma/archivos':
-        specifier: workspace:*
-        version: link:../../packages/archivos
-      '@plataforma/db':
+      '@platform/db':
         specifier: workspace:*
         version: link:../../packages/db
-      '@plataforma/indice':
+      '@platform/files':
         specifier: workspace:*
-        version: link:../../packages/indice
-      '@plataforma/tema':
+        version: link:../../packages/files
+      '@platform/law-index':
         specifier: workspace:*
-        version: link:../../packages/tema
-      '@plataforma/transparencia':
+        version: link:../../packages/law-index
+      '@platform/theme':
         specifier: workspace:*
-        version: link:../../packages/transparencia
-      '@plataforma/ui':
+        version: link:../../packages/theme
+      '@platform/transparency':
+        specifier: workspace:*
+        version: link:../../packages/transparency
+      '@platform/ui':
         specifier: workspace:*
         version: link:../../packages/ui
-      '@plataforma/ui-sitio':
+      '@platform/ui-site':
         specifier: workspace:*
-        version: link:../../packages/ui-sitio
+        version: link:../../packages/ui-site
       lucide-react:
         specifier: 'catalog:'
         version: 1.59.0(@types/react@19.3.0)(react@19.3.1)
@@ -549,7 +549,7 @@ importers:
         specifier: 'catalog:'
         version: 19.3.1(react@19.3.1)
     devDependencies:
-      '@plataforma/config':
+      '@platform/config':
         specifier: workspace:*
         version: link:../../packages/config
       '@tailwindcss/postcss':
@@ -574,52 +574,12 @@ importers:
         specifier: 'catalog:'
         version: 6.0.3
 
-  packages/archivos:
-    dependencies:
-      '@aws-sdk/client-s3':
-        specifier: 'catalog:'
-        version: 3.1152.0
-      '@aws-sdk/lib-storage':
-        specifier: 'catalog:'
-        version: 3.1152.0(@aws-sdk/client-s3@3.1152.0)
-      '@aws-sdk/s3-request-presigner':
-        specifier: 'catalog:'
-        version: 3.1152.0
-      file-type:
-        specifier: 'catalog:'
-        version: 22.2.0
-      nanoid:
-        specifier: 'catalog:'
-        version: 6.0.2
-      zod:
-        specifier: 'catalog:'
-        version: 4.6.7
-    devDependencies:
-      '@plataforma/config':
-        specifier: workspace:*
-        version: link:../config
-      '@plataforma/db':
-        specifier: workspace:*
-        version: link:../db
-      '@types/node':
-        specifier: 'catalog:'
-        version: 24.19.2
-      eslint:
-        specifier: 'catalog:'
-        version: 10.13.0(jiti@2.7.0)
-      typescript:
-        specifier: 'catalog:'
-        version: 6.0.3
-      vitest:
-        specifier: 'catalog:'
-        version: 5.0.5(@types/node@24.19.2)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15))
-
   packages/auth:
     dependencies:
       '@better-auth/drizzle-adapter':
         specifier: 'catalog:'
         version: 1.7.11(@better-auth/core@1.7.11(@better-auth/utils@0.5.0)(@better-fetch/fetch@1.3.2)(better-call@1.4.2(zod@4.6.7))(jose@6.2.12)(kysely@0.29.7)(nanostores@1.5.5))(@better-auth/utils@0.5.0)(drizzle-orm@0.45.4(@neondatabase/serverless@1.2.0)(kysely@0.29.7)(postgres@3.4.9))
-      '@plataforma/db':
+      '@platform/db':
         specifier: workspace:*
         version: link:../db
       better-auth:
@@ -629,7 +589,7 @@ importers:
         specifier: 'catalog:'
         version: 4.6.7
     devDependencies:
-      '@plataforma/config':
+      '@platform/config':
         specifier: workspace:*
         version: link:../config
       '@types/node':
@@ -690,7 +650,7 @@ importers:
         specifier: 'catalog:'
         version: 4.6.7
     devDependencies:
-      '@plataforma/config':
+      '@platform/config':
         specifier: workspace:*
         version: link:../config
       '@types/node':
@@ -715,16 +675,56 @@ importers:
         specifier: 'catalog:'
         version: 5.0.5(@types/node@24.19.2)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15))
 
-  packages/indice:
+  packages/files:
     dependencies:
-      '@plataforma/db':
+      '@aws-sdk/client-s3':
+        specifier: 'catalog:'
+        version: 3.1152.0
+      '@aws-sdk/lib-storage':
+        specifier: 'catalog:'
+        version: 3.1152.0(@aws-sdk/client-s3@3.1152.0)
+      '@aws-sdk/s3-request-presigner':
+        specifier: 'catalog:'
+        version: 3.1152.0
+      file-type:
+        specifier: 'catalog:'
+        version: 22.2.0
+      nanoid:
+        specifier: 'catalog:'
+        version: 6.0.2
+      zod:
+        specifier: 'catalog:'
+        version: 4.6.7
+    devDependencies:
+      '@platform/config':
+        specifier: workspace:*
+        version: link:../config
+      '@platform/db':
+        specifier: workspace:*
+        version: link:../db
+      '@types/node':
+        specifier: 'catalog:'
+        version: 24.19.2
+      eslint:
+        specifier: 'catalog:'
+        version: 10.13.0(jiti@2.7.0)
+      typescript:
+        specifier: 'catalog:'
+        version: 6.0.3
+      vitest:
+        specifier: 'catalog:'
+        version: 5.0.5(@types/node@24.19.2)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15))
+
+  packages/law-index:
+    dependencies:
+      '@platform/db':
         specifier: workspace:*
         version: link:../db
       zod:
         specifier: 'catalog:'
         version: 4.6.7
     devDependencies:
-      '@plataforma/config':
+      '@platform/config':
         specifier: workspace:*
         version: link:../config
       '@types/node':
@@ -740,9 +740,9 @@ importers:
         specifier: 'catalog:'
         version: 5.0.5(@types/node@24.19.2)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15))
 
-  packages/redes:
+  packages/social-networks:
     devDependencies:
-      '@plataforma/config':
+      '@platform/config':
         specifier: workspace:*
         version: link:../config
       '@types/node':
@@ -758,13 +758,13 @@ importers:
         specifier: 'catalog:'
         version: 5.0.5(@types/node@24.19.2)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15))
 
-  packages/tema:
+  packages/theme:
     dependencies:
       zod:
         specifier: 'catalog:'
         version: 4.6.7
     devDependencies:
-      '@plataforma/config':
+      '@platform/config':
         specifier: workspace:*
         version: link:../config
       '@types/node':
@@ -780,21 +780,21 @@ importers:
         specifier: 'catalog:'
         version: 5.0.5(@types/node@24.19.2)(vite@8.3.4(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15))
 
-  packages/transparencia:
+  packages/transparency:
     dependencies:
-      '@plataforma/archivos':
-        specifier: workspace:*
-        version: link:../archivos
-      '@plataforma/db':
+      '@platform/db':
         specifier: workspace:*
         version: link:../db
-      '@plataforma/indice':
+      '@platform/files':
         specifier: workspace:*
-        version: link:../indice
-      '@plataforma/tema':
+        version: link:../files
+      '@platform/law-index':
         specifier: workspace:*
-        version: link:../tema
-      '@plataforma/ui':
+        version: link:../law-index
+      '@platform/theme':
+        specifier: workspace:*
+        version: link:../theme
+      '@platform/ui':
         specifier: workspace:*
         version: link:../ui
       lucide-react:
@@ -816,7 +816,7 @@ importers:
         specifier: 'catalog:'
         version: 4.6.7
     devDependencies:
-      '@plataforma/config':
+      '@platform/config':
         specifier: workspace:*
         version: link:../config
       '@types/node':
@@ -874,7 +874,7 @@ importers:
         specifier: 'catalog:'
         version: 1.4.0
     devDependencies:
-      '@plataforma/config':
+      '@platform/config':
         specifier: workspace:*
         version: link:../config
       '@tailwindcss/postcss':
@@ -896,12 +896,12 @@ importers:
         specifier: 'catalog:'
         version: 6.0.3
 
-  packages/ui-sitio:
+  packages/ui-site:
     dependencies:
-      '@plataforma/redes':
+      '@platform/social-networks':
         specifier: workspace:*
-        version: link:../redes
-      '@plataforma/ui':
+        version: link:../social-networks
+      '@platform/ui':
         specifier: workspace:*
         version: link:../ui
       lucide-react:
@@ -917,7 +917,7 @@ importers:
         specifier: 'catalog:'
         version: 19.3.1(react@19.3.1)
     devDependencies:
-      '@plataforma/config':
+      '@platform/config':
         specifier: workspace:*
         version: link:../config
       '@types/react':

@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation'
-import { obtenerSesion } from '@/lib/sesion'
+import { getSession } from '@/lib/session'
 
-export default async function Inicio() {
-  const s = await obtenerSesion()
+export default async function Home() {
+  const s = await getSession()
   redirect(s ? '/municipios' : '/iniciar-sesion')
 }

@@ -1,13 +1,13 @@
 import type { Metadata } from 'next'
-import { FormularioVerificar } from './formulario'
+import { VerifyForm } from './form'
 
 export const metadata: Metadata = { title: 'Verificación en dos pasos' }
 
-export default async function PaginaVerificar({
+export default async function VerifyPage({
   searchParams,
 }: {
-  searchParams: Promise<{ volver?: string }>
+  searchParams: Promise<{ returnTo?: string }>
 }) {
-  const { volver } = await searchParams
-  return <FormularioVerificar volver={volver && volver.startsWith('/') ? volver : '/municipios'} />
+  const { returnTo } = await searchParams
+  return <VerifyForm returnTo={returnTo && returnTo.startsWith('/') ? returnTo : '/municipios'} />
 }

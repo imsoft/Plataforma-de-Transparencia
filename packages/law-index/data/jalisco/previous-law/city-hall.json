@@ -1,0 +1,870 @@
+{
+  "state": "JAL",
+  "version": {
+    "slug": "ley-anterior",
+    "name": "Ley de Transparencia de Jalisco (anterior a 2026)",
+    "validFrom": "2013-08-08"
+  },
+  "obligatedSubjectType": "ayuntamiento",
+  "nodes": [
+    {
+      "level": "article",
+      "number": "8",
+      "title": "Información fundamental – General",
+      "frequency": "monthly",
+      "frequencyToConfirm": true,
+      "children": [
+        {
+          "level": "fraction",
+          "number": "I",
+          "title": "La necesaria para el ejercicio del derecho a la información pública, que comprende:",
+          "children": [
+            {
+              "level": "item",
+              "number": "a",
+              "title": "La Ley General, la presente Ley de transparencia y acceso a la información pública y su reglamento"
+            },
+            {
+              "level": "item",
+              "number": "b",
+              "title": "El reglamento interno para el manejo de la información pública del sujeto obligado"
+            },
+            {
+              "level": "item",
+              "number": "c",
+              "title": "Los lineamientos estatales de clasificación de información pública, emitidos por el Instituto"
+            },
+            {
+              "level": "item",
+              "number": "d",
+              "title": "Los lineamientos estatales de publicación y actualización de información fundamental, emitidos por el Instituto"
+            },
+            {
+              "level": "item",
+              "number": "e",
+              "title": "Los lineamientos estatales de protección de información confidencial y reservada, emitidos por el Instituto"
+            },
+            {
+              "level": "item",
+              "number": "f",
+              "title": "Los lineamientos generales que emita el Sistema Nacional"
+            },
+            {
+              "level": "item",
+              "number": "g",
+              "title": "Las actas y resoluciones del Comité de Transparencia"
+            },
+            {
+              "level": "item",
+              "number": "h",
+              "title": "Dirección electrónica donde podrán recibirse las solicitudes de acceso a la información"
+            },
+            {
+              "level": "item",
+              "number": "i",
+              "title": "La denominación, domicilio, teléfonos, faxes, dirección electrónica y correo electrónico oficiales del sujeto obligado"
+            },
+            {
+              "level": "item",
+              "number": "j",
+              "title": "El directorio de todos los servidores públicos del sujeto obligado, a partir del nivel de jefe de departamento o su equivalente, o de menor nivel, cuando se brinde atención al público; manejen o apliquen recursos públicos; realicen actos de autoridad o presten servicios profesionales bajo el régimen de confianza u honorarios y personal de base. El directorio deberá incluir, al menos, el nombre, cargo o nombramiento asignado, nivel del puesto en la estructura orgánica, fecha de alta en el cargo, número telefónico, domicilio para recibir correspondencia y dirección de correo electrónico oficiales; el directorio a que se refiere este inciso deberá contener, además, el nombre de todas las cuentas oficiales de redes sociales digitales que administren los sujetos obligados, así como aquellas de los servidores públicos que voluntariamente decidan incorporarse a dicho directorio en los términos establecidos por el Sistema Nacional de Transparencia"
+            },
+            {
+              "level": "item",
+              "number": "k",
+              "title": "El nombre del encargado y de los integrantes, teléfono, fax, y correo electrónico del Comité de Transparencia"
+            },
+            {
+              "level": "item",
+              "number": "l",
+              "title": "El nombre del encargado, teléfono, fax, y correo electrónico de la Unidad del sujeto obligado"
+            },
+            {
+              "level": "item",
+              "number": "m",
+              "title": "El manual y formato de solicitud de información pública"
+            },
+            {
+              "level": "item",
+              "number": "n",
+              "title": "Índice de los expedientes clasificados como reservados, por área responsable de la información y tema"
+            },
+            {
+              "level": "item",
+              "number": "ñ",
+              "title": "La estadística de las solicitudes de información pública atendidas, precisando las procedentes, parcialmente procedentes e improcedentes; así como la estadística de visitas a su sistema de consulta electrónica"
+            }
+          ]
+        },
+        {
+          "level": "fraction",
+          "number": "II",
+          "title": "La información sobre el marco jurídico aplicable al y por el sujeto obligado, que comprende:",
+          "children": [
+            {
+              "level": "item",
+              "number": "a",
+              "title": "Las disposiciones de las Constituciones Políticas Federal y Estatal aplicables al y por el sujeto obligado"
+            },
+            {
+              "level": "item",
+              "number": "b",
+              "title": "Los tratados y convenciones internacionales suscritas por México aplicables al y por el sujeto obligado"
+            },
+            {
+              "level": "item",
+              "number": "c",
+              "title": "Las leyes federales y estatales"
+            },
+            {
+              "level": "item",
+              "number": "d",
+              "title": "Los reglamentos federales, estatales y municipales"
+            },
+            {
+              "level": "item",
+              "number": "e",
+              "title": "Los decretos, acuerdos, criterios, políticas, reglas de operación y demás normas jurídicas generales"
+            }
+          ]
+        },
+        {
+          "level": "fraction",
+          "number": "III",
+          "title": "La información sobre la planeación del desarrollo, aplicable al y por el sujeto obligado, que comprende:",
+          "children": [
+            {
+              "level": "item",
+              "number": "a",
+              "title": "Los apartados del Plan Nacional de Desarrollo que sirve de marco general a la planeación de las áreas relativas a las funciones del sujeto obligado"
+            },
+            {
+              "level": "item",
+              "number": "b",
+              "title": "Los apartados de los programas federales"
+            },
+            {
+              "level": "item",
+              "number": "c",
+              "title": "Los apartados del Plan Estatal de Desarrollo"
+            },
+            {
+              "level": "item",
+              "number": "d",
+              "title": "Los programas estatales aplicables al y por el sujeto obligado"
+            },
+            {
+              "level": "item",
+              "number": "e",
+              "title": "Los programas regionales"
+            },
+            {
+              "level": "item",
+              "number": "f",
+              "title": "Las evaluaciones y encuestas que hagan los sujetos obligados a programas financiados con recursos públicos"
+            },
+            {
+              "level": "item",
+              "number": "g",
+              "title": "Los demás instrumentos de planeación no comprendidos en los incisos anteriores, aplicables al y por el sujeto obligado"
+            }
+          ]
+        },
+        {
+          "level": "fraction",
+          "number": "IV",
+          "title": "La información sobre la planeación estratégica gubernamental aplicable al y por el sujeto obligado, que comprende:",
+          "children": [
+            {
+              "level": "item",
+              "number": "a",
+              "title": "El Plan General Institucional del poder, organismo o municipio"
+            },
+            {
+              "level": "item",
+              "number": "b",
+              "title": "Los programas operativos anuales aplicables"
+            },
+            {
+              "level": "item",
+              "number": "c",
+              "title": "Los manuales de organización aplicables"
+            },
+            {
+              "level": "item",
+              "number": "d",
+              "title": "Los manuales de operación aplicables"
+            },
+            {
+              "level": "item",
+              "number": "e",
+              "title": "Los manuales de procedimientos"
+            },
+            {
+              "level": "item",
+              "number": "f",
+              "title": "Los manuales de servicios"
+            },
+            {
+              "level": "item",
+              "number": "g",
+              "title": "Los protocolos"
+            },
+            {
+              "level": "item",
+              "number": "h",
+              "title": "Los indicadores que permitan rendir cuenta de sus objetivos y resultados"
+            },
+            {
+              "level": "item",
+              "number": "i",
+              "title": "Los demás instrumentos normativos internos"
+            }
+          ]
+        },
+        {
+          "level": "fraction",
+          "number": "V",
+          "title": "La información financiera, patrimonial y administrativa, que comprende:",
+          "children": [
+            {
+              "level": "item",
+              "number": "a",
+              "title": "Las partidas del Presupuesto de Egresos de la Federación y del Presupuesto de Egresos del Estado, así como los conceptos del clasificador por objeto del gasto aplicables al y por el sujeto obligado, de cuando menos los últimos tres años"
+            },
+            {
+              "level": "item",
+              "number": "b",
+              "title": "Los ingresos extraordinarios recibidos por cualquier concepto, señalando el origen de los recursos, el nombre de los responsables de recibirlos, administrarlos y ejercerlos, así como el proyecto o programa donde serán aplicados"
+            },
+            {
+              "level": "item",
+              "number": "c",
+              "title": "El presupuesto de egresos anual y, en su caso, el clasificador por objeto del gasto del sujeto obligado, de cuando menos los últimos tres años"
+            },
+            {
+              "level": "item",
+              "number": "d",
+              "title": "Las convocatorias a concursos para ocupar cargos públicos"
+            },
+            {
+              "level": "item",
+              "number": "e",
+              "title": "La plantilla del personal del sujeto obligado, con las modificaciones de cuando menos los últimos tres años"
+            },
+            {
+              "level": "item",
+              "number": "f",
+              "title": "Las remuneraciones mensuales por puesto, incluidas todas las prestaciones, estímulos o compensaciones"
+            },
+            {
+              "level": "item",
+              "number": "g",
+              "title": "Las nóminas completas del sujeto obligado en las que se incluya las gratificaciones, primas, comisiones, dietas y estímulos, de cuando menos los últimos tres años, y en su caso, con sistema de busqueda"
+            },
+            {
+              "level": "item",
+              "number": "h",
+              "title": "El listado de jubilados y pensionados y el monto que reciben"
+            },
+            {
+              "level": "item",
+              "number": "i",
+              "title": "Los estados financieros mensuales, de cuando menos los últimos tres años"
+            },
+            {
+              "level": "item",
+              "number": "j",
+              "title": "Los gastos de comunicación social, de cuando menos los últimos tres años, donde se señale cuando menos la fecha, monto y partida de la erogación, responsable directo de la autorización de la contratación, denominación del medio de comunicación contratado, descripción del servicio contratado, justificación y relación con alguna función o servicio públicos"
+            },
+            {
+              "level": "item",
+              "number": "k",
+              "title": "El contrato de prestación de servicios o por honorarios, y el gasto realizado por concepto de pago de asesorías al sujeto obligado, donde se señale nombre de la empresa, institución o individuos, el concepto de cada una de las asesorías, así como el trabajo realizado"
+            },
+            {
+              "level": "item",
+              "number": "l",
+              "title": "Los subsidios, en especie o en numerario, recibidos por el sujeto obligado, así como los otorgados por el sujeto obligado, en los que se señale lo siguiente:"
+            },
+            {
+              "level": "item",
+              "number": "m",
+              "title": "El listado de personas físicas o jurídicas a quienes, por cualquier motivo, se les asigne o permita usar recursos públicos o, en los términos de las disposiciones aplicables, realicen actos de autoridad, así como los informes que dichas personas les entreguen sobre el uso y destino de dichos recursos"
+            },
+            {
+              "level": "item",
+              "number": "n",
+              "title": "Las cuentas públicas y demás informes de gestión financiera, las auditorías internas y externas realizadas, así como los informes de gestión financiera del sujeto obligado, de cuando menos los últimos tres años"
+            },
+            {
+              "level": "item",
+              "number": "ñ",
+              "title": "Los padrones de proveedores o contratistas, de cuando menos los últimos tres años"
+            },
+            {
+              "level": "item",
+              "number": "o",
+              "title": "La información sobre adjudicaciones directas en materia de adquisiciones, obra pública, proyectos de inversión y prestación de servicios, de cuando menos los últimos tres años, que deberá contener"
+            },
+            {
+              "level": "item",
+              "number": "p",
+              "title": "La información sobre concursos por invitación y licitaciones públicas en materia de adquisiciones, obra pública, proyectos de invresión prestación de servicios, de cuando menos los últimos tres años, que deberá contener"
+            },
+            {
+              "level": "item",
+              "number": "q",
+              "title": "El nombre, denominación o razón social y clave del Registro Federal de Contribuyentes de quienes se les hubiera cancelado o condonado algún crédito fiscal, los montos respectivos, así como la información estadística sobre las exenciones previstas en las disposiciones fiscales"
+            },
+            {
+              "level": "item",
+              "number": "r",
+              "title": "Los inventarios de bienes muebles e inmuebles del sujeto obligado, de cuando menos los últimos tres años, donde se señale cuando menos la descripción, el valor, el régimen jurídico, y el uso o afectación del bien"
+            },
+            {
+              "level": "item",
+              "number": "s",
+              "title": "Los gastos de representación, viáticos y viajes oficiales, su costo, itinerario, agenda y resultados"
+            },
+            {
+              "level": "item",
+              "number": "t",
+              "title": "Las concesiones, licencias, permisos o autorizaciones otorgadas de los últimos tres años"
+            },
+            {
+              "level": "item",
+              "number": "u",
+              "title": "Los decretos y expedientes relativos a las expropiaciones que realicen por utilidad pública"
+            },
+            {
+              "level": "item",
+              "number": "v",
+              "title": "Las pólizas de los cheques expedidos, con identificación del número de cheque o transferencia, monto y nombre del beneficiario, indicando el motivo de la erogación, en el que de manera detallada y completa se indique para qué se erogó el recurso público, o en su caso la descripción que aparezca en la factura correspondiente; siempre y cuando con ello se aporten los elementos cualitativos de la finalidad del cheque o transferencia"
+            },
+            {
+              "level": "item",
+              "number": "w",
+              "title": "El estado de la deuda pública del sujeto obligado, donde se señale cuando menos responsable de la autorización, fecha de contratación, monto del crédito, tasa de interés, monto total amortizable, plazo de vencimiento, institución crediticia, objeto de aplicación y avance de aplicación de cada deuda contratada"
+            },
+            {
+              "level": "item",
+              "number": "x",
+              "title": "Los estados de cuenta bancarios que expiden las instituciones financieras, número de cuentas bancarias,estados financieros, cuentas de fideicomisos e inversiones"
+            },
+            {
+              "level": "item",
+              "number": "y",
+              "title": "La información en versión pública de las declaraciones patrimoniales de los servidores públicos que así lo determinen, en los sistemas habilitados para ello, de acuerdo a la normatividad aplicable"
+            },
+            {
+              "level": "item",
+              "number": "z",
+              "title": "El registro de los procedimientos de responsabilidad administrativa, con indicación del número de expediente, fecha de ingreso, nombre del denunciante, nombre y cargo del denunciado, causa del procedimiento, estado procesal y, en su caso, la sanción impuesta"
+            }
+          ]
+        },
+        {
+          "level": "fraction",
+          "number": "VI",
+          "title": "La información sobre la gestión pública",
+          "children": [
+            {
+              "level": "item",
+              "number": "a",
+              "title": "Las funciones públicas que realiza el sujeto obligado, donde se señale cuando menos el fundamento legal, la descripción de la función pública, así como los recursos materiales, humanos y financieros asignados para la realización de la función pública"
+            },
+            {
+              "level": "item",
+              "number": "b",
+              "title": "Los servicios públicos que presta el sujeto obligado, donde se señale cuando menos la descripción y cobertura del servicio público; los recursos materiales, humanos y financieros asignados para la prestación del servicio público, y el número y tipo de beneficiarios directos e indirectos del servicio público"
+            },
+            {
+              "level": "item",
+              "number": "c",
+              "title": "Las obras públicas que realiza el sujeto obligado, de cuando menos los últimos tres años, donde se señale cuando menos la descripción y ubicación de la obra; el ejecutor y supervisor de la obra; el costo inicial y final; la superficie construida por metros cuadrados; costo por metro cuadrado; su relación con los instrumentos de planeación del desarrollo, y el número y tipo de beneficiarios directos e indirectos de la obra"
+            },
+            {
+              "level": "item",
+              "number": "d",
+              "title": "Los programas sociales que aplica el sujeto obligado, de cuando menos los últimos tres años, donde se señale cuando menos los objetivos, metas, presupuesto y reglas de operación del programa; los requisitos, trámites y formatos para ser beneficiario; la entidad pública ejecutora, el responsable directo, número de personal que lo aplica y el costo de operación del programa; el padrón de beneficiarios del programa, y la medición de avances de la ejecución del gasto, y el cumplimiento de metas y objetivos del programa, incluida la metodología empleada"
+            },
+            {
+              "level": "item",
+              "number": "e",
+              "title": "Las políticas públicas que elabora y aplica el sujeto obligado, de cuando menos los últimos tres años"
+            },
+            {
+              "level": "item",
+              "number": "f",
+              "title": "Los convenios, contratos y demás instrumentos jurídicos suscritos por el sujeto obligado, de cuando menos los últimos tres años"
+            },
+            {
+              "level": "item",
+              "number": "g",
+              "title": "Las concesiones, licencias, permisos, autorizaciones y demás actos administrativos otorgados por el sujeto obligado, de cuando menos los últimos tres años, en el que se incluyan los requisitos para acceder a ellos y, en su caso, los formatos correspondientes"
+            },
+            {
+              "level": "item",
+              "number": "h",
+              "title": "La agenda diaria de actividades del sujeto obligado, de cuando menos el último mes"
+            },
+            {
+              "level": "item",
+              "number": "i",
+              "title": "El lugar, día y hora de todas las reuniones o sesiones de sus órganos colegiados, junto con el orden del día y una relación detallada de los asuntos a tratar, así como la indicación del lugar y forma en que se puedan consultar los documentos públicos relativos, con cuando menos veinticuatro horas anteriores a la celebración de dicha reunión o sesión"
+            },
+            {
+              "level": "item",
+              "number": "j",
+              "title": "Las versiones estenográficas, así como las actas o minutas de las reuniones o sesiones de sus órganos colegiados Video sesiones de ayuntamiento"
+            },
+            {
+              "level": "item",
+              "number": "k",
+              "title": "La integración, la regulación básica y las actas de las reuniones de los consejos ciudadanos reconocidos oficialmente por el sujeto obligado con el propósito de que la ciudadanía participe o vigile la actividad de sus órganos y dependencias"
+            },
+            {
+              "level": "item",
+              "number": "l",
+              "title": "Los informes trimestrales y anuales de actividades del sujeto obligado, de cuando menos los últimos tres años"
+            },
+            {
+              "level": "item",
+              "number": "m",
+              "title": "Las recomendaciones emitidas por los órganos públicos del Estado mexicano u organismos internacionales garantes de los derechos humanos, así como las acciones que han llevado a cabo para su atención"
+            },
+            {
+              "level": "item",
+              "number": "n",
+              "title": "Las estadísticas que generen en cumplimiento de sus facultades, competencias o funciones con la mayor desagregación posible"
+            }
+          ]
+        },
+        {
+          "level": "fraction",
+          "number": "VII",
+          "title": "Las versiones públicas de las resoluciones y laudos que emitan los sujetos obligados, en procesos o procedimientos seguidos en forma de juicio y que hayan causado estado"
+        },
+        {
+          "level": "fraction",
+          "number": "VIII",
+          "title": "Los mecanismos e instrumentos de participación ciudadana que puedan acceder o ejercer ante el sujeto obligado"
+        },
+        {
+          "level": "fraction",
+          "number": "IX",
+          "title": "La información pública ordinaria proactiva o focalizada que considere el sujeto obligado, por sí o a propuesta del Instituto"
+        },
+        {
+          "level": "fraction",
+          "number": "X",
+          "title": "Las condiciones generales de trabajo, contratos o convenios que regulen las relaciones laborales del personal de base o de confianza, así como los recursos públicos económicos, en especie o donativos, que sean entregados a los sindicatos y ejerzan como recursos públicos"
+        },
+        {
+          "level": "fraction",
+          "number": "XI",
+          "title": "Los estudios financiados con recursos públicos"
+        },
+        {
+          "level": "fraction",
+          "number": "XII",
+          "title": "Los ingresos recibidos por cualquier concepto señalando el nombre de los responsables de recibirlos, administrarlos y ejercerlos, así como su destino, indicando el destino de cada uno de ellos"
+        },
+        {
+          "level": "fraction",
+          "number": "XIII",
+          "title": "El catálogo de disposición y guía de archivo documental"
+        },
+        {
+          "level": "fraction",
+          "number": "XIV",
+          "title": "La demás información pública a que obliguen las disposiciones federales y la Ley General de Contabilidad Gubernamental, así como aquella que se genere por la ejecución del gasto público con recursos federales"
+        }
+      ]
+    },
+    {
+      "level": "article",
+      "number": "15",
+      "title": "Información fundamental – Ayuntamientos",
+      "frequency": "monthly",
+      "frequencyToConfirm": true,
+      "children": [
+        {
+          "level": "fraction",
+          "number": "I",
+          "title": "La obligatoria para todos los sujetos obligados"
+        },
+        {
+          "level": "fraction",
+          "number": "II",
+          "title": "La integración del Ayuntamiento, las comisiones edilicias y demás órganos que establezca su organigrama"
+        },
+        {
+          "level": "fraction",
+          "number": "III",
+          "title": "Los bandos de policía y gobierno, reglamentos, decretos, acuerdos, circulares y demás disposiciones jurídicas expedidas por el Ayuntamiento respectivo"
+        },
+        {
+          "level": "fraction",
+          "number": "IV",
+          "title": "Las iniciativas presentadas y las exposiciones de motivos de los reglamentos vigentes en el Municipio"
+        },
+        {
+          "level": "fraction",
+          "number": "V",
+          "title": "Los instrumentos de planeación del desarrollo del municipio y sus modificaciones"
+        },
+        {
+          "level": "fraction",
+          "number": "VI",
+          "title": "Los reglamentos internos, manuales y programas operativos anuales de toda dependencia"
+        },
+        {
+          "level": "fraction",
+          "number": "VII",
+          "title": "Los programas de trabajo de las comisiones edilicias"
+        },
+        {
+          "level": "fraction",
+          "number": "VIII",
+          "title": "Los órdenes del día de las sesiones del Ayuntamiento y las comisiones edilicias"
+        },
+        {
+          "level": "fraction",
+          "number": "IX",
+          "title": "El libro de actas de las sesiones del Ayuntamiento y las actas de las comisiones edilicias"
+        },
+        {
+          "level": "fraction",
+          "number": "X",
+          "title": "La gaceta municipal"
+        },
+        {
+          "level": "fraction",
+          "number": "XI",
+          "title": "La información de los registros públicos"
+        },
+        {
+          "level": "fraction",
+          "number": "XII",
+          "title": "Los recursos materiales, humanos y financieros asignados a cada dependencia"
+        },
+        {
+          "level": "fraction",
+          "number": "XIII",
+          "title": "Los convenios y contratos celebrados para la realización de obra pública"
+        },
+        {
+          "level": "fraction",
+          "number": "XIV",
+          "title": "Los convenios de coordinación o asociación municipal"
+        },
+        {
+          "level": "fraction",
+          "number": "XV",
+          "title": "Los convenios para la prestación de servicios públicos coordinados o concesionados"
+        },
+        {
+          "level": "fraction",
+          "number": "XVI",
+          "title": "El registro de los consejos consultivos ciudadanos"
+        },
+        {
+          "level": "fraction",
+          "number": "XVII",
+          "title": "El registro de las asociaciones de vecinos en el municipio"
+        },
+        {
+          "level": "fraction",
+          "number": "XVIII",
+          "title": "El registro público de bienes del patrimonio municipal"
+        },
+        {
+          "level": "fraction",
+          "number": "XIX",
+          "title": "La relación del personal y los inventarios de bienes afectos a cada uno de los servicios públicos municipales"
+        },
+        {
+          "level": "fraction",
+          "number": "XX",
+          "title": "El Programa Municipal de Desarrollo Urbano, los planes de desarrollo urbano de centros de población, y los planes parciales de desarrollo urbano"
+        },
+        {
+          "level": "fraction",
+          "number": "XXI",
+          "title": "La integración, las actas de las reuniones y los acuerdos del Consejo Municipal de Desarrollo Urbano"
+        },
+        {
+          "level": "fraction",
+          "number": "XXII",
+          "title": "Las autorizaciones de nuevos fraccionamientos y los cambios de uso de suelo junto con las consultas públicas realizadas con los colonos y la integración del expediente respectivo, en los terminos del Código Urbano para el Estado de Jalisco"
+        },
+        {
+          "level": "fraction",
+          "number": "XXIII",
+          "title": "Los indicadores de evaluación del desempeño"
+        },
+        {
+          "level": "fraction",
+          "number": "XXIV",
+          "title": "La estadística de asistencias y registro de votación de las sesiones del ayuntamiento, de las comisiones edilicias y de los consejos ciudadanos municipales, que contenga el nombre de los regidores y funcionarios que participan, el sentido del voto y, en su caso, los votos paticulares"
+        },
+        {
+          "level": "fraction",
+          "number": "XXV",
+          "title": "Los ingresos municipales por concepto de participaciones federales y estatales, así como por ingresos propios, que integre a la hacienda pública"
+        },
+        {
+          "level": "fraction",
+          "number": "XXVI",
+          "title": "La información relativa a la implementación del Presupuesto Participativo desde su planeación hasta su ejecución"
+        },
+        {
+          "level": "fraction",
+          "number": "XXVII",
+          "title": "La que establezca el Reglamento Interno de Información Pública del Municipio"
+        }
+      ]
+    },
+    {
+      "level": "article",
+      "routeSlug": "armonizacion-contable",
+      "title": "Armonización contable",
+      "frequency": "quarterly",
+      "frequencyToConfirm": true,
+      "children": [
+        {
+          "level": "fraction",
+          "number": "1",
+          "title": "- Iniciativas y Proyectos"
+        },
+        {
+          "level": "fraction",
+          "number": "2",
+          "title": "- Proyecto de Presupuesto de Egresos"
+        },
+        {
+          "level": "fraction",
+          "number": "3",
+          "title": "- Información adicional a la Iniciativa de Ingresos"
+        },
+        {
+          "level": "fraction",
+          "number": "4",
+          "title": "- Información adicional del proyecto del Presupuesto de Egresos"
+        },
+        {
+          "level": "fraction",
+          "number": "5",
+          "title": "- Presupuesto Ciudadano"
+        },
+        {
+          "level": "fraction",
+          "number": "6",
+          "title": "- Ley de Ingresos"
+        },
+        {
+          "level": "fraction",
+          "number": "7",
+          "title": "Presupuesto de Egresos"
+        },
+        {
+          "level": "fraction",
+          "number": "8",
+          "title": "- Documentos de aprobación de la Ley de Ingresos"
+        },
+        {
+          "level": "fraction",
+          "number": "9",
+          "title": "- Documentos de aprobación del Presupuesto de Egresos"
+        },
+        {
+          "level": "fraction",
+          "number": "10",
+          "title": "- Calendario de ingresos base mensual"
+        },
+        {
+          "level": "fraction",
+          "number": "11",
+          "title": "- Calendario de egresos base mensual"
+        },
+        {
+          "level": "fraction",
+          "number": "12",
+          "title": "- Estado de situación financiera"
+        },
+        {
+          "level": "fraction",
+          "number": "13",
+          "title": "- Estado de actividades"
+        },
+        {
+          "level": "fraction",
+          "number": "14",
+          "title": "- Estado de variación en la hacienda pública"
+        },
+        {
+          "level": "fraction",
+          "number": "15",
+          "title": "- Estado de cambios en la situación financiera"
+        },
+        {
+          "level": "fraction",
+          "number": "16",
+          "title": "- Estado de flujos de efectivo"
+        },
+        {
+          "level": "fraction",
+          "number": "17",
+          "title": "- Estado analítico del activo"
+        },
+        {
+          "level": "fraction",
+          "number": "18",
+          "title": "Notas de desglose"
+        },
+        {
+          "level": "fraction",
+          "number": "19",
+          "title": "- Notas de gestión administrativa"
+        },
+        {
+          "level": "fraction",
+          "number": "20",
+          "title": "- Notas de memoria"
+        },
+        {
+          "level": "fraction",
+          "number": "21",
+          "title": "- Estado analítico de ingresos, del que se derivará la presentación en clasificación económica por fuente de financiamiento y concepto, incluyendo los ingresos excedentes"
+        },
+        {
+          "level": "fraction",
+          "number": "22",
+          "title": "- Estado analítico del ejercicio del presupuesto de egresos por clasificación administrativa"
+        },
+        {
+          "level": "fraction",
+          "number": "23",
+          "title": "- Estado analítico del ejercicio del presupuesto de egresos por clasificación económica (por tipo de gasto)"
+        },
+        {
+          "level": "fraction",
+          "number": "24",
+          "title": "- Estado analítico del ejercicio del presupuesto de egresos por objeto del gasto"
+        },
+        {
+          "level": "fraction",
+          "number": "25",
+          "title": "- Estado analítico del ejercicio del presupuesto de egresos por clasificación funcional"
+        },
+        {
+          "level": "fraction",
+          "number": "26",
+          "title": "- Inventario de los bienes muebles actualizado"
+        },
+        {
+          "level": "fraction",
+          "number": "27",
+          "title": "- Inventario de los bienes inmuebles actualizado"
+        },
+        {
+          "level": "fraction",
+          "number": "28",
+          "title": "- Información de montos pagados por ayudas y subsidios"
+        },
+        {
+          "level": "fraction",
+          "number": "29",
+          "title": "- Programas con recursos federales por orden de gobierno"
+        },
+        {
+          "level": "fraction",
+          "number": "30",
+          "title": "- Aportación Fortalecimiento Municipios"
+        },
+        {
+          "level": "fraction",
+          "number": "31",
+          "title": "- Información de obligaciones pagadas o garantizadas con fondos federales"
+        },
+        {
+          "level": "fraction",
+          "number": "32",
+          "title": "- Ejercicio y destino de gasto federalizado y reintegros"
+        },
+        {
+          "level": "fraction",
+          "number": "33",
+          "title": "- Lineamiento para informar los avances del ejercicio de los recursos trimestralmente y al término de cada ejercicio"
+        },
+        {
+          "level": "fraction",
+          "number": "34",
+          "title": "- Evaluación de Recursos Federales"
+        },
+        {
+          "level": "fraction",
+          "number": "35",
+          "title": "- Relación de las cuentas bancarias productivas específicas"
+        },
+        {
+          "level": "fraction",
+          "number": "36",
+          "title": "- Lineamientos para dar a conocer los montos que reciban, las obras y acciones a realizar, el costo de cada una, su ubicación, metas y beneficiarios"
+        },
+        {
+          "level": "fraction",
+          "number": "37",
+          "title": "- Publicar la cuenta pública para consulta de la población en general"
+        },
+        {
+          "level": "fraction",
+          "number": "38",
+          "title": "- Estados de situación financiera LDF"
+        },
+        {
+          "level": "fraction",
+          "number": "39",
+          "title": "- Informe analítico de deudad pública LDF"
+        },
+        {
+          "level": "fraction",
+          "number": "40",
+          "title": "- Informe analítico de obligaciones diferentes de financiamientos LDF"
+        },
+        {
+          "level": "fraction",
+          "number": "41",
+          "title": "Balance presupuestario LDF"
+        },
+        {
+          "level": "fraction",
+          "number": "42",
+          "title": "- Estado analítico de ingresos LDF"
+        },
+        {
+          "level": "fraction",
+          "number": "43",
+          "title": "- Estado analítico presupuesto de egresos detallado LDF"
+        },
+        {
+          "level": "fraction",
+          "number": "44",
+          "title": "- Estado analítico del ejercicio del presupuesto de egresos detallado"
+        },
+        {
+          "level": "fraction",
+          "number": "45",
+          "title": "- Estado analítico del ejercicio del presupuesto de egresos detallado LDF Clasificación funcional"
+        },
+        {
+          "level": "fraction",
+          "number": "46",
+          "title": "- Estado analítico del ejercicio del presupuesto de egresos detallado LDF Clasificación de servicios personales por categoría"
+        }
+      ]
+    }
+  ]
+}

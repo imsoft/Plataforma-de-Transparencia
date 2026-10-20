@@ -1,10 +1,10 @@
-import { cssDeTema, temaSchema } from '@plataforma/tema'
-import { Encabezado } from '@/components/shell/encabezado'
-import { NavMunicipio, type EnlaceNav } from '@/components/shell/nav-municipio'
-import { contextoMunicipio } from '@/lib/municipio'
-import { segmentoPanel } from '@/lib/urls'
+import { themeCss, themeSchema } from '@platform/theme'
+import { Header } from '@/components/shell/header'
+import { MunicipalityNav, type NavLink } from '@/components/shell/municipality-nav'
+import { municipalityContext } from '@/lib/municipality'
+import { panelSegment } from '@/lib/urls'
 
-export default async function LayoutMunicipio({
+export default async function MunicipalityLayout({
   children,
   params,
 }: {
@@ -12,33 +12,32 @@ export default async function LayoutMunicipio({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
-  const c = await contextoMunicipio(slug)
-  const tema = temaSchema.safeParse(c.municipio.tema ?? {})
-  const css = tema.success ? cssDeTema(tema.data, { oscuro: true }) : ''
+  const c = await municipalityContext(slug)
+  const theme = themeSchema.safeParse(c.municipality.theme ?? {})
+  const css = theme.success ? themeCss(theme.data, { dark: true }) : ''
   const base = `/m/${slug}`
-  const enlaces: EnlaceNav[] = [
-    { href: base, etiqueta: 'Inicio', exacto: true },
-    ...c.municipio.sujetosObligados
-      .filter((so) => so.activo)
+  const links: NavLink[] = [
+    { href: base, label: 'Inicio', exact: true },
+    ...c.municipality.obligatedSubjects
+      .filter((so) => so.active)
       .map((so) => ({
-        href: `${base}/${segmentoPanel(so)}`,
-        etiqueta: so.prefijo ? so.nombre : 'Ayuntamiento',
+        href: `${base}/${panelSegment(so)}`,
+        label: so.prefix ? so.name : 'Ayuntamiento',
       })),
-    { href: `${base}/papelera`, etiqueta: 'Papelera' },
+    { href: `${base}/papelera`, label: 'Papelera' },
   ]
-  if (c.puede('usuario:ver')) enlaces.push({ href: `${base}/usuarios`, etiqueta: 'Usuarios' })
-  if (c.puede('redes_sociales:ver'))
-    enlaces.push({ href: `${base}/redes-sociales`, etiqueta: 'Redes sociales' })
-  if (c.puede('identidad:ver')) enlaces.push({ href: `${base}/identidad`, etiqueta: 'Identidad' })
-  if (c.puede('exportacion:ver'))
-    enlaces.push({ href: `${base}/exportaciones`, etiqueta: 'Exportación' })
+  if (c.can('user:view')) links.push({ href: `${base}/usuarios`, label: 'Usuarios' })
+  if (c.can('socialNetworks:view'))
+    links.push({ href: `${base}/redes-sociales`, label: 'Redes sociales' })
+  if (c.can('identity:view')) links.push({ href: `${base}/identidad`, label: 'Identidad' })
+  if (c.can('exportJob:view')) links.push({ href: `${base}/exportaciones`, label: 'Exportación' })
 
   return (
     <>
       {css && <style dangerouslySetInnerHTML={{ __html: css }} />}
-      <Encabezado c={c} />
+      <Header c={c} />
       <div className="mx-auto w-full max-w-6xl px-4">
-        <NavMunicipio enlaces={enlaces} />
+        <MunicipalityNav links={links} />
       </div>
       <main className="mx-auto w-full max-w-6xl px-4 py-6">{children}</main>
     </>

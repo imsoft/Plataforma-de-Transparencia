@@ -18,16 +18,16 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm audit --prod --audit-level=high || true
-      - run: cp .env.example .env && cp apps/sitio-tuxcacuesco/.env.example apps/sitio-tuxcacuesco/.env.local
+      - run: cp .env.example .env && cp apps/site-tuxcacuesco/.env.example apps/site-tuxcacuesco/.env.local
       - run: pnpm docker:up
-      - run: pnpm --filter @plataforma/db migrate
+      - run: pnpm --filter @platform/db migrate
       - run: pnpm typecheck
       - run: pnpm typecheck:scripts
       - run: pnpm lint
       - run: pnpm format:check
       - run: pnpm test
       - run: pnpm test:scripts
-      - run: pnpm iniciar
+      - run: pnpm bootstrap
       - run: pnpm exec playwright install --with-deps chromium
       - run: pnpm e2e
         env:

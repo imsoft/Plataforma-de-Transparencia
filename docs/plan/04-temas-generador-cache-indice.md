@@ -1,6 +1,6 @@
 # Entregables 5, 6 y 7 — Temas, generador, invalidación de caché y formato del índice
 
-## 5a. Sistema de temas (`packages/tema`)
+## 5a. Sistema de temas (`packages/theme`)
 
 **Flujo:** `municipio_tema` (BD) → `temaDesdeBD(slug)` (cacheado con etiqueta `tema:<slug>`) → `tokensDeTema(tema)` (función pura: calcula variantes y contraste) → `<style>` inline en `<html>` con variables CSS → Tailwind v4 las consume vía `@theme`.
 
@@ -23,20 +23,20 @@
 - Cambiar identidad = `UPDATE municipio_tema` + `version + 1` + revalidar `tema:<slug>` y `og:*`. Sin redeploy.
 - Fallback: cada app trae `tema.config.ts` con los valores iniciales por si la BD no responde en build.
 
-## 5b. Generador (`pnpm nuevo-municipio`)
+## 5b. Generador (`pnpm new-municipality`)
 
 Script `scripts/nuevo-municipio.ts` con `@clack/prompts`:
 
 1. Pregunta: slug, nombre, nombre oficial, dominio, plantilla (MVP: solo `institucional-clasica`), colores base, sujetos obligados (Ayuntamiento preseleccionado; agregar DIF con prefijo `dif`, etc.).
 2. Valida slug único (BD y carpeta), prefijos contra palabras reservadas.
-3. Copia `templates/<plantilla>` → `apps/sitio-<slug>`, reemplaza `{{slug}}`, `{{nombre}}`, `{{dominio}}`; escribe `tema.config.ts` y `.env.example` con `MUNICIPIO_SLUG` y `REVALIDACION_SECRETO` generado.
-4. Inserta `municipios`, `organization`, `municipio_dominios`, `municipio_tema`, `sujetos_obligados` dentro de `conUsuario` (actor: el superadmin que corre el script, `origen: 'generador'`).
-5. Imprime los pasos manuales: crear proyecto en Vercel con Root Directory `apps/sitio-<slug>`, variables, dominio, Search Console. En Fase 2 estos pasos se hacen por API.
+3. Copia `templates/<plantilla>` → `apps/site-<slug>`, reemplaza `{{slug}}`, `{{nombre}}`, `{{dominio}}`; escribe `tema.config.ts` y `.env.example` con `MUNICIPALITY_SLUG` y `REVALIDATION_SECRET` generado.
+4. Inserta `municipios`, `organization`, `municipio_dominios`, `municipio_tema`, `sujetos_obligados` dentro de `withUser` (actor: el superadmin que corre el script, `origen: 'generador'`).
+5. Imprime los pasos manuales: crear proyecto en Vercel con Root Directory `apps/site-<slug>`, variables, dominio, Search Console. En Fase 2 estos pasos se hacen por API.
 6. Idempotente: si la carpeta o el municipio ya existen, pregunta si actualizar o aborta.
 
 ## 6. Invalidación de caché entre panel y sitio
 
-**Etiquetas** (`packages/transparencia/etiquetas-cache.ts`, función pura):
+**Etiquetas** (`packages/transparency/etiquetas-cache.ts`, función pura):
 
 | Cambio                                                               | Etiquetas afectadas                                                                                              |
 | -------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
@@ -45,21 +45,21 @@ Script `scripts/nuevo-municipio.ts` con `@clack/prompts`:
 | Redes sociales, tema, datos de contacto                              | `municipio` (lo usa el layout) y `og`                                                                            |
 | Sujetos obligados, versión del índice                                | `todo`                                                                                                           |
 
-**Lado del sitio:** cada lectura va en una función con `'use cache'` + `cacheTag(...)` + `cacheLife('days')` (Cache Components de Next 16); el endpoint `POST /api/revalidar` recibe `{ etiquetas: string[] }`, valida `Authorization: Bearer <secreto>` con `timingSafeEqual`, limita el cuerpo a 100 etiquetas y llama `revalidateTag` por cada una. Responde `{ ok, revalidadas }`.
+**Lado del sitio:** cada lectura va en una función con `'use cache'` + `cacheTag(...)` + `cacheLife('days')` (Cache Components de Next 16); el endpoint `POST /api/revalidate` recibe `{ etiquetas: string[] }`, valida `Authorization: Bearer <secreto>` con `timingSafeEqual`, limita el cuerpo a 100 etiquetas y llama `revalidateTag` por cada una. Responde `{ ok, revalidadas }`.
 
 **Lado del panel:**
 
-1. Dentro de la transacción de `conUsuario` se inserta una fila en `revalidaciones_pendientes` (outbox). Si la transacción falla, no hay revalidación fantasma.
+1. Dentro de la transacción de `withUser` se inserta una fila en `revalidaciones_pendientes` (outbox). Si la transacción falla, no hay revalidación fantasma.
 2. Al terminar la acción, `after()` de Next dispara `procesarRevalidaciones(municipioId)`: agrupa etiquetas pendientes, hace el POST con timeout de 5 s, y borra las filas si responde 200.
 3. Si falla (sitio caído, deploy en curso), quedan las filas; un Vercel Cron cada 5 min (`/api/cron/revalidaciones`) reintenta con backoff y avisa a Sentry después de 10 intentos.
 4. Red de seguridad: `cacheLife` de 1 día en el sitio, así nada queda desactualizado más de 24 h aunque todo lo anterior falle.
-5. El secreto por municipio vive hasheado en `municipios.secreto_revalidacion` (para verificarlo en el panel al configurar) y en claro solo en las variables de entorno de la app del sitio y del panel (`REVALIDACION_SECRETOS` JSON por slug). Si se rota, se cambia en ambos lados.
+5. El secreto por municipio vive hasheado en `municipios.secreto_revalidacion` (para verificarlo en el panel al configurar) y en claro solo en las variables de entorno de la app del sitio y del panel (`REVALIDATION_SECRETS` JSON por slug). Si se rota, se cambia en ambos lados.
 
-En local, `url_revalidacion` apunta a `http://localhost:3001/api/revalidar`.
+En local, `url_revalidacion` apunta a `http://localhost:3001/api/revalidate`.
 
 ## 7. Formato del archivo del índice
 
-JSON (sin dependencias, validado con zod, diff legible en git). Un archivo por versión y tipo de sujeto obligado: `packages/indice/datos/jalisco/ley-anterior/ayuntamiento.json`.
+JSON (sin dependencias, validado con zod, diff legible en git). Un archivo por versión y tipo de sujeto obligado: `packages/law-index/data/jalisco/ley-anterior/ayuntamiento.json`.
 
 ```json
 {
